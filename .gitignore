@@ -42,7 +42,17 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
-
 local.properties
+/alist-lib/*
+alist-main
+!../alist-lib/alistlib
+!../alist-lib/scripts
+
+*.aar
+*.exe
+*.tgz
+*.jar
+*.zip
+*.so
+
 

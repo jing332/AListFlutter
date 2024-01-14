@@ -14,8 +14,8 @@ key.properties
 
 /alist-lib/*
 alist-main
-!alist-lib/alistlib
-!alist-lib/scripts
+!../alist-lib/alistlib
+!../alist-lib/scripts
 
 *.aar
 *.exe

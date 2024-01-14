@@ -1,0 +1,54 @@
+name: CheckAList
+
+on:
+  schedule:
+    - cron: "0 * * * *" # 每小时执行一次
+  workflow_dispatch:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "sync_alist.yaml"  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VERSION_FILE: ${{ github.workspace }}/alist_version
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd $GITHUB_WORKSPACE/.github/scripts
+          chmod +x ./*.sh
+
+          touch ${{ env.VERSION_FILE }}
+          ./check_alist.sh
+
+      - name: Shell
+        run: |
+          echo "alist_version=${{ env.alist_version }}"
+          echo "alist_update=${{ env.alist_update }}" 
+
+          # 用于测试
+          # echo "alist_update=1" >> $GITHUB_ENV 
+
+          if [ ${{ env.alist_update }} -eq 0 ]
+          then
+            echo "无更新"
+          else
+            echo -e "[自动同步AList] ${{ env.alist_version }}" > $GITHUB_WORKSPACE/CHANGELOG.md
+            echo -e "${{ env.alist_version }}" > ${{ env.VERSION_FILE }}
+
+            git config user.name "github-actions"
+            git config user.email "42014615+jing332@users.noreply.github.com"
+            git add .
+            git commit -m "[bot] Update alist to ${{ env.alist_version }}"
+            git push
+          fi
+
+      - name: Run workflow release
+        if: env.alist_update == 1 && ( success() || failure() )
+        run: |
+          gh workflow run release.yaml -R jing332/AlistAndroid
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  

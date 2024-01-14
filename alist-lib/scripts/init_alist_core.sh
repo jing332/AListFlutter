@@ -6,8 +6,8 @@ echo "Downloading alist ${TAG_NAME} from ${URL}"
 curl -L -o "alist.tgz" $URL
 tar xf "alist.tgz" --strip-components 1 -C ../
 
-echo "Write version to local.properties"
-cd ../../
-touch local.properties
-sed -i '/ALIST_VERSION/d' local.properties
-echo "ALIST_VERSION=${TAG_NAME}" >> local.properties
+#echo "Write version to local.properties"
+#cd ../../
+#touch local.properties
+#sed -i '/ALIST_VERSION/d' local.properties
+#echo "ALIST_VERSION=${TAG_NAME}" >> local.properties

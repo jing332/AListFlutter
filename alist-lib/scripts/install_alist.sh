@@ -13,8 +13,8 @@ function build() {
 
     go build -ldflags "-s -w" -o ${FN}
 
-    mkdir -p ${dir}/../app/libs/$2
-    cp -f ${FN} ${dir}/../app/libs/$2
+    mkdir -p ${dir}/../android/app/libs/$2
+    cp -f ${FN} ${dir}/../android/app/libs/$2
 }
 
 #cp -f ./frp-*/conf/* ../app/src/main/assets/defaultData
