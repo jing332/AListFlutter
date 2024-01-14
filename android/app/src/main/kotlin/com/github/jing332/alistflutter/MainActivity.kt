@@ -7,16 +7,17 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.github.jing332.alistflutter.config.AppConfig
+import com.github.jing332.alistflutter.bridge.AndroidBridge
+import com.github.jing332.alistflutter.bridge.AppConfigBridge
 import com.github.jing332.alistflutter.model.ShortCuts
+import com.github.jing332.pigeon.GeneratedApi
+import com.github.jing332.pigeon.GeneratedApi.VoidResult
 import io.flutter.embedding.android.FlutterActivity
-import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
 
-class MainActivity : FlutterActivity(), MethodChannel.MethodCallHandler,
-    EventChannel.StreamHandler {
+class MainActivity : FlutterActivity() {
     companion object {
         private val TAG = "MainActivity"
         const val BRIDGE_CHANNEL = "alistflutter/bridge"
@@ -26,7 +27,7 @@ class MainActivity : FlutterActivity(), MethodChannel.MethodCallHandler,
     }
 
     private val receiver by lazy { MyReceiver() }
-    private var mEventSink: EventChannel.EventSink? = null
+    private var mEvent: GeneratedApi.Event? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,33 +38,11 @@ class MainActivity : FlutterActivity(), MethodChannel.MethodCallHandler,
 
         GeneratedPluginRegistrant.registerWith(this.flutterEngine!!)
 
-        MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, BRIDGE_CHANNEL)
-            .setMethodCallHandler(this)
+        val binaryMessage = flutterEngine!!.dartExecutor.binaryMessenger
+        GeneratedApi.AppConfig.setUp(binaryMessage, AppConfigBridge)
+        GeneratedApi.Android.setUp(binaryMessage, AndroidBridge(this))
+        mEvent = GeneratedApi.Event(binaryMessage)
 
-        MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, CONFIG_CHANNEL)
-            .setMethodCallHandler { call, result ->
-                when (call.method) {
-                    "isWakeLockEnabled" -> result.success(AppConfig.isWakeLockEnabled)
-                    "setWakeLockEnabled" -> {
-                        AppConfig.isWakeLockEnabled = call.arguments as Boolean
-                        result.success(null)
-                    }
-
-                    "isStartAtBootEnabled" -> result.success(AppConfig.isStartAtBootEnabled)
-                    "setStartAtBootEnabled" -> {
-                        AppConfig.isStartAtBootEnabled = call.arguments as Boolean
-                        result.success(null)
-                    }
-
-                    "isAutoCheckUpdateEnabled" -> result.success(AppConfig.isAutoCheckUpdateEnabled)
-                    "setAutoCheckUpdateEnabled" -> {
-                        AppConfig.isAutoCheckUpdateEnabled = call.arguments as Boolean
-                        result.success(null)
-                    }
-                }
-            }
-        EventChannel(flutterEngine!!.dartExecutor.binaryMessenger, EVENT_CHANNEL)
-            .setStreamHandler(this)
     }
 
     override fun onDestroy() {
@@ -76,31 +55,18 @@ class MainActivity : FlutterActivity(), MethodChannel.MethodCallHandler,
     inner class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == AListService.ACTION_STATUS_CHANGED) {
-                mEventSink?.success(AListService.isRunning)
+                Log.e(TAG, "onReceive: ${AListService.isRunning}")
+                mEvent?.onServiceStatusChanged(AListService.isRunning, object : VoidResult {
+                    override fun success() {
+
+                    }
+
+                    override fun error(error: Throwable) {
+                    }
+
+                })
             }
         }
-    }
-
-    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
-        when (call.method) {
-            "startService" -> {
-                Log.d(TAG, "startService")
-                startService(Intent(this, AListService::class.java))
-                result.success(null)
-            }
-
-            "isRunning" -> result.success(AListService.isRunning)
-
-            else -> result.notImplemented()
-        }
-    }
-
-    override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-        mEventSink = events
-    }
-
-    override fun onCancel(arguments: Any?) {
-
     }
 
 }

@@ -6,34 +6,35 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-def localProperties = new Properties()
+def pro = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
+        pro.load(reader)
     }
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
+static def releaseTime() {
+    return new Date().format("yy.MMddHH", TimeZone.getTimeZone("GMT+8"))
 }
 
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
+def version = "1." + releaseTime()
+def gitCommits = Integer.parseInt('git rev-list HEAD --count'.execute().text.trim())
 
+def alistVersion = rootProject.file("../alist_version").readLines()[0]
 
 android {
     namespace "com.github.jing332.alistflutter"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
-
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+    signingConfigs {
+        release {
+            storeFile file(pro["KEY_PATH"])
+            storePassword pro["KEY_PASSWORD"]
+            keyAlias pro["ALIAS_NAME"]
+            keyPassword pro["ALIAS_PASSWORD"]
+        }
     }
 
     defaultConfig {
@@ -43,8 +44,15 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode gitCommits
+        versionName version
+
+        buildConfigField("String", "ALIST_VERSION", "\"${alistVersion}\"")
+    }
+
+
+    buildFeatures {
+        buildConfig true
     }
 
 
@@ -73,7 +81,7 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
 
         debug {

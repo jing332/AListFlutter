@@ -16,6 +16,5 @@ class App : FlutterApplication() {
         super.onCreate()
 
         app = this
-        longToast("init!")
     }
 }

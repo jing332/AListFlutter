@@ -1,7 +1,3 @@
-import 'dart:developer';
-
-import 'package:alist_flutter/bridges/app_config.dart';
-import 'package:alist_flutter/bridges/bridge.dart';
 import 'package:alist_flutter/pages/alist.dart';
 import 'package:alist_flutter/pages/settings.dart';
 import 'package:alist_flutter/pages/web.dart';
@@ -67,32 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
-  void _switch() {
-    Bridge.startService();
-    // _text = ;
-    AppConfig.isWakLockEnabled().then((value) {
-      log("isWakLockEnabled: $value");
-      setState(() {
-        _text = value.toString();
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   // TRY THIS: Try changing the color here to a specific color (to
-      //   // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-      //   // change color while the other colors stay the same.
-      //   backgroundColor: Theme
-      //       .of(context)
-      //       .colorScheme
-      //       .inversePrimary,
-      //   // Here we take the value from the MyHomePage object that was created by
-      //   // the App.build method, and use it to set our appbar title.
-      //   title: Text(widget.title),
-      // ),
       body: PageView.builder(
         itemBuilder: (context, index) {
           return [
@@ -101,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SettingsScreen()
           ][index];
         },
+        physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,
         controller: _pageController,
         onPageChanged: (int index) {
