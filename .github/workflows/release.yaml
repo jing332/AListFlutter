@@ -82,7 +82,7 @@ jobs:
           echo KEY_PASSWORD='${{ secrets.KEY_PASSWORD }}' >> local.properties
           echo KEY_PATH='./key.jks' >> local.properties
           # 从Secrets读取无换行符Base64解码, 然后保存到到app/key.jks
-          echo ${{ secrets.KEY_STORE }} | base64 --decode > $GITHUB_WORKSPACE/app/key.jks
+          echo ${{ secrets.KEY_STORE }} | base64 --decode > $GITHUB_WORKSPACE/android/app/key.jks
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
