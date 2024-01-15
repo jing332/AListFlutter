@@ -70,18 +70,21 @@ class MainActivity : FlutterActivity() {
 
     inner class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == AListService.ACTION_STATUS_CHANGED) {
-                Log.e(TAG, "onReceive: ${AListService.isRunning}")
-                mEvent?.onServiceStatusChanged(AListService.isRunning, object : VoidResult {
-                    override fun success() {
+            when (intent.action) {
+                AListService.ACTION_STATUS_CHANGED -> {
+                    Log.d(TAG, "onReceive: ACTION_STATUS_CHANGED")
 
-                    }
+                    mEvent?.onServiceStatusChanged(AListService.isRunning, object : VoidResult {
+                        override fun success() {}
+                        override fun error(error: Throwable) {
+                        }
+                    })
+                }
 
-                    override fun error(error: Throwable) {
-                    }
 
-                })
+
             }
+
         }
     }
 

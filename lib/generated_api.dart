@@ -412,6 +412,34 @@ class Android {
   }
 }
 
+abstract class Flutter {
+  static const MessageCodec<Object?> pigeonChannelCodec = StandardMessageCodec();
+
+  String getLocalIpAddress();
+
+  static void setup(Flutter? api, {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.alist_flutter.Flutter.getLocalIpAddress', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        __pigeon_channel.setMessageHandler(null);
+      } else {
+        __pigeon_channel.setMessageHandler((Object? message) async {
+          try {
+            final String output = api.getLocalIpAddress();
+            return wrapResponse(result: output);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+}
+
 abstract class Event {
   static const MessageCodec<Object?> pigeonChannelCodec = StandardMessageCodec();
 

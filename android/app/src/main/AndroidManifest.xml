@@ -39,7 +39,10 @@
         tools:ignore="UnusedAttribute">
         <activity
             android:name=".SwitchServerActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="alist.switch"
+            android:theme="@android:style/Theme.NoDisplay" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

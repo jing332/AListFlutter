@@ -37,6 +37,11 @@ abstract class Android {
 }
 
 @FlutterApi()
+abstract class Flutter {
+  String getLocalIpAddress();
+}
+
+@FlutterApi()
 abstract class Event {
   void onServiceStatusChanged(bool isRunning);
 

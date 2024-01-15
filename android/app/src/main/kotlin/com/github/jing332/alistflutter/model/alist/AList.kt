@@ -1,12 +1,10 @@
 package com.github.jing332.alistflutter.model.alist
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.github.jing332.alistflutter.R
 import com.github.jing332.alistflutter.app
 import com.github.jing332.alistflutter.constant.LogLevel
 import com.github.jing332.alistflutter.data.entities.ServerLog.Companion.evalLog
-import com.github.jing332.alistflutter.utils.FileUtils.readAllText
 import com.github.jing332.alistflutter.utils.StringUtils.removeAnsiCodes
 import com.github.jing332.alistflutter.utils.ToastUtils.longToast
 import kotlinx.coroutines.CoroutineScope
@@ -36,11 +34,12 @@ object AList {
 
 
     fun setAdminPassword(pwd: String) {
-        val log = execWithParams(
+        execWithParams(
             redirect = true,
             params = arrayOf("admin", "set", pwd, "--data", dataPath)
-        ).inputStream.readAllText()
-//        appDb.serverLogDao.insert(ServerLog(level = LogLevel.INFO, message = log.removeAnsiCodes()))
+        ).inputStream.logWatcher {
+            handleLog(it)
+        }
     }
 
 
@@ -54,14 +53,21 @@ object AList {
 
     private var mProcess: Process? = null
 
-    private suspend fun InputStream.logWatcher(onNewLine: (String) -> Unit) {
+    private fun handleLog(log:String){
+        log.removeAnsiCodes().evalLog()?.let {
+            Logger.log(level = it.level, time = it.time, msg = it.message)
+        } ?: run {
+            Logger.log(level = LogLevel.INFO, time = "", msg = log)
+        }
+    }
+
+    private fun InputStream.logWatcher(onNewLine: (String) -> Unit) {
         bufferedReader().use {
-            while (coroutineContext.isActive) {
+            while (true) {
                 runCatching {
                     val line = it.readLine() ?: return@use
                     onNewLine(line)
                 }.onFailure {
-                    Log.e(TAG, "logWatcher: ", it)
                     return@use
                 }
             }
@@ -72,19 +78,12 @@ object AList {
 
     private val mScope = CoroutineScope(Dispatchers.IO + Job())
     private fun initOutput() {
-        val onNewLine = { msg: String ->
-            msg.removeAnsiCodes().evalLog()?.let {
-                Logger.log(level = it.level, time = it.time, msg = it.message)
-            } ?: run {
-                Logger.log(level = LogLevel.INFO, time = "", msg = msg)
-            }
-        }
 
         mScope.launch {
-            mProcess?.inputStream?.logWatcher(onNewLine)
+            mProcess?.inputStream?.logWatcher(::handleLog)
         }
         mScope.launch {
-            mProcess?.errorStream?.logWatcher(onNewLine)
+            mProcess?.errorStream?.logWatcher(::handleLog)
         }
     }
 

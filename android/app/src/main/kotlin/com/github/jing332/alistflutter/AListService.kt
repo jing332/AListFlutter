@@ -14,17 +14,16 @@ import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.github.jing332.alistflutter.model.alist.AList
-import com.github.jing332.alistflutter.BridgeUtils.invokeMethodSync
 import com.github.jing332.alistflutter.config.AppConfig
+import com.github.jing332.alistflutter.model.alist.AList
 import com.github.jing332.alistflutter.utils.AndroidUtils.registerReceiverCompat
 import com.github.jing332.alistflutter.utils.ClipboardUtils
 import com.github.jing332.alistflutter.utils.ToastUtils.toast
+import com.github.jing332.utils.NativeLib
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import splitties.systemservices.powerManager
 
@@ -50,6 +49,7 @@ class AListService : Service() {
     private val mNotificationReceiver = NotificationActionReceiver()
     private val mReceiver = MyReceiver()
     private var mWakeLock: PowerManager.WakeLock? = null
+    private var mLocalAddress: String = ""
 
     override fun onBind(p0: Intent?): IBinder? = null
 
@@ -62,7 +62,7 @@ class AListService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        initNotification()
+        initOrUpdateNotification()
 
         if (AppConfig.isWakeLockEnabled) {
             mWakeLock = powerManager.newWakeLock(
@@ -73,7 +73,10 @@ class AListService : Service() {
         }
 
         LocalBroadcastManager.getInstance(this)
-            .registerReceiver(mReceiver, IntentFilter(ACTION_STATUS_CHANGED))
+            .registerReceiver(
+                mReceiver,
+                IntentFilter(ACTION_STATUS_CHANGED)
+            )
         registerReceiverCompat(
             mNotificationReceiver,
             ACTION_SHUTDOWN,
@@ -117,28 +120,24 @@ class AListService : Service() {
 
     @Suppress("DEPRECATION")
     inner class MyReceiver : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == ACTION_STATUS_CHANGED) {
-                if (!isRunning) {
-                    stopForeground(true)
-                    stopSelf()
+        override fun onReceive(context: Context?, intent: Intent) {
+            when (intent.action) {
+                ACTION_STATUS_CHANGED -> {
+                    if (!isRunning) {
+                        stopForeground(true)
+                        stopSelf()
+                    }
                 }
             }
+
         }
     }
 
-    private fun httpAddress(): String = runBlocking {
-        val channel = BridgeUtils.getMethodChannel(this@AListService)
+    private fun localAddress(): String = NativeLib.getLocalIp()
 
-//        return@runBlocking when (val ret = channel.invokeMethodSync("getHttpAddress", null)) {
-//            is BridgeUtils.MethodChannelResult.Success -> ret.result as String
-//            else -> ""
-//        }
-        return@runBlocking ""
-    }
 
     @Suppress("DEPRECATION")
-    private fun initNotification() {
+    private fun initOrUpdateNotification() {
         // Android 12(S)+ 必须指定PendingIntent.FLAG_
         val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
             PendingIntent.FLAG_IMMUTABLE
@@ -196,24 +195,23 @@ class AListService : Service() {
         val notification = builder
 //            .setColor(color)
             .setContentTitle(getString(R.string.alist_server_running))
-            .setContentText(httpAddress())
+            .setContentText(localAddress())
             .setSmallIcon(smallIconRes)
             .setContentIntent(pendingIntent)
             .addAction(0, getString(R.string.shutdown), shutdownAction)
             .addAction(0, getString(R.string.copy_address), copyAddressPendingIntent)
+
             .build()
 
-        // 前台服务
         startForeground(FOREGROUND_ID, notification)
     }
 
     inner class NotificationActionReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             when (intent?.action) {
-//                ACTION_SHUTDOWN -> /*AList.shutdown()*/
 
                 ACTION_COPY_ADDRESS -> {
-                    ClipboardUtils.copyText("AList", httpAddress())
+                    ClipboardUtils.copyText("AList", localAddress())
                     toast(R.string.address_copied)
                 }
             }

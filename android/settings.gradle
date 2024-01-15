@@ -27,3 +27,4 @@ plugins {
 }
 
 include ":app"
+include ":utils"

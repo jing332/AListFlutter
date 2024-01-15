@@ -130,7 +130,7 @@ flutter {
 //}
 dependencies {
 //    compileOnly files("$flutterRoot/bin/cache/artifacts/engine/android-arm/flutter.jar")
-
+    implementation project(":utils")
     //noinspection GradleDependency
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
 

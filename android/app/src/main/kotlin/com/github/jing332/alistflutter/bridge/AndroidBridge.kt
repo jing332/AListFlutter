@@ -18,7 +18,7 @@ class AndroidBridge(private val context: Context) : GeneratedApi.Android {
             context,
             context.getString(R.string.app_switch),
             "alist_flutter_switch",
-            R.drawable.ic_launcher_foreground,
+            R.drawable.alist_switch,
             Intent(context, SwitchServerActivity::class.java)
         )
     }

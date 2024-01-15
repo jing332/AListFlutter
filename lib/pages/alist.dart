@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/pwd_edit_dialog.dart';
 import 'package:alist_flutter/widgets/switch_floating_action_button.dart';
@@ -29,6 +31,7 @@ class AListScreen extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (context) => PwdEditDialog(onConfirm: (pwd) {
+                            log("pwd: $pwd");
                             Android().setAdminPwd(pwd);
                           }));
                 },

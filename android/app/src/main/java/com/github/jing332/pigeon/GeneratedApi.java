@@ -488,6 +488,44 @@ public class GeneratedApi {
     }
   }
   /** Generated class from Pigeon that represents Flutter messages that can be called from Java. */
+  public static class Flutter {
+    private final @NonNull BinaryMessenger binaryMessenger;
+
+    public Flutter(@NonNull BinaryMessenger argBinaryMessenger) {
+      this.binaryMessenger = argBinaryMessenger;
+    }
+
+    /** Public interface for sending reply. */ 
+    /** The codec used by Flutter. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    public void getLocalIpAddress(@NonNull Result<String> result) {
+      final String channelName = "dev.flutter.pigeon.alist_flutter.Flutter.getLocalIpAddress";
+      BasicMessageChannel<Object> channel =
+          new BasicMessageChannel<>(
+              binaryMessenger, channelName, getCodec());
+      channel.send(
+          null,
+          channelReply -> {
+            if (channelReply instanceof List) {
+              List<Object> listReply = (List<Object>) channelReply;
+              if (listReply.size() > 1) {
+                result.error(new FlutterError((String) listReply.get(0), (String) listReply.get(1), (String) listReply.get(2)));
+              } else if (listReply.get(0) == null) {
+                result.error(new FlutterError("null-error", "Flutter api returned null value for non-null return value.", ""));
+              } else {
+                @SuppressWarnings("ConstantConditions")
+                String output = (String) listReply.get(0);
+                result.success(output);
+              }
+            }  else {
+              result.error(createConnectionError(channelName));
+            } 
+          });
+    }
+  }
+  /** Generated class from Pigeon that represents Flutter messages that can be called from Java. */
   public static class Event {
     private final @NonNull BinaryMessenger binaryMessenger;
 
