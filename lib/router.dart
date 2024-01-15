@@ -1,5 +1,5 @@
 import 'package:alist_flutter/pages/alist.dart';
-import 'package:alist_flutter/pages/settings.dart';
+import 'package:alist_flutter/pages/settings/settings.dart';
 import 'package:alist_flutter/pages/web.dart';
 import 'package:flutter/material.dart';
 
