@@ -253,7 +253,11 @@ public class GeneratedApi {
   /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
   public interface Android {
 
+    void addShortcut();
+
     void startService();
+
+    void setAdminPwd(@NonNull String pwd);
 
     @NonNull 
     Boolean isRunning();
@@ -280,6 +284,28 @@ public class GeneratedApi {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.addShortcut", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  api.addShortcut();
+                  wrapped.add(0, null);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
                 binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.startService", getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -287,6 +313,30 @@ public class GeneratedApi {
                 ArrayList<Object> wrapped = new ArrayList<Object>();
                 try {
                   api.startService();
+                  wrapped.add(0, null);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.setAdminPwd", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                ArrayList<Object> args = (ArrayList<Object>) message;
+                String pwdArg = (String) args.get(0);
+                try {
+                  api.setAdminPwd(pwdArg);
                   wrapped.add(0, null);
                 }
  catch (Throwable exception) {
@@ -457,6 +507,26 @@ public class GeneratedApi {
               binaryMessenger, channelName, getCodec());
       channel.send(
           new ArrayList<Object>(Collections.singletonList(isRunningArg)),
+          channelReply -> {
+            if (channelReply instanceof List) {
+              List<Object> listReply = (List<Object>) channelReply;
+              if (listReply.size() > 1) {
+                result.error(new FlutterError((String) listReply.get(0), (String) listReply.get(1), (String) listReply.get(2)));
+              } else {
+                result.success();
+              }
+            }  else {
+              result.error(createConnectionError(channelName));
+            } 
+          });
+    }
+    public void onServerLog(@NonNull Long levelArg, @NonNull String timeArg, @NonNull String logArg, @NonNull VoidResult result) {
+      final String channelName = "dev.flutter.pigeon.alist_flutter.Event.onServerLog";
+      BasicMessageChannel<Object> channel =
+          new BasicMessageChannel<>(
+              binaryMessenger, channelName, getCodec());
+      channel.send(
+          new ArrayList<Object>(Arrays.asList(levelArg, timeArg, logArg)),
           channelReply -> {
             if (channelReply instanceof List) {
               List<Object> listReply = (List<Object>) channelReply;

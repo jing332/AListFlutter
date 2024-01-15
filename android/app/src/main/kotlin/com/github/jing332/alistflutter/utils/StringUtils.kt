@@ -22,9 +22,9 @@ object StringUtils {
         return this.replace(Regex("[^0-9]"), "").toIntOrNull() ?: 0
     }
 
+    private val mAnsiRegex = Regex("""\x1b(\[.*?[@-~]|].*?(\x07|\x1b\\))""")
     fun String.removeAnsiCodes(): String {
-        val ansiRegex = Regex("\\x1B\\[[0-9;]*[m|K]")
-        return this.replace(ansiRegex, "")
+        return mAnsiRegex.replace(this, "")
     }
 
     fun String.parseToMap(): Map<String, String> {

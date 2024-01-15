@@ -3,6 +3,7 @@ plugins {
     id "kotlin-android"
     id "kotlin-parcelize"
     id "kotlinx-serialization"
+    id "com.google.devtools.ksp"
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -46,6 +47,12 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode gitCommits
         versionName version
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas".toString())
+            arg("room.incremental", "true")
+            arg("room.expandProjection", "true")
+        }
 
         buildConfigField("String", "ALIST_VERSION", "\"${alistVersion}\"")
     }
@@ -134,6 +141,12 @@ dependencies {
     implementation 'com.github.cioccarellia:ksprefs:2.4.0'
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+    // Room
+//    implementation("androidx.room:room-runtime:$room_version")
+//    implementation("androidx.room:room-ktx:$room_version")
+//    ksp("androidx.room:room-compiler:$room_version")
+//    androidTestImplementation("androidx.room:room-testing:$room_version")
 
 
 }

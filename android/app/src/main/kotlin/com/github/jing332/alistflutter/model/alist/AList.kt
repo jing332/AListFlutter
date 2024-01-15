@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.util.Log
 import com.github.jing332.alistflutter.R
 import com.github.jing332.alistflutter.app
+import com.github.jing332.alistflutter.constant.LogLevel
+import com.github.jing332.alistflutter.data.entities.ServerLog.Companion.evalLog
 import com.github.jing332.alistflutter.utils.FileUtils.readAllText
+import com.github.jing332.alistflutter.utils.StringUtils.removeAnsiCodes
 import com.github.jing332.alistflutter.utils.ToastUtils.longToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +16,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
+import java.io.InputStream
 import kotlin.coroutines.coroutineContext
 
 object AList {
@@ -50,73 +54,37 @@ object AList {
 
     private var mProcess: Process? = null
 
-    private suspend fun errorLogWatcher(onNewLine: (String) -> Unit) {
-        mProcess?.apply {
-            errorStream.bufferedReader().use {
-                while (coroutineContext.isActive) {
-                    val line = it.readLine() ?: break
-                    Log.d(TAG, "Process errorStream: $line")
+    private suspend fun InputStream.logWatcher(onNewLine: (String) -> Unit) {
+        bufferedReader().use {
+            while (coroutineContext.isActive) {
+                runCatching {
+                    val line = it.readLine() ?: return@use
                     onNewLine(line)
+                }.onFailure {
+                    Log.e(TAG, "logWatcher: ", it)
+                    return@use
                 }
             }
+
         }
     }
 
-    private suspend fun logWatcher(onNewLine: (String) -> Unit) {
-        mProcess?.apply {
-            inputStream.bufferedReader().use {
-                while (coroutineContext.isActive) {
-                    val line = it.readLine() ?: break
-                    Log.d(TAG, "Process inputStream: $line")
-                    onNewLine(line)
-                }
-            }
-        }
-    }
 
     private val mScope = CoroutineScope(Dispatchers.IO + Job())
     private fun initOutput() {
-//        val dao = appDb.serverLogDao
-        mScope.launch {
-            runCatching {
-                logWatcher { msg ->
-//                    msg.removeAnsiCodes().evalLog()?.let {
-//                        dao.insert(
-//                            ServerLog(
-//                                level = it.level,
-//                                message = it.message
-//                            )
-//                        )
-//                        return@logWatcher
-//                    }
-
-//                    dao.insert(
-//                        ServerLog(
-//                            level = if (msg.startsWith("fail")) LogLevel.ERROR else LogLevel.INFO,
-//                            message = msg
-//                        )
-//                    )
-
-                }
-            }.onFailure {
-                it.printStackTrace()
+        val onNewLine = { msg: String ->
+            msg.removeAnsiCodes().evalLog()?.let {
+                Logger.log(level = it.level, time = it.time, msg = it.message)
+            } ?: run {
+                Logger.log(level = LogLevel.INFO, time = "", msg = msg)
             }
         }
+
         mScope.launch {
-            runCatching {
-                errorLogWatcher { msg ->
-//                    val log = msg.removeAnsiCodes().evalLog() ?: return@errorLogWatcher
-//                    dao.insert(
-//                        ServerLog(
-//                            level = log.level,
-//                            message = log.message,
-////                            description = log.time + "\n" + log.code
-//                        )
-//                    )
-                }
-            }.onFailure {
-                it.printStackTrace()
-            }
+            mProcess?.inputStream?.logWatcher(onNewLine)
+        }
+        mScope.launch {
+            mProcess?.errorStream?.logWatcher(onNewLine)
         }
     }
 

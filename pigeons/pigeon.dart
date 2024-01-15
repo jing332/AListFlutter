@@ -17,7 +17,11 @@ abstract class AppConfig {
 
 @HostApi()
 abstract class Android {
+  void addShortcut();
+
   void startService();
+
+  void setAdminPwd(String pwd);
 
   bool isRunning();
 
@@ -35,4 +39,10 @@ abstract class Android {
 @FlutterApi()
 abstract class Event {
   void onServiceStatusChanged(bool isRunning);
+
+  void onServerLog(
+    int level,
+    String time,
+    String log,
+  );
 }

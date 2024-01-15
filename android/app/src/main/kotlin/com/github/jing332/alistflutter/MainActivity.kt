@@ -10,25 +10,25 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.github.jing332.alistflutter.bridge.AndroidBridge
 import com.github.jing332.alistflutter.bridge.AppConfigBridge
 import com.github.jing332.alistflutter.model.ShortCuts
+import com.github.jing332.alistflutter.model.alist.Logger
 import com.github.jing332.pigeon.GeneratedApi
 import com.github.jing332.pigeon.GeneratedApi.VoidResult
 import io.flutter.embedding.android.FlutterActivity
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : FlutterActivity() {
     companion object {
-        private val TAG = "MainActivity"
-        const val BRIDGE_CHANNEL = "alistflutter/bridge"
-        const val CONFIG_CHANNEL = "alistflutter/config"
-
-        const val EVENT_CHANNEL = "alistflutter/event"
+        private const val TAG = "MainActivity"
     }
 
     private val receiver by lazy { MyReceiver() }
     private var mEvent: GeneratedApi.Event? = null
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,6 +43,22 @@ class MainActivity : FlutterActivity() {
         GeneratedApi.Android.setUp(binaryMessage, AndroidBridge(this))
         mEvent = GeneratedApi.Event(binaryMessage)
 
+        Logger.addListener(object : Logger.Listener {
+            override fun onLog(level: Int, time: String, msg: String) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    mEvent?.onServerLog(level.toLong(), time, msg, object : VoidResult {
+                        override fun success() {
+
+                        }
+
+                        override fun error(error: Throwable) {
+                        }
+
+                    })
+                }
+            }
+
+        })
     }
 
     override fun onDestroy() {
