@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   pigeon: ^16.0.0
+  flutter_inappwebview: ^6.0.0
 
 
 dev_dependencies:

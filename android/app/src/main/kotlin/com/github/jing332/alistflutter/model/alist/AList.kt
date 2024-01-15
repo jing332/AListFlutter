@@ -53,7 +53,7 @@ object AList {
 
     private var mProcess: Process? = null
 
-    private fun handleLog(log:String){
+    private fun handleLog(log: String) {
         log.removeAnsiCodes().evalLog()?.let {
             Logger.log(level = it.level, time = it.time, msg = it.message)
         } ?: run {
@@ -111,5 +111,9 @@ object AList {
         System.arraycopy(params, 0, cmdline, 1, params.size)
         return ProcessBuilder(*cmdline).redirectErrorStream(redirect).start()
             ?: throw IOException("Process is null!")
+    }
+
+    fun getHttpPort(): Int {
+        return AListConfigManager.config().scheme.httpPort
     }
 }

@@ -31,6 +31,10 @@ class AndroidBridge(private val context: Context) : GeneratedApi.Android {
         AList.setAdminPassword(pwd)
     }
 
+    override fun getAListHttpPort(): Long {
+        return AList.getHttpPort().toLong()
+    }
+
     override fun isRunning() = AListService.isRunning
     override fun getAListVersion() = BuildConfig.ALIST_VERSION
     override fun getVersionName() = BuildConfig.VERSION_NAME

@@ -259,6 +259,33 @@ class Android {
     }
   }
 
+  Future<int> getAListHttpPort() async {
+    const String __pigeon_channelName = 'dev.flutter.pigeon.alist_flutter.Android.getAListHttpPort';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(null) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else if (__pigeon_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (__pigeon_replyList[0] as int?)!;
+    }
+  }
+
   Future<bool> isRunning() async {
     const String __pigeon_channelName = 'dev.flutter.pigeon.alist_flutter.Android.isRunning';
     final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
@@ -408,34 +435,6 @@ class Android {
       );
     } else {
       return;
-    }
-  }
-}
-
-abstract class Flutter {
-  static const MessageCodec<Object?> pigeonChannelCodec = StandardMessageCodec();
-
-  String getLocalIpAddress();
-
-  static void setup(Flutter? api, {BinaryMessenger? binaryMessenger}) {
-    {
-      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.alist_flutter.Flutter.getLocalIpAddress', pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (api == null) {
-        __pigeon_channel.setMessageHandler(null);
-      } else {
-        __pigeon_channel.setMessageHandler((Object? message) async {
-          try {
-            final String output = api.getLocalIpAddress();
-            return wrapResponse(result: output);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          }          catch (e) {
-            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
     }
   }
 }

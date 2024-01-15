@@ -1,12 +1,12 @@
 import 'dart:developer';
 
 import 'package:alist_flutter/generated_api.dart';
-import 'package:alist_flutter/pages/pwd_edit_dialog.dart';
+import 'package:alist_flutter/pages/alist/pwd_edit_dialog.dart';
 import 'package:alist_flutter/widgets/switch_floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'alist/log_list_view.dart';
+import 'log_list_view.dart';
 
 class AListScreen extends StatelessWidget {
   const AListScreen({Key? key}) : super(key: key);

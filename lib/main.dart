@@ -1,14 +1,21 @@
-import 'dart:async';
-
-import 'package:alist_flutter/generated_api.dart';
-import 'package:alist_flutter/pages/alist.dart';
+import 'package:alist_flutter/pages/alist/alist.dart';
 import 'package:alist_flutter/pages/settings/settings.dart';
-import 'package:alist_flutter/pages/web.dart';
+import 'package:alist_flutter/pages/web/web.dart';
 import 'package:alist_flutter/router.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Android
+  if (!kIsWeb &&
+      kDebugMode &&
+      defaultTargetPlatform == TargetPlatform.android) {
+    await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
+  }
+
   runApp(const MyApp());
 }
 

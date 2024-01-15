@@ -23,6 +23,8 @@ abstract class Android {
 
   void setAdminPwd(String pwd);
 
+  int getAListHttpPort();
+
   bool isRunning();
 
   String getAListVersion();
@@ -36,10 +38,6 @@ abstract class Android {
   void longToast(String msg);
 }
 
-@FlutterApi()
-abstract class Flutter {
-  String getLocalIpAddress();
-}
 
 @FlutterApi()
 abstract class Event {
