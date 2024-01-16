@@ -35,21 +35,36 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "checkForUpdates":
             MessageLookupByLibrary.simpleMessage("Check for updates"),
-        "copiedToClipboard": MessageLookupByLibrary.simpleMessage("已复制到剪贴板"),
+        "copiedToClipboard":
+            MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
         "currentIsLatestVersion":
             MessageLookupByLibrary.simpleMessage("Current is latest version"),
         "desktopShortcut":
             MessageLookupByLibrary.simpleMessage("Desktop shortcut"),
-        "download": MessageLookupByLibrary.simpleMessage("下载"),
+        "download": MessageLookupByLibrary.simpleMessage("download"),
         "downloadApk": MessageLookupByLibrary.simpleMessage("Download APK"),
-        "downloadThisFile": MessageLookupByLibrary.simpleMessage("下载此文件吗？"),
+        "downloadThisFile":
+            MessageLookupByLibrary.simpleMessage("Download this file？"),
         "general": MessageLookupByLibrary.simpleMessage("General"),
-        "goTo": MessageLookupByLibrary.simpleMessage("前往"),
-        "jump_to_other_app":
+        "goTo": MessageLookupByLibrary.simpleMessage("GO"),
+        "grantManagerStoragePermission": MessageLookupByLibrary.simpleMessage(
+            "Grant 【Manage external storage】 permission"),
+        "grantNotificationPermission": MessageLookupByLibrary.simpleMessage(
+            "Grant 【Notification】 permission"),
+        "grantNotificationPermissionDesc": MessageLookupByLibrary.simpleMessage(
+            "Used for foreground service keep alive"),
+        "grantStoragePermission": MessageLookupByLibrary.simpleMessage(
+            "Grant 【external storage】 permission"),
+        "grantStoragePermissionDesc": MessageLookupByLibrary.simpleMessage(
+            "Mounting local storage is a must, otherwise no permission to read and write files"),
+        "importantSettings":
+            MessageLookupByLibrary.simpleMessage("Important settings"),
+        "jumpToOtherApp":
             MessageLookupByLibrary.simpleMessage("Jump to other app？"),
         "moreOptions": MessageLookupByLibrary.simpleMessage("More options"),
         "releasePage": MessageLookupByLibrary.simpleMessage("Release Page"),
-        "selectAppToOpen": MessageLookupByLibrary.simpleMessage("选择应用打开"),
+        "selectAppToOpen":
+            MessageLookupByLibrary.simpleMessage("Select app to open"),
         "setAdminPassword":
             MessageLookupByLibrary.simpleMessage("Set admin password"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),

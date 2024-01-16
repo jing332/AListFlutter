@@ -65,7 +65,7 @@ class WebScreenState extends State<WebScreen> {
                   _webViewController = controller;
                 },
                 onLoadStart: (InAppWebViewController controller, Uri? url) {
-                  setState(() async {
+                  setState(() {
                     _progress = 0;
                   });
                 },
@@ -75,7 +75,7 @@ class WebScreenState extends State<WebScreen> {
                     return NavigationActionPolicy.ALLOW;
                   }
                   Get.showSnackbar(GetSnackBar(
-                      message: S.of(context).jump_to_other_app,
+                      message: S.of(context).jumpToOtherApp,
                       duration: const Duration(seconds: 3),
                       mainButton: TextButton(
                         onPressed: () {

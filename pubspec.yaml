@@ -42,6 +42,7 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   android_intent_plus: ^4.0.3
   flutter_svg: ^2.0.9
+  permission_handler: ^11.1.0
 
 
 dev_dependencies:

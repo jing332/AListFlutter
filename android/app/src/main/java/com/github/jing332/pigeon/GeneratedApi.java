@@ -266,6 +266,9 @@ public class GeneratedApi {
     Boolean isRunning();
 
     @NonNull 
+    Long getDeviceSdkInt();
+
+    @NonNull 
     String getDeviceCPUABI();
 
     @NonNull 
@@ -387,6 +390,28 @@ public class GeneratedApi {
                 ArrayList<Object> wrapped = new ArrayList<Object>();
                 try {
                   Boolean output = api.isRunning();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.getDeviceSdkInt", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  Long output = api.getDeviceSdkInt();
                   wrapped.add(0, output);
                 }
  catch (Throwable exception) {

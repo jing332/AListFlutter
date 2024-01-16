@@ -8,6 +8,7 @@ import 'package:alist_flutter/pages/settings/settings.dart';
 import 'package:alist_flutter/pages/web/web.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -74,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
+
   @override
   void initState() {
     super.initState();
@@ -106,18 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
       bottomNavigationBar: NavigationBar(
-        destinations: [ NavigationDestination(
-          icon: const Icon(Icons.preview),
-          label: S.current.webPage,
-        ),
+        destinations: [
           NavigationDestination(
-            icon: SvgPicture.asset("assets/alist.svg",
-                color: Theme.of(context).hintColor,
-            width: 32,
-            height: 32,),
+            icon: const Icon(Icons.preview),
+            label: S.current.webPage,
+          ),
+          NavigationDestination(
+            icon: SvgPicture.asset(
+              "assets/alist.svg",
+              color: Theme.of(context).hintColor,
+              width: 32,
+              height: 32,
+            ),
             label: S.current.appName,
           ),
-
           NavigationDestination(
             icon: const Icon(Icons.settings),
             label: S.current.settings,

@@ -41,6 +41,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "downloadThisFile": MessageLookupByLibrary.simpleMessage("下载此文件吗？"),
         "general": MessageLookupByLibrary.simpleMessage("通用"),
         "goTo": MessageLookupByLibrary.simpleMessage("前往"),
+        "grantManagerStoragePermission":
+            MessageLookupByLibrary.simpleMessage("申请【所有文件访问权限】"),
+        "grantNotificationPermission":
+            MessageLookupByLibrary.simpleMessage("申请【通知权限】"),
+        "grantNotificationPermissionDesc":
+            MessageLookupByLibrary.simpleMessage("用于前台服务保活"),
+        "grantStoragePermission":
+            MessageLookupByLibrary.simpleMessage("申请【读写外置存储权限】"),
+        "grantStoragePermissionDesc":
+            MessageLookupByLibrary.simpleMessage("挂载本地存储时必须授予，否则无权限读写文件"),
+        "importantSettings": MessageLookupByLibrary.simpleMessage("重要设置"),
         "moreOptions": MessageLookupByLibrary.simpleMessage("更多选项"),
         "releasePage": MessageLookupByLibrary.simpleMessage("发布页面"),
         "selectAppToOpen": MessageLookupByLibrary.simpleMessage("选择应用打开"),

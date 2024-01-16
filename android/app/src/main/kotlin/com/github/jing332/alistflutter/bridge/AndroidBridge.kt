@@ -38,6 +38,10 @@ class AndroidBridge(private val context: Context) : GeneratedApi.Android {
 
     override fun isRunning() = AListService.isRunning
 
+    override fun getDeviceSdkInt(): Long {
+        return Build.VERSION.SDK_INT.toLong()
+    }
+
     override fun getAListVersion() = BuildConfig.ALIST_VERSION
 
 

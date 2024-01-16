@@ -23,5 +23,11 @@
   "goTo": "前往",
   "downloadThisFile": "下载此文件吗？",
   "download": "下载",
-  "copiedToClipboard": "已复制到剪贴板"
+  "copiedToClipboard": "已复制到剪贴板",
+  "importantSettings": "重要设置",
+  "grantManagerStoragePermission": "申请【所有文件访问权限】",
+  "grantStoragePermissionDesc": "挂载本地存储时必须授予，否则无权限读写文件",
+  "grantStoragePermission": "申请【读写外置存储权限】",
+  "grantNotificationPermission": "申请【通知权限】",
+  "grantNotificationPermissionDesc": "用于前台服务保活"
 }

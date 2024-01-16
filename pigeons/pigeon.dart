@@ -27,6 +27,8 @@ abstract class Android {
 
   bool isRunning();
 
+  int getDeviceSdkInt();
+
   String getDeviceCPUABI();
 
   String getAListVersion();
@@ -44,9 +46,7 @@ abstract class Android {
 abstract class Event {
   void onServiceStatusChanged(bool isRunning);
 
-  void onServerLog(
-    int level,
-    String time,
-    String log,
-  );
+  void onServerLog(int level,
+      String time,
+      String log,);
 }

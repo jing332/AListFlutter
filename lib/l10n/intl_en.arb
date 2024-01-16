@@ -19,10 +19,16 @@
   "bootAutoStartServiceDesc": "Automatically start AList service after boot. (Please make sure to grant auto-start permission)",
   "webPage": "Web Page",
   "settings": "Settings",
-  "jump_to_other_app": "Jump to other app？",
-  "selectAppToOpen": "选择应用打开",
-  "goTo": "前往",
-  "downloadThisFile": "下载此文件吗？",
-  "download": "下载",
-  "copiedToClipboard": "已复制到剪贴板"
+  "jumpToOtherApp": "Jump to other app？",
+  "selectAppToOpen": "Select app to open",
+  "goTo": "GO",
+  "downloadThisFile": "Download this file？",
+  "download": "download",
+  "copiedToClipboard": "Copied to clipboard",
+  "importantSettings": "Important settings",
+  "grantManagerStoragePermission": "Grant 【Manage external storage】 permission",
+  "grantStoragePermissionDesc": "Mounting local storage is a must, otherwise no permission to read and write files",
+  "grantStoragePermission": "Grant 【external storage】 permission",
+  "grantNotificationPermission": "Grant 【Notification】 permission",
+  "grantNotificationPermissionDesc": "Used for foreground service keep alive"
 }

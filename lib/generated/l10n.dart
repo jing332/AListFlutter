@@ -241,60 +241,120 @@ class S {
   }
 
   /// `Jump to other app？`
-  String get jump_to_other_app {
+  String get jumpToOtherApp {
     return Intl.message(
       'Jump to other app？',
-      name: 'jump_to_other_app',
+      name: 'jumpToOtherApp',
       desc: '',
       args: [],
     );
   }
 
-  /// `选择应用打开`
+  /// `Select app to open`
   String get selectAppToOpen {
     return Intl.message(
-      '选择应用打开',
+      'Select app to open',
       name: 'selectAppToOpen',
       desc: '',
       args: [],
     );
   }
 
-  /// `前往`
+  /// `GO`
   String get goTo {
     return Intl.message(
-      '前往',
+      'GO',
       name: 'goTo',
       desc: '',
       args: [],
     );
   }
 
-  /// `下载此文件吗？`
+  /// `Download this file？`
   String get downloadThisFile {
     return Intl.message(
-      '下载此文件吗？',
+      'Download this file？',
       name: 'downloadThisFile',
       desc: '',
       args: [],
     );
   }
 
-  /// `下载`
+  /// `download`
   String get download {
     return Intl.message(
-      '下载',
+      'download',
       name: 'download',
       desc: '',
       args: [],
     );
   }
 
-  /// `已复制到剪贴板`
+  /// `Copied to clipboard`
   String get copiedToClipboard {
     return Intl.message(
-      '已复制到剪贴板',
+      'Copied to clipboard',
       name: 'copiedToClipboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Important settings`
+  String get importantSettings {
+    return Intl.message(
+      'Important settings',
+      name: 'importantSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grant 【Manage external storage】 permission`
+  String get grantManagerStoragePermission {
+    return Intl.message(
+      'Grant 【Manage external storage】 permission',
+      name: 'grantManagerStoragePermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mounting local storage is a must, otherwise no permission to read and write files`
+  String get grantStoragePermissionDesc {
+    return Intl.message(
+      'Mounting local storage is a must, otherwise no permission to read and write files',
+      name: 'grantStoragePermissionDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grant 【external storage】 permission`
+  String get grantStoragePermission {
+    return Intl.message(
+      'Grant 【external storage】 permission',
+      name: 'grantStoragePermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grant 【Notification】 permission`
+  String get grantNotificationPermission {
+    return Intl.message(
+      'Grant 【Notification】 permission',
+      name: 'grantNotificationPermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Used for foreground service keep alive`
+  String get grantNotificationPermissionDesc {
+    return Intl.message(
+      'Used for foreground service keep alive',
+      name: 'grantNotificationPermissionDesc',
       desc: '',
       args: [],
     );
