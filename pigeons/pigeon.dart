@@ -13,6 +13,10 @@ abstract class AppConfig {
   bool isAutoCheckUpdateEnabled();
 
   void setAutoCheckUpdateEnabled(bool enabled);
+
+  bool isAutoOpenWebPageEnabled();
+
+  void setAutoOpenWebPageEnabled(bool enabled);
 }
 
 @HostApi()

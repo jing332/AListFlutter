@@ -10,6 +10,11 @@ object AppConfigBridge : GeneratedApi.AppConfig {
     override fun isStartAtBootEnabled() = AppConfig.isStartAtBootEnabled
 
     override fun isAutoCheckUpdateEnabled() = AppConfig.isAutoCheckUpdateEnabled
+    override fun isAutoOpenWebPageEnabled() = AppConfig.isAutoOpenWebPageEnabled
+
+    override fun setAutoOpenWebPageEnabled(enabled: Boolean) {
+        AppConfig.isAutoOpenWebPageEnabled = enabled
+    }
 
     override fun setAutoCheckUpdateEnabled(enabled: Boolean) {
         AppConfig.isAutoCheckUpdateEnabled = enabled

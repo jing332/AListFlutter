@@ -359,6 +359,26 @@ class S {
       args: [],
     );
   }
+
+  /// `将网页设置为打开首页`
+  String get autoStartWebPage {
+    return Intl.message(
+      '将网页设置为打开首页',
+      name: 'autoStartWebPage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `打开主界面时的首页`
+  String get autoStartWebPageDesc {
+    return Intl.message(
+      '打开主界面时的首页',
+      name: 'autoStartWebPageDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

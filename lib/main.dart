@@ -72,13 +72,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final PageController _pageController = PageController();
-
 
   @override
   void initState() {
     super.initState();
+
+    AppConfig().isAutoOpenWebPageEnabled().then((value) => setState(() {
+          _selectedIndex = 1;
+        }));
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (await AppConfig().isAutoCheckUpdateEnabled()) {
@@ -144,15 +147,5 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
     );
-  }
-}
-
-class NavigationBarController extends GetxController {
-  final _selectedIndex = 0.obs;
-
-  int get selectedIndex => _selectedIndex.value;
-
-  void setIndex(int index) {
-    _selectedIndex.value = index;
   }
 }

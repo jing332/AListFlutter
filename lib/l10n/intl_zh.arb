@@ -29,5 +29,7 @@
   "grantStoragePermissionDesc": "挂载本地存储时必须授予，否则无权限读写文件",
   "grantStoragePermission": "申请【读写外置存储权限】",
   "grantNotificationPermission": "申请【通知权限】",
-  "grantNotificationPermissionDesc": "用于前台服务保活"
+  "grantNotificationPermissionDesc": "用于前台服务保活",
+  "autoStartWebPage": "将网页设置为打开首页",
+  "autoStartWebPageDesc": "打开主界面时的首页"
 }

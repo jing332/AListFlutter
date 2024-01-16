@@ -27,6 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoCheckForUpdates": MessageLookupByLibrary.simpleMessage("自动检查更新"),
         "autoCheckForUpdatesDesc":
             MessageLookupByLibrary.simpleMessage("启动时自动检查更新"),
+        "autoStartWebPage": MessageLookupByLibrary.simpleMessage("将网页设置为打开首页"),
+        "autoStartWebPageDesc":
+            MessageLookupByLibrary.simpleMessage("打开主界面时的首页"),
         "bootAutoStartService": MessageLookupByLibrary.simpleMessage("开机自启动服务"),
         "bootAutoStartServiceDesc": MessageLookupByLibrary.simpleMessage(
             "在开机后自动启动AList服务。（请确保授予自启动权限）"),

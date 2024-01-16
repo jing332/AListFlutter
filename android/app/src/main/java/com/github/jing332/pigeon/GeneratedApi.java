@@ -104,6 +104,11 @@ public class GeneratedApi {
 
     void setAutoCheckUpdateEnabled(@NonNull Boolean enabled);
 
+    @NonNull 
+    Boolean isAutoOpenWebPageEnabled();
+
+    void setAutoOpenWebPageEnabled(@NonNull Boolean enabled);
+
     /** The codec used by AppConfig. */
     static @NonNull MessageCodec<Object> getCodec() {
       return new StandardMessageCodec();
@@ -236,6 +241,52 @@ public class GeneratedApi {
                 Boolean enabledArg = (Boolean) args.get(0);
                 try {
                   api.setAutoCheckUpdateEnabled(enabledArg);
+                  wrapped.add(0, null);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.AppConfig.isAutoOpenWebPageEnabled", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  Boolean output = api.isAutoOpenWebPageEnabled();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.AppConfig.setAutoOpenWebPageEnabled", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                ArrayList<Object> args = (ArrayList<Object>) message;
+                Boolean enabledArg = (Boolean) args.get(0);
+                try {
+                  api.setAutoOpenWebPageEnabled(enabledArg);
                   wrapped.add(0, null);
                 }
  catch (Throwable exception) {

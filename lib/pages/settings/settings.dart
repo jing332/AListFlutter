@@ -109,6 +109,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               controller.startAtBoot = value;
             },
           ),
+          // AutoStartWebPage
+          SwitchPreference(
+            title: S.of(context).autoStartWebPage,
+            subtitle: S.of(context).autoStartWebPageDesc,
+            icon: const Icon(Icons.open_in_browser),
+            value: controller._autoStartWebPage.value,
+            onChanged: (value) {
+              controller.autoStartWebPage = value;
+            },
+          ),
         ],
       ),
     ));
@@ -140,6 +150,15 @@ class SettingsController extends GetxController {
 
   get startAtBoot => _autoStart.value;
 
+
+  final _autoStartWebPage = false.obs;
+
+  set autoStartWebPage(value) =>
+      {_autoStartWebPage.value = value, AppConfig().setAutoOpenWebPageEnabled(value)};
+
+  get autoStartWebPage => _autoStartWebPage.value;
+
+
   @override
   void onInit() async {
     log("onInit");
@@ -153,6 +172,7 @@ class SettingsController extends GetxController {
     cfg.isAutoCheckUpdateEnabled().then((value) => autoUpdate = value);
     cfg.isWakeLockEnabled().then((value) => wakeLock = value);
     cfg.isStartAtBootEnabled().then((value) => startAtBoot = value);
+    cfg.isAutoOpenWebPageEnabled().then((value) => autoStartWebPage = value);
 
     final sdk = await Android().getDeviceSdkInt();
     // A11

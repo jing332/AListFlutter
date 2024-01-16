@@ -30,5 +30,7 @@
   "grantStoragePermissionDesc": "Mounting local storage is a must, otherwise no permission to read and write files",
   "grantStoragePermission": "Grant 【external storage】 permission",
   "grantNotificationPermission": "Grant 【Notification】 permission",
-  "grantNotificationPermissionDesc": "Used for foreground service keep alive"
+  "grantNotificationPermissionDesc": "Used for foreground service keep alive",
+  "autoStartWebPage": "将网页设置为打开首页",
+  "autoStartWebPageDesc": "打开主界面时的首页"
 }

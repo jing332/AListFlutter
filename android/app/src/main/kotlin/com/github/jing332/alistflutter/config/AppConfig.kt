@@ -15,4 +15,9 @@ object AppConfig {
         fallback = false
     )
 
+    var isAutoOpenWebPageEnabled: Boolean by prefs.dynamic(
+        "isAutoOpenWebPageEnabled",
+        fallback = false
+    )
+
 }

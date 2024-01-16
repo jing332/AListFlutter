@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Auto check for updates"),
         "autoCheckForUpdatesDesc": MessageLookupByLibrary.simpleMessage(
             "Check for updates when app starts"),
+        "autoStartWebPage": MessageLookupByLibrary.simpleMessage("将网页设置为打开首页"),
+        "autoStartWebPageDesc":
+            MessageLookupByLibrary.simpleMessage("打开主界面时的首页"),
         "bootAutoStartService":
             MessageLookupByLibrary.simpleMessage("Boot auto-start service"),
         "bootAutoStartServiceDesc": MessageLookupByLibrary.simpleMessage(
