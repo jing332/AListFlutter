@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/alist/alist.dart';
 import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/pages/settings/settings.dart';
@@ -83,8 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      AppUpdateDialog.checkUpdateAndShowDialog(context, null);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      if (await AppConfig().isAutoCheckUpdateEnabled()) {
+        AppUpdateDialog.checkUpdateAndShowDialog(context, null);
+      }
     });
   }
 
