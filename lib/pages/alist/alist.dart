@@ -1,9 +1,12 @@
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/alist/pwd_edit_dialog.dart';
+import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/widgets/switch_floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/UpdateChecker.dart';
+import '../../utils/intent_utils.dart';
 import 'log_list_view.dart';
 
 class AListScreen extends StatelessWidget {
@@ -19,12 +22,14 @@ class AListScreen extends StatelessWidget {
             title: Obx(() => Text("AList - ${ui.alistVersion.value}")),
             actions: [
               IconButton(
+                tooltip: "桌面快捷方式",
                 onPressed: () {
                   Android().addShortcut();
                 },
                 icon: const Icon(Icons.add_home),
               ),
               IconButton(
+                tooltip: "修改 admin 密码",
                 onPressed: () {
                   showDialog(
                       context: context,
@@ -38,15 +43,51 @@ class AListScreen extends StatelessWidget {
                 icon: const Icon(Icons.password),
               ),
               PopupMenuButton(
+                tooltip: "更多选项",
                 itemBuilder: (context) {
                   return [
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 1,
-                      child: Text("检查更新"),
+                      onTap: () async {
+                        AppUpdateDialog.checkUpdateAndShowDialog(context, (b) {
+                          if (!b) {
+                            Get.showSnackbar(GetSnackBar(
+                                message: "已经是最新版本",
+                                duration: const Duration(seconds: 2)));
+                          }
+                        });
+                      },
+                      child: const Text("检查更新"),
                     ),
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 2,
-                      child: Text("关于"),
+                      onTap: () {
+                        Android().getVersionName().then((verName) {
+                          showAboutDialog(
+                              context: context,
+                              applicationVersion: verName,
+                              applicationName: "AList",
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      IntentUtils.getUrlIntent(
+                                              "https://github.com/jing332/AListFlutter")
+                                          .launchChooser("AListFlutter");
+                                    },
+                                    child: const Text("AListFlutter")),
+                                TextButton(
+                                    onPressed: () {
+                                      Android().getAListVersion().then((ver) {
+                                        IntentUtils.getUrlIntent(
+                                                "https://github.com/alist-org/alist/releases/tag/$ver")
+                                            .launchChooser("AList");
+                                      });
+                                    },
+                                    child: const Text("AList")),
+                              ]);
+                        });
+                      },
+                      child: const Text("关于"),
                     ),
                   ];
                 },

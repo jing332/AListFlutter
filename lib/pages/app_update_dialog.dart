@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../utils/UpdateChecker.dart';
 import '../utils/intent_utils.dart';
 
 class AppUpdateDialog extends StatelessWidget {
@@ -14,6 +15,29 @@ class AppUpdateDialog extends StatelessWidget {
       required this.apkUrl,
       required this.version,
       required this.htmlUrl});
+
+  static checkUpdateAndShowDialog(
+      BuildContext context, ValueChanged<bool> ? checkFinished ) async {
+    final checker = UpdateChecker(owner: "jing332", repo: "AListFlutter");
+    await checker.downloadData();
+    checker.hasNewVersion().then((value) {
+      checkFinished?.call(value);
+      if (value) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            barrierColor: Colors.black.withOpacity(0.5),
+            builder: (context) {
+              return AppUpdateDialog(
+                content: checker.getUpdateContent(),
+                apkUrl: checker.getApkDownloadUrl(),
+                htmlUrl: checker.getHtmlUrl(),
+                version: checker.getTag(),
+              );
+            });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +66,6 @@ class AppUpdateDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
             IntentUtils.getUrlIntent(apkUrl).launchChooser("下载APK");
-
           },
         ),
       ],

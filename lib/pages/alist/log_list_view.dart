@@ -29,8 +29,8 @@ class _LogListViewState extends State<LogListView> {
         final log = widget.logs[index];
         return ListTile(
           dense: true,
-          title: Text(log.content),
-          subtitle: Text(log.time),
+          title: SelectableText(log.content),
+          subtitle: SelectableText(log.time),
           leading: LogLevelView(level: log.level),
         );
       },
