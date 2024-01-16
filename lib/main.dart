@@ -1,14 +1,16 @@
 import 'dart:developer';
 
+import 'package:alist_flutter/generated/l10n.dart';
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/alist/alist.dart';
 import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/pages/settings/settings.dart';
 import 'package:alist_flutter/pages/web/web.dart';
-import 'package:alist_flutter/router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 void main() async {
@@ -32,28 +34,20 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(),
         ),
       ),
-      home: const MyHomePage(title: 'AList'),
+      supportedLocales: S.delegate.supportedLocales,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      home: const MyHomePage(title: ""),
     );
   }
 }
@@ -97,8 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: PageView.builder(
         itemBuilder: (context, index) {
           return [
-            const AListScreen(),
             WebScreen(key: webGlobalKey),
+            const AListScreen(),
             const SettingsScreen()
           ][index];
         },
@@ -112,12 +106,28 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
       bottomNavigationBar: NavigationBar(
-        destinations: AppRouter.destinations,
+        destinations: [ NavigationDestination(
+          icon: const Icon(Icons.preview),
+          label: S.current.webPage,
+        ),
+          NavigationDestination(
+            icon: SvgPicture.asset("assets/alist.svg",
+                color: Theme.of(context).hintColor,
+            width: 32,
+            height: 32,),
+            label: S.current.appName,
+          ),
+
+          NavigationDestination(
+            icon: const Icon(Icons.settings),
+            label: S.current.settings,
+          ),
+        ],
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {
           log(index.toString());
           // Web
-          if (_selectedIndex == 1 && index == 1) {
+          if (_selectedIndex == 0 && index == 0) {
             webGlobalKey.currentState?.onClickNavigationBar();
           }
 

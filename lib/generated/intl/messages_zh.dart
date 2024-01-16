@@ -1,0 +1,54 @@
+// DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
+// This is a library that provides messages for a zh locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
+// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
+
+import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
+
+final messages = new MessageLookup();
+
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
+
+class MessageLookup extends MessageLookupByLibrary {
+  String get localeName => 'zh';
+
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("关于"),
+        "appName": MessageLookupByLibrary.simpleMessage("AList"),
+        "autoCheckForUpdates": MessageLookupByLibrary.simpleMessage("自动检查更新"),
+        "autoCheckForUpdatesDesc":
+            MessageLookupByLibrary.simpleMessage("启动时自动检查更新"),
+        "bootAutoStartService": MessageLookupByLibrary.simpleMessage("开机自启动服务"),
+        "bootAutoStartServiceDesc": MessageLookupByLibrary.simpleMessage(
+            "在开机后自动启动AList服务。（请确保授予自启动权限）"),
+        "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "checkForUpdates": MessageLookupByLibrary.simpleMessage("检查更新"),
+        "copiedToClipboard": MessageLookupByLibrary.simpleMessage("已复制到剪贴板"),
+        "currentIsLatestVersion":
+            MessageLookupByLibrary.simpleMessage("已经是最新版本"),
+        "desktopShortcut": MessageLookupByLibrary.simpleMessage("桌面快捷方式"),
+        "download": MessageLookupByLibrary.simpleMessage("下载"),
+        "downloadApk": MessageLookupByLibrary.simpleMessage("下载APK"),
+        "downloadThisFile": MessageLookupByLibrary.simpleMessage("下载此文件吗？"),
+        "general": MessageLookupByLibrary.simpleMessage("通用"),
+        "goTo": MessageLookupByLibrary.simpleMessage("前往"),
+        "moreOptions": MessageLookupByLibrary.simpleMessage("更多选项"),
+        "releasePage": MessageLookupByLibrary.simpleMessage("发布页面"),
+        "selectAppToOpen": MessageLookupByLibrary.simpleMessage("选择应用打开"),
+        "setAdminPassword": MessageLookupByLibrary.simpleMessage("设置admin密码"),
+        "settings": MessageLookupByLibrary.simpleMessage("设置"),
+        "wakeLock": MessageLookupByLibrary.simpleMessage("唤醒锁"),
+        "wakeLockDesc": MessageLookupByLibrary.simpleMessage(
+            "开启防止锁屏后CPU休眠，保持进程在后台运行。（部分系统可能导致杀后台）"),
+        "webPage": MessageLookupByLibrary.simpleMessage("网页")
+      };
+}

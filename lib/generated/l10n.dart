@@ -1,0 +1,329 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'intl/messages_all.dart';
+
+// **************************************************************************
+// Generator: Flutter Intl IDE plugin
+// Made by Localizely
+// **************************************************************************
+
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+// ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
+// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
+
+class S {
+  S();
+
+  static S? _current;
+
+  static S get current {
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    return _current!;
+  }
+
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+
+  static Future<S> load(Locale locale) {
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
+    return initializeMessages(localeName).then((_) {
+      Intl.defaultLocale = localeName;
+      final instance = S();
+      S._current = instance;
+
+      return instance;
+    });
+  }
+
+  static S of(BuildContext context) {
+    final instance = S.maybeOf(context);
+    assert(instance != null,
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    return instance!;
+  }
+
+  static S? maybeOf(BuildContext context) {
+    return Localizations.of<S>(context, S);
+  }
+
+  /// `AList`
+  String get appName {
+    return Intl.message(
+      'AList',
+      name: 'appName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Desktop shortcut`
+  String get desktopShortcut {
+    return Intl.message(
+      'Desktop shortcut',
+      name: 'desktopShortcut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set admin password`
+  String get setAdminPassword {
+    return Intl.message(
+      'Set admin password',
+      name: 'setAdminPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More options`
+  String get moreOptions {
+    return Intl.message(
+      'More options',
+      name: 'moreOptions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check for updates`
+  String get checkForUpdates {
+    return Intl.message(
+      'Check for updates',
+      name: 'checkForUpdates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current is latest version`
+  String get currentIsLatestVersion {
+    return Intl.message(
+      'Current is latest version',
+      name: 'currentIsLatestVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release Page`
+  String get releasePage {
+    return Intl.message(
+      'Release Page',
+      name: 'releasePage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download APK`
+  String get downloadApk {
+    return Intl.message(
+      'Download APK',
+      name: 'downloadApk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General`
+  String get general {
+    return Intl.message(
+      'General',
+      name: 'general',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auto check for updates`
+  String get autoCheckForUpdates {
+    return Intl.message(
+      'Auto check for updates',
+      name: 'autoCheckForUpdates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check for updates when app starts`
+  String get autoCheckForUpdatesDesc {
+    return Intl.message(
+      'Check for updates when app starts',
+      name: 'autoCheckForUpdatesDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wake lock`
+  String get wakeLock {
+    return Intl.message(
+      'Wake lock',
+      name: 'wakeLock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prevent CPU from sleeping when screen is off. (May cause app killed in background on some devices)`
+  String get wakeLockDesc {
+    return Intl.message(
+      'Prevent CPU from sleeping when screen is off. (May cause app killed in background on some devices)',
+      name: 'wakeLockDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Boot auto-start service`
+  String get bootAutoStartService {
+    return Intl.message(
+      'Boot auto-start service',
+      name: 'bootAutoStartService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Automatically start AList service after boot. (Please make sure to grant auto-start permission)`
+  String get bootAutoStartServiceDesc {
+    return Intl.message(
+      'Automatically start AList service after boot. (Please make sure to grant auto-start permission)',
+      name: 'bootAutoStartServiceDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Web Page`
+  String get webPage {
+    return Intl.message(
+      'Web Page',
+      name: 'webPage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Jump to other app？`
+  String get jump_to_other_app {
+    return Intl.message(
+      'Jump to other app？',
+      name: 'jump_to_other_app',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `选择应用打开`
+  String get selectAppToOpen {
+    return Intl.message(
+      '选择应用打开',
+      name: 'selectAppToOpen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `前往`
+  String get goTo {
+    return Intl.message(
+      '前往',
+      name: 'goTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `下载此文件吗？`
+  String get downloadThisFile {
+    return Intl.message(
+      '下载此文件吗？',
+      name: 'downloadThisFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `下载`
+  String get download {
+    return Intl.message(
+      '下载',
+      name: 'download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `已复制到剪贴板`
+  String get copiedToClipboard {
+    return Intl.message(
+      '已复制到剪贴板',
+      name: 'copiedToClipboard',
+      desc: '',
+      args: [],
+    );
+  }
+}
+
+class AppLocalizationDelegate extends LocalizationsDelegate<S> {
+  const AppLocalizationDelegate();
+
+  List<Locale> get supportedLocales {
+    return const <Locale>[
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'zh'),
+    ];
+  }
+
+  @override
+  bool isSupported(Locale locale) => _isSupported(locale);
+  @override
+  Future<S> load(Locale locale) => S.load(locale);
+  @override
+  bool shouldReload(AppLocalizationDelegate old) => false;
+
+  bool _isSupported(Locale locale) {
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode) {
+        return true;
+      }
+    }
+    return false;
+  }
+}

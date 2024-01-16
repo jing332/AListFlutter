@@ -5,7 +5,7 @@ import 'package:alist_flutter/widgets/switch_floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/UpdateChecker.dart';
+import '../../generated/l10n.dart';
 import '../../utils/intent_utils.dart';
 import 'log_list_view.dart';
 
@@ -22,20 +22,21 @@ class AListScreen extends StatelessWidget {
             title: Obx(() => Text("AList - ${ui.alistVersion.value}")),
             actions: [
               IconButton(
-                tooltip: "桌面快捷方式",
+                tooltip: S.of(context).desktopShortcut,
                 onPressed: () {
                   Android().addShortcut();
                 },
                 icon: const Icon(Icons.add_home),
               ),
               IconButton(
-                tooltip: "修改 admin 密码",
+                tooltip: S.current.setAdminPassword,
                 onPressed: () {
                   showDialog(
                       context: context,
                       builder: (context) => PwdEditDialog(onConfirm: (pwd) {
                             Get.showSnackbar(GetSnackBar(
-                                message: "admin 密码修改为：$pwd",
+                                title: S.current.setAdminPassword,
+                                message: pwd,
                                 duration: const Duration(seconds: 1)));
                             Android().setAdminPwd(pwd);
                           }));
@@ -43,7 +44,7 @@ class AListScreen extends StatelessWidget {
                 icon: const Icon(Icons.password),
               ),
               PopupMenuButton(
-                tooltip: "更多选项",
+                tooltip: S.of(context).moreOptions,
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
@@ -51,13 +52,13 @@ class AListScreen extends StatelessWidget {
                       onTap: () async {
                         AppUpdateDialog.checkUpdateAndShowDialog(context, (b) {
                           if (!b) {
-                            Get.showSnackbar(const GetSnackBar(
-                                message: "已经是最新版本",
-                                duration: Duration(seconds: 2)));
+                            Get.showSnackbar(  GetSnackBar(
+                                message: S.of(context).currentIsLatestVersion,
+                                duration: const Duration(seconds: 2)));
                           }
                         });
                       },
-                      child: const Text("检查更新"),
+                      child: Text(S.of(context).checkForUpdates),
                     ),
                     PopupMenuItem(
                       value: 2,
@@ -87,7 +88,7 @@ class AListScreen extends StatelessWidget {
                               ]);
                         });
                       },
-                      child: const Text("关于"),
+                      child:   Text(S.of(context).about),
                     ),
                   ];
                 },

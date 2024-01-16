@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
 import '../utils/UpdateChecker.dart';
 import '../utils/intent_utils.dart';
 
@@ -17,7 +18,7 @@ class AppUpdateDialog extends StatelessWidget {
       required this.htmlUrl});
 
   static checkUpdateAndShowDialog(
-      BuildContext context, ValueChanged<bool> ? checkFinished ) async {
+      BuildContext context, ValueChanged<bool>? checkFinished) async {
     final checker = UpdateChecker(owner: "jing332", repo: "AListFlutter");
     await checker.downloadData();
     checker.hasNewVersion().then((value) {
@@ -49,23 +50,25 @@ class AppUpdateDialog extends StatelessWidget {
       ]),
       actions: <Widget>[
         TextButton(
-          child: const Text('取消'),
+          child: Text(S.of(context).cancel),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         TextButton(
-          child: const Text('发布页面'),
+          child: Text(S.of(context).releasePage),
           onPressed: () {
             Navigator.pop(context);
-            IntentUtils.getUrlIntent(htmlUrl).launchChooser("发布页面");
+            IntentUtils.getUrlIntent(htmlUrl)
+                .launchChooser(S.of(context).releasePage);
           },
         ),
         TextButton(
-          child: const Text('下载APK'),
+          child: Text(S.of(context).downloadApk),
           onPressed: () {
             Navigator.pop(context);
-            IntentUtils.getUrlIntent(apkUrl).launchChooser("下载APK");
+            IntentUtils.getUrlIntent(apkUrl)
+                .launchChooser(S.of(context).downloadApk);
           },
         ),
       ],

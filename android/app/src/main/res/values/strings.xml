@@ -26,7 +26,7 @@
     <string name="alist_starting">启动中</string>
     <string name="alist_shut_downing">关闭中</string>
     <string name="app_switch">开关</string>
-    <string name="more_options">更多选项</string>
+    <string name="moreOptions">更多选项</string>
     <string name="about">关于</string>
     <string name="listen_address">监听地址</string>
     <string name="edit_config_json">编辑 config.json</string>
@@ -43,8 +43,8 @@
     <string name="grant_battery_whiltelist">请求电池优化白名单</string>
     <string name="grant_battery_whiltelist_desc">如果程序在后台运行时被系统杀死，可以尝试设置。</string>
     <string name="close">关闭</string>
-    <string name="auto_check_updates">自动检查更新</string>
-    <string name="auto_check_updates_desc">打开程序主界面时从Github检查更新</string>
+    <string name="autoCheckForUpdates">自动检查更新</string>
+    <string name="autoCheckForUpdatesDesc">打开程序主界面时从Github检查更新</string>
     <string name="wake_lock">唤醒锁</string>
     <string name="wake_lock_desc">打开可防止锁屏后CPU休眠，但在部分系统可能会导致杀后台</string>
     <string name="importent_settings">重要设置</string>

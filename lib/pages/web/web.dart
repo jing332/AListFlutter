@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
+import '../../generated/l10n.dart';
+
 GlobalKey<WebScreenState> webGlobalKey = GlobalKey();
 
 class WebScreen extends StatefulWidget {
@@ -73,7 +75,7 @@ class WebScreenState extends State<WebScreen> {
                     return NavigationActionPolicy.ALLOW;
                   }
                   Get.showSnackbar(GetSnackBar(
-                      message: "是否跳转到其他应用？",
+                      message: S.of(context).jump_to_other_app,
                       duration: const Duration(seconds: 3),
                       mainButton: TextButton(
                         onPressed: () {
@@ -81,16 +83,16 @@ class WebScreenState extends State<WebScreen> {
                               action: "action_view",
                               data: navigationAction.request.url!.toString());
 
-                          intent.launchChooser("选择应用");
+                          intent.launchChooser(S.of(context).selectAppToOpen);
                         },
-                        child: const Text('前往'),
+                        child: Text(S.of(context).goTo),
                       )));
 
                   return NavigationActionPolicy.CANCEL;
                 },
                 onDownloadStartRequest: (controller, url) async {
                   Get.showSnackbar(GetSnackBar(
-                    title: "是否下载文件？",
+                    title: S.of(context).downloadThisFile,
                     message: url.suggestedFilename ??
                         url.contentDisposition ??
                         url.toString(),
@@ -99,24 +101,24 @@ class WebScreenState extends State<WebScreen> {
                       TextButton(
                         onPressed: () {
                           IntentUtils.getUrlIntent(url.url.toString())
-                              .launchChooser("选择应用");
+                              .launchChooser(S.of(context).selectAppToOpen);
                         },
-                        child: const Text('选择应用下载'),
+                        child: Text(S.of(context).selectAppToOpen),
                       ),
                       TextButton(
                         onPressed: () {
                           IntentUtils.getUrlIntent(url.url.toString()).launch();
                         },
-                        child: const Text('下载'),
+                        child: Text(S.of(context).download),
                       ),
                     ]),
                     onTap: (_) {
                       Clipboard.setData(
                           ClipboardData(text: url.url.toString()));
                       Get.closeCurrentSnackbar();
-                      Get.showSnackbar(const GetSnackBar(
-                        message: "下载链接已复制到剪贴板",
-                        duration: Duration(seconds: 1),
+                      Get.showSnackbar(GetSnackBar(
+                        message: S.of(context).copiedToClipboard,
+                        duration: const Duration(seconds: 1),
                       ));
                     },
                   ));

@@ -3,6 +3,8 @@ import 'package:alist_flutter/pages/settings/preference_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../generated/l10n.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
@@ -15,11 +17,11 @@ class SettingsScreen extends StatelessWidget {
         children: [
           // SizedBox(height: MediaQuery.of(context).padding.top),
 
-          const DividerPreference(title: '通用'),
+          DividerPreference(title: S.of(context).general),
 
           SwitchPreference(
-            title: '自动检查更新',
-            subtitle: '打开主界面时自动从Github检查更新。',
+            title: S.of(context).autoCheckForUpdates,
+            subtitle: S.of(context).autoCheckForUpdatesDesc,
             icon: const Icon(Icons.system_update),
             value: controller.autoUpdate,
             onChanged: (value) {
@@ -27,8 +29,8 @@ class SettingsScreen extends StatelessWidget {
             },
           ),
           SwitchPreference(
-            title: '唤醒锁',
-            subtitle: '开启防止锁屏后CPU休眠，保持进程在后台运行。（部分系统可能导致杀后台）',
+            title: S.of(context).wakeLock,
+            subtitle: S.of(context).wakeLockDesc,
             icon: const Icon(Icons.screen_lock_portrait),
             value: controller.wakeLock,
             onChanged: (value) {
@@ -36,8 +38,8 @@ class SettingsScreen extends StatelessWidget {
             },
           ),
           SwitchPreference(
-            title: '开机自启动服务',
-            subtitle: '在开机后自动启动AList服务。（请确保授予自启动权限）',
+            title: S.of(context).bootAutoStartService,
+            subtitle: S.of(context).bootAutoStartServiceDesc,
             icon: const Icon(Icons.power_settings_new),
             value: controller.startAtBoot,
             onChanged: (value) {
