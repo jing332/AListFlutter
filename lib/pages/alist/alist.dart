@@ -51,9 +51,9 @@ class AListScreen extends StatelessWidget {
                       onTap: () async {
                         AppUpdateDialog.checkUpdateAndShowDialog(context, (b) {
                           if (!b) {
-                            Get.showSnackbar(GetSnackBar(
+                            Get.showSnackbar(const GetSnackBar(
                                 message: "已经是最新版本",
-                                duration: const Duration(seconds: 2)));
+                                duration: Duration(seconds: 2)));
                           }
                         });
                       },
@@ -145,6 +145,7 @@ class AListController extends GetxController {
     Event.setup(MyEventReceiver(
         (isRunning) => isSwitch.value = isRunning, (log) => addLog(log)));
     Android().getAListVersion().then((value) => alistVersion.value = value);
+    Android().isRunning().then((value) => isSwitch.value = value);
 
     super.onInit();
   }

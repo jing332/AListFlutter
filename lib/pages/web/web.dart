@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/utils/intent_utils.dart';
 import 'package:android_intent_plus/android_intent.dart';
@@ -6,19 +8,27 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
+GlobalKey<WebScreenState> webGlobalKey = GlobalKey();
+
 class WebScreen extends StatefulWidget {
   const WebScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _WebScreenState();
+    return WebScreenState();
   }
 }
 
-class _WebScreenState extends State<WebScreen> {
+class WebScreenState extends State<WebScreen> {
   InAppWebViewController? _webViewController;
   double _progress = 0;
   String _url = "http://localhost:5244";
+  bool _canGoBack = false;
+
+  onClickNavigationBar() {
+    log("onClickNavigationBar");
+    _webViewController?.reload();
+  }
 
   @override
   void initState() {
@@ -31,10 +41,12 @@ class _WebScreenState extends State<WebScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-        onPopInvoked: (b) {
-          _webViewController?.canGoBack().then((value) => {
-                if (value) {_webViewController?.goBack()} else {Get.back()}
-              });
+        canPop: !_canGoBack,
+        onPopInvoked: (didPop) async {
+          log("onPopInvoked $didPop");
+          if (didPop) return;
+
+          _webViewController?.goBack();
         },
         child: Scaffold(
           body: Column(children: <Widget>[
@@ -51,7 +63,7 @@ class _WebScreenState extends State<WebScreen> {
                   _webViewController = controller;
                 },
                 onLoadStart: (InAppWebViewController controller, Uri? url) {
-                  setState(() {
+                  setState(() async {
                     _progress = 0;
                   });
                 },
@@ -121,40 +133,11 @@ class _WebScreenState extends State<WebScreen> {
                     _progress = progress / 100;
                     if (_progress == 1) _progress = 0;
                   });
+                  controller.canGoBack().then((value) => setState(() {
+                        _canGoBack = value;
+                      }));
                 },
               ),
-            ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ElevatedButton(
-                  child: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    if (_webViewController != null) {
-                      _webViewController!.goBack();
-                    }
-                  },
-                ),
-                ElevatedButton(
-                  child: const Icon(Icons.arrow_forward),
-                  onPressed: () {
-                    if (_webViewController != null) {
-                      _webViewController!.goForward();
-                    }
-                  },
-                ),
-                ElevatedButton(
-                  child: const Icon(Icons.refresh),
-                  onPressed: () {
-                    if (_webViewController != null) {
-                      _webViewController!.reload();
-                    }
-                    _webViewController!.loadUrl(
-                        urlRequest:
-                            URLRequest(url: WebUri("http://coolapk.com")));
-                  },
-                ),
-              ],
             ),
           ]),
         ));

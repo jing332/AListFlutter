@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:alist_flutter/pages/alist/alist.dart';
 import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/pages/settings/settings.dart';
@@ -93,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           return [
             const AListScreen(),
-            const WebScreen(),
+            WebScreen(key: webGlobalKey),
             const SettingsScreen()
           ][index];
         },
@@ -110,6 +112,12 @@ class _MyHomePageState extends State<MyHomePage> {
         destinations: AppRouter.destinations,
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {
+          log(index.toString());
+          // Web
+          if (_selectedIndex == 1 && index == 1) {
+            webGlobalKey.currentState?.onClickNavigationBar();
+          }
+
           setState(() {
             _selectedIndex = index;
           });
@@ -119,5 +127,15 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
     );
+  }
+}
+
+class NavigationBarController extends GetxController {
+  final _selectedIndex = 0.obs;
+
+  int get selectedIndex => _selectedIndex.value;
+
+  void setIndex(int index) {
+    _selectedIndex.value = index;
   }
 }
