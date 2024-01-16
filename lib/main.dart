@@ -1,7 +1,9 @@
 import 'package:alist_flutter/pages/alist/alist.dart';
+import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/pages/settings/settings.dart';
 import 'package:alist_flutter/pages/web/web.dart';
 import 'package:alist_flutter/router.dart';
+import 'package:alist_flutter/utils/UpdateChecker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -75,6 +77,31 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final checker = UpdateChecker(owner: "jing332", repo: "AListFlutter");
+      await checker.downloadData();
+      final hasNewVersion = await checker.hasNewVersion();
+      if (hasNewVersion) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            barrierColor: Colors.black.withOpacity(0.5),
+            builder: (context) {
+              return AppUpdateDialog(
+                content: checker.getUpdateContent(),
+                apkUrl: checker.getApkDownloadUrl(),
+                htmlUrl: checker.getHtmlUrl(),
+                version: checker.getTag(),
+              );
+            });
+      }
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {

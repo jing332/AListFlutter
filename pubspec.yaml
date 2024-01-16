@@ -39,7 +39,7 @@ dependencies:
   pigeon: ^16.0.0
   flutter_inappwebview: ^6.0.0
   android_intent_plus: ^4.0.3
-
+  http: ^1.1.2
 
 dev_dependencies:
   flutter_test:

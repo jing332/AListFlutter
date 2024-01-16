@@ -1,4 +1,5 @@
 import 'package:alist_flutter/generated_api.dart';
+import 'package:alist_flutter/utils/intent_utils.dart';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -85,17 +86,14 @@ class _WebScreenState extends State<WebScreen> {
                     mainButton: Column(children: [
                       TextButton(
                         onPressed: () {
-                          final intent = AndroidIntent(
-                              action: "action_view", data: url.url.toString());
-                          intent.launchChooser("选择应用");
+                          IntentUtils.getUrlIntent(url.url.toString())
+                              .launchChooser("选择应用");
                         },
                         child: const Text('选择应用下载'),
                       ),
                       TextButton(
                         onPressed: () {
-                          final intent = AndroidIntent(
-                              action: "action_view", data: url.url.toString());
-                          intent.launch();
+                          IntentUtils.getUrlIntent(url.url.toString()).launch();
                         },
                         child: const Text('下载'),
                       ),

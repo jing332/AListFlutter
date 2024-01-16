@@ -2,6 +2,7 @@ package com.github.jing332.alistflutter.bridge
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import com.github.jing332.alistflutter.AListService
 import com.github.jing332.alistflutter.BuildConfig
 import com.github.jing332.alistflutter.R
@@ -36,9 +37,19 @@ class AndroidBridge(private val context: Context) : GeneratedApi.Android {
     }
 
     override fun isRunning() = AListService.isRunning
-    override fun getAListVersion() = BuildConfig.ALIST_VERSION
-    override fun getVersionName() = BuildConfig.VERSION_NAME
 
+    override fun getAListVersion() = BuildConfig.ALIST_VERSION
+
+
+    override fun getDeviceCPUABI(): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Build.SUPPORTED_ABIS[0]
+        } else {
+            android.os.Build.CPU_ABI
+        }
+    }
+
+    override fun getVersionName() = BuildConfig.VERSION_NAME
     override fun getVersionCode() = BuildConfig.VERSION_CODE.toLong()
 
 

@@ -27,6 +27,8 @@ abstract class Android {
 
   bool isRunning();
 
+  String getDeviceCPUABI();
+
   String getAListVersion();
 
   String getVersionName();
@@ -37,7 +39,6 @@ abstract class Android {
 
   void longToast(String msg);
 }
-
 
 @FlutterApi()
 abstract class Event {
