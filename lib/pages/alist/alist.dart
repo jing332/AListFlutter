@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/alist/pwd_edit_dialog.dart';
 import 'package:alist_flutter/widgets/switch_floating_action_button.dart';
@@ -31,7 +29,9 @@ class AListScreen extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (context) => PwdEditDialog(onConfirm: (pwd) {
-                            log("pwd: $pwd");
+                            Get.showSnackbar(GetSnackBar(
+                                message: "admin 密码修改为：$pwd",
+                                duration: const Duration(seconds: 1)));
                             Android().setAdminPwd(pwd);
                           }));
                 },
