@@ -35,8 +35,6 @@ jobs:
 
       - name: Build
         run: |
-          cd $GITHUB_WORKSPACE/alist-lib
-          
           GOARCH=${{ matrix.GO_ARCH }}                   
           
           declare -A goarch2cc=( ["arm64"]="aarch64-linux-android32-clang" ["arm"]="armv7a-linux-androideabi32-clang" ["amd64"]="x86_64-linux-android32-clang" ["386"]="i686-linux-android32-clang")
