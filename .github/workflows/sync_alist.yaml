@@ -2,7 +2,7 @@ name: CheckAList
 
 on:
   schedule:
-    - cron: "0 * * * *" # 每小时执行一次
+    - cron: "0 5,17 * * *" # 每日5点和17点执行
   workflow_dispatch:
   push:
     branches:

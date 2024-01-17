@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: 1.21.5
-          cache-dependency-path: ${{ github.workspace }}/alist-lib/go.sum
+          cache-dependency-path: ${{ github.workspace }}/alist-lib/alist/go.sum
 
       - name: Build
         run: |

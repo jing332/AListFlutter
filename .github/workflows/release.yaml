@@ -27,12 +27,10 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: 1.21.5
-          cache-dependency-path: ${{ github.workspace }}/alist-lib/go.sum
+          cache-dependency-path: ${{ github.workspace }}/alist-lib/alist/go.sum
 
       - name: Build
         run: |
-          cd $GITHUB_WORKSPACE/alist-lib
-          
           GOARCH=${{ matrix.GO_ARCH }}                   
           
           declare -A goarch2cc=( ["arm64"]="aarch64-linux-android32-clang" ["arm"]="armv7a-linux-androideabi32-clang" ["amd64"]="x86_64-linux-android32-clang" ["386"]="i686-linux-android32-clang")
@@ -41,7 +39,8 @@ jobs:
           declare -A arch2lib=( ["arm64"]="arm64-v8a" ["arm"]="armeabi-v7a" ["amd64"]="x86_64" ["386"]="x86")
           export LIB="${arch2lib[$GOARCH]}"
           
-          ./scripts/install_alist.sh $GOARCH $LIB  
+          cd $GITHUB_WORKSPACE/alist-lib/scripts
+          ./install_alist.sh $GOARCH $LIB  
 
       - name: Upload to Artifact
         uses: actions/upload-artifact@v3

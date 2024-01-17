@@ -1,11 +1,13 @@
 #!/bin/bash
 
+GIT_REPO="https://github.com/alist-org/alist.git"
+
 function to_int() {
     echo $(echo "$1" | grep -oE '[0-9]+' | tr -d '\n')
 }
 
 function get_latest_version() {
-    echo $(curl -s https://api.github.com/repos/alist-org/alist/releases/latest | grep -o '"tag_name": ".*"' | cut -d'"' -f4)
+    echo $(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags $GIT_REPO | tail --lines=1 | cut --delimiter='/' --fields=3)
 }
 
 LATEST_VER=""
