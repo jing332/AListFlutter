@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
-import '../utils/UpdateChecker.dart';
+import '../utils/update_checker.dart';
 import '../utils/intent_utils.dart';
 
 class AppUpdateDialog extends StatelessWidget {

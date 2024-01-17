@@ -23,9 +23,7 @@ class _SwitchFloatingButtonState extends State<SwitchFloatingButton>
       vsync: this,
       duration: const Duration(milliseconds: 200),
     );
-    // _controller.addListener((){
-    //   setState(() {});
-    // });
+
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
   }
 

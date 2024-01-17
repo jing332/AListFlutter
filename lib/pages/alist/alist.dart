@@ -1,4 +1,5 @@
 import 'package:alist_flutter/generated_api.dart';
+import 'package:alist_flutter/pages/alist/about_dialog.dart';
 import 'package:alist_flutter/pages/alist/pwd_edit_dialog.dart';
 import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/widgets/switch_floating_action_button.dart';
@@ -18,7 +19,7 @@ class AListScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             title: Obx(() => Text("AList - ${ui.alistVersion.value}")),
             actions: [
               IconButton(
@@ -52,7 +53,7 @@ class AListScreen extends StatelessWidget {
                       onTap: () async {
                         AppUpdateDialog.checkUpdateAndShowDialog(context, (b) {
                           if (!b) {
-                            Get.showSnackbar(  GetSnackBar(
+                            Get.showSnackbar(GetSnackBar(
                                 message: S.of(context).currentIsLatestVersion,
                                 duration: const Duration(seconds: 2)));
                           }
@@ -63,32 +64,11 @@ class AListScreen extends StatelessWidget {
                     PopupMenuItem(
                       value: 2,
                       onTap: () {
-                        Android().getVersionName().then((verName) {
-                          showAboutDialog(
-                              context: context,
-                              applicationVersion: verName,
-                              applicationName: "AList",
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      IntentUtils.getUrlIntent(
-                                              "https://github.com/jing332/AListFlutter")
-                                          .launchChooser("AListFlutter");
-                                    },
-                                    child: const Text("AListFlutter")),
-                                TextButton(
-                                    onPressed: () {
-                                      Android().getAListVersion().then((ver) {
-                                        IntentUtils.getUrlIntent(
-                                                "https://github.com/alist-org/alist/releases/tag/$ver")
-                                            .launchChooser("AList");
-                                      });
-                                    },
-                                    child: const Text("AList")),
-                              ]);
-                        });
+                        showDialog(context: context, builder: ((context){
+                          return const AppAboutDialog();
+                        }));
                       },
-                      child:   Text(S.of(context).about),
+                      child: Text(S.of(context).about),
                     ),
                   ];
                 },

@@ -34,9 +34,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        colorSchemeSeed: Colors.blueGrey,
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(),
         ),
@@ -80,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     AppConfig().isAutoOpenWebPageEnabled().then((value) => setState(() {
-          _selectedIndex = 1;
+          _selectedIndex = 0;
         }));
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
