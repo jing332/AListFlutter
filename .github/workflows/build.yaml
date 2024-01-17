@@ -43,7 +43,8 @@ jobs:
           declare -A arch2lib=( ["arm64"]="arm64-v8a" ["arm"]="armeabi-v7a" ["amd64"]="x86_64" ["386"]="x86")
           export LIB="${arch2lib[$GOARCH]}"
           
-          ./scripts/install_alist.sh $GOARCH $LIB  
+          cd $GITHUB_WORKSPACE/alist-lib/scripts
+          ./install_alist.sh $GOARCH $LIB  
 
       - name: Upload to Artifact
         uses: actions/upload-artifact@v3
