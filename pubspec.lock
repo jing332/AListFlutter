@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.3"
+  animations:
+    dependency: "direct main"
+    description:
+      name: animations
+      sha256: d3d6dcfb218225bbe68e87ccf6378bbb2e32a94900722c5f81611dad089911cb
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.11"
   args:
     dependency: transitive
     description:
@@ -237,6 +245,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  lazy_load_indexed_stack:
+    dependency: "direct main"
+    description:
+      name: lazy_load_indexed_stack
+      sha256: e581426391c44708210b1f571046320ea52dea46740d4972d9e1820b4ef94827
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   lints:
     dependency: transitive
     description:

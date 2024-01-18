@@ -41,13 +41,18 @@ class WebScreenState extends State<WebScreen> {
   }
 
   @override
+  void dispose() {
+    _webViewController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
         canPop: !_canGoBack,
         onPopInvoked: (didPop) async {
           log("onPopInvoked $didPop");
           if (didPop) return;
-
           _webViewController?.goBack();
         },
         child: Scaffold(
@@ -89,6 +94,15 @@ class WebScreenState extends State<WebScreen> {
                       )));
 
                   return NavigationActionPolicy.CANCEL;
+                },
+                onReceivedError: (controller, request, error) async {
+                  final isRunning = await Android().isRunning();
+                  if (!isRunning) {
+                    Android().startService();
+                  } else {
+                    await Future.delayed(const Duration(milliseconds: 100));
+                  }
+                    controller.reload();
                 },
                 onDownloadStartRequest: (controller, url) async {
                   Get.showSnackbar(GetSnackBar(

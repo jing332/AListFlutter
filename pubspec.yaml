@@ -43,6 +43,8 @@ dependencies:
   android_intent_plus: ^4.0.3
   flutter_svg: ^2.0.9
   permission_handler: ^11.1.0
+  lazy_load_indexed_stack: ^1.1.0
+  animations: ^2.0.11
 
 
 dev_dependencies:
