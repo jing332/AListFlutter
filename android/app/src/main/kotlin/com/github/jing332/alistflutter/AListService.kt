@@ -98,7 +98,7 @@ class AListService : Service() {
         unregisterReceiver(mNotificationReceiver)
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    private fun startOrShutdown() {
         if (isRunning) {
             AList.shutdown()
         } else {
@@ -114,6 +114,10 @@ class AListService : Service() {
                 }
             }
         }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+       startOrShutdown()
 
         return super.onStartCommand(intent, flags, startId)
     }
@@ -209,6 +213,9 @@ class AListService : Service() {
     inner class NotificationActionReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             when (intent?.action) {
+                ACTION_SHUTDOWN ->{
+                    startOrShutdown()
+                }
 
                 ACTION_COPY_ADDRESS -> {
                     ClipboardUtils.copyText("AList", localAddress())

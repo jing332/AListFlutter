@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     AppConfig().isAutoOpenWebPageEnabled().then((value) => setState(() {
-          _selectedIndex = 0;
+          _selectedIndex = value ? 0 : 1;
         }));
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
