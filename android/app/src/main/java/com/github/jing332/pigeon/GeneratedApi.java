@@ -109,6 +109,11 @@ public class GeneratedApi {
 
     void setAutoOpenWebPageEnabled(@NonNull Boolean enabled);
 
+    @NonNull 
+    String getDataDir();
+
+    void setDataDir(@NonNull String dir);
+
     /** The codec used by AppConfig. */
     static @NonNull MessageCodec<Object> getCodec() {
       return new StandardMessageCodec();
@@ -287,6 +292,52 @@ public class GeneratedApi {
                 Boolean enabledArg = (Boolean) args.get(0);
                 try {
                   api.setAutoOpenWebPageEnabled(enabledArg);
+                  wrapped.add(0, null);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.AppConfig.getDataDir", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  String output = api.getDataDir();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.AppConfig.setDataDir", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                ArrayList<Object> args = (ArrayList<Object>) message;
+                String dirArg = (String) args.get(0);
+                try {
+                  api.setDataDir(dirArg);
                   wrapped.add(0, null);
                 }
  catch (Throwable exception) {

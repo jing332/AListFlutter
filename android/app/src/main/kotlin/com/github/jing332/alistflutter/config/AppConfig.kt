@@ -20,4 +20,23 @@ object AppConfig {
         fallback = false
     )
 
+    val defaultDataDir by lazy {app.getExternalFilesDir("data")?.absolutePath!!}
+
+    private var mDataDir: String by prefs.dynamic("dataDir", fallback = defaultDataDir)
+
+
+    var dataDir:String
+        get() {
+            if (mDataDir.isBlank()) mDataDir = defaultDataDir
+            return mDataDir
+        }
+        set(value) {
+            if (value.isBlank()){
+                mDataDir = defaultDataDir
+                return
+            }
+
+            mDataDir = value
+        }
+
 }

@@ -6,6 +6,7 @@
   "moreOptions": "More options",
   "checkForUpdates": "Check for updates",
   "currentIsLatestVersion": "Current is latest version",
+  "confirm": "OK",
   "cancel": "Cancel",
   "releasePage": "Release Page",
   "downloadApk": "Download APK",
@@ -32,5 +33,7 @@
   "grantNotificationPermission": "Grant 【Notification】 permission",
   "grantNotificationPermissionDesc": "Used for foreground service keep alive",
   "autoStartWebPage": "将网页设置为打开首页",
-  "autoStartWebPageDesc": "打开主界面时的首页"
+  "autoStartWebPageDesc": "打开主界面时的首页",
+  "dataDirectory": "data Directory",
+  "setDefaultDirectory": "是否设为默认目录？"
 }

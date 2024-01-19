@@ -11,6 +11,11 @@ object AppConfigBridge : GeneratedApi.AppConfig {
 
     override fun isAutoCheckUpdateEnabled() = AppConfig.isAutoCheckUpdateEnabled
     override fun isAutoOpenWebPageEnabled() = AppConfig.isAutoOpenWebPageEnabled
+    override fun getDataDir() = AppConfig.dataDir
+
+    override fun setDataDir(dir: String) {
+        AppConfig.dataDir = dir
+    }
 
     override fun setAutoOpenWebPageEnabled(enabled: Boolean) {
         AppConfig.isAutoOpenWebPageEnabled = enabled

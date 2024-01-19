@@ -3,6 +3,7 @@ package com.github.jing332.alistflutter.model.alist
 import android.annotation.SuppressLint
 import com.github.jing332.alistflutter.R
 import com.github.jing332.alistflutter.app
+import com.github.jing332.alistflutter.config.AppConfig
 import com.github.jing332.alistflutter.constant.LogLevel
 import com.github.jing332.alistflutter.data.entities.ServerLog.Companion.evalLog
 import com.github.jing332.alistflutter.utils.StringUtils.removeAnsiCodes
@@ -10,12 +11,10 @@ import com.github.jing332.alistflutter.utils.ToastUtils.longToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
-import kotlin.coroutines.coroutineContext
 
 object AList {
     const val TAG = "AList"
@@ -27,7 +26,7 @@ object AList {
     val context = app
 
     val dataPath: String
-        get() = context.getExternalFilesDir("data")?.absolutePath!!
+        get() = AppConfig.dataDir
 
     val configPath: String
         get() = "$dataPath${File.separator}config.json"
@@ -90,8 +89,7 @@ object AList {
 
     @SuppressLint("SdCardPath")
     fun startup(
-        dataFolder: String = context.getExternalFilesDir("data")?.absolutePath
-            ?: "/data/data/${context.packageName}/files/data"
+        dataFolder: String = dataPath
     ): Int {
 //        appDb.serverLogDao.deleteAll()
         mProcess =

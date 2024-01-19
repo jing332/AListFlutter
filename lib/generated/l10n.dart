@@ -110,6 +110,16 @@ class S {
     );
   }
 
+  /// `OK`
+  String get confirm {
+    return Intl.message(
+      'OK',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancel`
   String get cancel {
     return Intl.message(
@@ -375,6 +385,26 @@ class S {
     return Intl.message(
       '打开主界面时的首页',
       name: 'autoStartWebPageDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `data Directory`
+  String get dataDirectory {
+    return Intl.message(
+      'data Directory',
+      name: 'dataDirectory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `是否设为默认目录？`
+  String get setDefaultDirectory {
+    return Intl.message(
+      '是否设为默认目录？',
+      name: 'setDefaultDirectory',
       desc: '',
       args: [],
     );

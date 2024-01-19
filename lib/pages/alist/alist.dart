@@ -1,8 +1,12 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/alist/about_dialog.dart';
 import 'package:alist_flutter/pages/alist/pwd_edit_dialog.dart';
 import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/widgets/switch_floating_action_button.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +28,7 @@ class AListScreen extends StatelessWidget {
             actions: [
               IconButton(
                 tooltip: S.of(context).desktopShortcut,
-                onPressed: () {
+                onPressed: () async  {
                   Android().addShortcut();
                 },
                 icon: const Icon(Icons.add_home),

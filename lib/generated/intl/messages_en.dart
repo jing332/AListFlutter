@@ -38,10 +38,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "checkForUpdates":
             MessageLookupByLibrary.simpleMessage("Check for updates"),
+        "confirm": MessageLookupByLibrary.simpleMessage("OK"),
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
         "currentIsLatestVersion":
             MessageLookupByLibrary.simpleMessage("Current is latest version"),
+        "dataDirectory": MessageLookupByLibrary.simpleMessage("data Directory"),
         "desktopShortcut":
             MessageLookupByLibrary.simpleMessage("Desktop shortcut"),
         "download": MessageLookupByLibrary.simpleMessage("download"),
@@ -70,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select app to open"),
         "setAdminPassword":
             MessageLookupByLibrary.simpleMessage("Set admin password"),
+        "setDefaultDirectory":
+            MessageLookupByLibrary.simpleMessage("是否设为默认目录？"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "wakeLock": MessageLookupByLibrary.simpleMessage("Wake lock"),
         "wakeLockDesc": MessageLookupByLibrary.simpleMessage(

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/settings/preference_widgets.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -25,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _lifecycleListener = AppLifecycleListener(
       onResume: () async {
         log("onResume");
-        final controller = Get.put(SettingsController());
+        final controller = Get.put(_SettingsController());
         controller.updateData();
       },
     );
@@ -40,7 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SettingsController());
+    final controller = Get.put(_SettingsController());
     return Scaffold(
         body: Obx(
       () => ListView(
@@ -119,17 +120,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
               controller.autoStartWebPage = value;
             },
           ),
+
+          BasicPreference(
+            title: S.of(context).dataDirectory,
+            subtitle: controller._dataDir.value,
+            leading: const Icon(Icons.folder),
+            onTap: () async {
+              final path = await FilePicker.platform.getDirectoryPath();
+
+              if (path == null) {
+                Get.showSnackbar(GetSnackBar(
+                    message: S.current.setDefaultDirectory,
+                    duration: const Duration(seconds: 3),
+                    mainButton: TextButton(
+                      onPressed: () {
+                        controller.setDataDir("");
+                        Get.back();
+                      },
+                      child: Text(S.current.confirm),
+                    )));
+              } else {
+                controller.setDataDir(path);
+              }
+            },
+          ),
         ],
       ),
     ));
   }
 }
 
-class SettingsController extends GetxController {
+class _SettingsController extends GetxController {
+  final _dataDir = "".obs;
   final _autoUpdate = true.obs;
   final _managerStorageGranted = true.obs;
   final _notificationGranted = true.obs;
   final _storageGranted = true.obs;
+
+  setDataDir(String value) async {
+    AppConfig().setDataDir(value);
+    _dataDir.value = await AppConfig().getDataDir();
+  }
+
+  get dataDir => _dataDir.value;
 
   set autoUpdate(value) =>
       {_autoUpdate.value = value, AppConfig().setAutoCheckUpdateEnabled(value)};
@@ -150,14 +183,14 @@ class SettingsController extends GetxController {
 
   get startAtBoot => _autoStart.value;
 
-
   final _autoStartWebPage = false.obs;
 
-  set autoStartWebPage(value) =>
-      {_autoStartWebPage.value = value, AppConfig().setAutoOpenWebPageEnabled(value)};
+  set autoStartWebPage(value) => {
+        _autoStartWebPage.value = value,
+        AppConfig().setAutoOpenWebPageEnabled(value)
+      };
 
   get autoStartWebPage => _autoStartWebPage.value;
-
 
   @override
   void onInit() async {
@@ -174,13 +207,16 @@ class SettingsController extends GetxController {
     cfg.isStartAtBootEnabled().then((value) => startAtBoot = value);
     cfg.isAutoOpenWebPageEnabled().then((value) => autoStartWebPage = value);
 
+    _dataDir.value = await cfg.getDataDir();
+
     final sdk = await Android().getDeviceSdkInt();
     // A11
     if (sdk >= 30) {
       _managerStorageGranted.value =
           await Permission.manageExternalStorage.isGranted;
 
-      Permission.manageExternalStorage.status.then((value) => log(value.toString()));
+      Permission.manageExternalStorage.status
+          .then((value) => log(value.toString()));
     } else {
       _managerStorageGranted.value = true;
       _storageGranted.value = await Permission.storage.isGranted;

@@ -6,6 +6,7 @@
   "moreOptions": "更多选项",
   "checkForUpdates": "检查更新",
   "currentIsLatestVersion": "已经是最新版本",
+  "confirm": "确认",
   "cancel": "取消",
   "releasePage": "发布页面",
   "downloadApk": "下载APK",
@@ -31,5 +32,7 @@
   "grantNotificationPermission": "申请【通知权限】",
   "grantNotificationPermissionDesc": "用于前台服务保活",
   "autoStartWebPage": "将网页设置为打开首页",
-  "autoStartWebPageDesc": "打开主界面时的首页"
+  "autoStartWebPageDesc": "打开主界面时的首页",
+  "dataDirectory": "data 文件夹路径",
+  "setDefaultDirectory": "是否设为默认目录？"
 }

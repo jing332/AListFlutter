@@ -45,6 +45,7 @@ dependencies:
   permission_handler: ^11.1.0
   lazy_load_indexed_stack: ^1.1.0
   animations: ^2.0.11
+  file_picker: ^6.1.1
 
 
 dev_dependencies:

@@ -35,9 +35,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "在开机后自动启动AList服务。（请确保授予自启动权限）"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "checkForUpdates": MessageLookupByLibrary.simpleMessage("检查更新"),
+        "confirm": MessageLookupByLibrary.simpleMessage("确认"),
         "copiedToClipboard": MessageLookupByLibrary.simpleMessage("已复制到剪贴板"),
         "currentIsLatestVersion":
             MessageLookupByLibrary.simpleMessage("已经是最新版本"),
+        "dataDirectory": MessageLookupByLibrary.simpleMessage("data 文件夹路径"),
         "desktopShortcut": MessageLookupByLibrary.simpleMessage("桌面快捷方式"),
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "downloadApk": MessageLookupByLibrary.simpleMessage("下载APK"),
@@ -59,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "releasePage": MessageLookupByLibrary.simpleMessage("发布页面"),
         "selectAppToOpen": MessageLookupByLibrary.simpleMessage("选择应用打开"),
         "setAdminPassword": MessageLookupByLibrary.simpleMessage("设置admin密码"),
+        "setDefaultDirectory":
+            MessageLookupByLibrary.simpleMessage("是否设为默认目录？"),
         "settings": MessageLookupByLibrary.simpleMessage("设置"),
         "wakeLock": MessageLookupByLibrary.simpleMessage("唤醒锁"),
         "wakeLockDesc": MessageLookupByLibrary.simpleMessage(

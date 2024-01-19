@@ -17,6 +17,9 @@ abstract class AppConfig {
   bool isAutoOpenWebPageEnabled();
 
   void setAutoOpenWebPageEnabled(bool enabled);
+
+  String getDataDir();
+  void setDataDir(String dir);
 }
 
 @HostApi()
