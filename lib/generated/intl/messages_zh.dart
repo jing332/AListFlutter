@@ -62,7 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectAppToOpen": MessageLookupByLibrary.simpleMessage("选择应用打开"),
         "setAdminPassword": MessageLookupByLibrary.simpleMessage("设置admin密码"),
         "setDefaultDirectory":
-            MessageLookupByLibrary.simpleMessage("是否设为默认目录？"),
+            MessageLookupByLibrary.simpleMessage("是否设为默认初始目录？"),
         "settings": MessageLookupByLibrary.simpleMessage("设置"),
         "wakeLock": MessageLookupByLibrary.simpleMessage("唤醒锁"),
         "wakeLockDesc": MessageLookupByLibrary.simpleMessage(

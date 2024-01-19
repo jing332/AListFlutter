@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:alist_flutter/generated/l10n.dart';
 import 'package:alist_flutter/generated_api.dart';
@@ -7,14 +6,13 @@ import 'package:alist_flutter/pages/alist/alist.dart';
 import 'package:alist_flutter/pages/app_update_dialog.dart';
 import 'package:alist_flutter/pages/settings/settings.dart';
 import 'package:alist_flutter/pages/web/web.dart';
-import 'package:animations/animations.dart';
+import 'package:fade_indexed_stack/fade_indexed_stack.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,7 +75,8 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
         body: Obx(
-          () => LazyLoadIndexedStack(
+          () => FadeIndexedStack(
+            lazy: true,
             index: controller.selectedIndex.value,
             children: [
               WebScreen(key: webGlobalKey),
@@ -108,7 +107,6 @@ class MyHomePage extends StatelessWidget {
                 ],
                 selectedIndex: controller.selectedIndex.value,
                 onDestinationSelected: (int index) {
-                  log(index.toString());
                   // Web
                   if (controller.selectedIndex.value == webPageIndex &&
                       controller.selectedIndex.value == webPageIndex) {

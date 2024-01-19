@@ -46,6 +46,7 @@ dependencies:
   lazy_load_indexed_stack: ^1.1.0
   animations: ^2.0.11
   file_picker: ^6.1.1
+  fade_indexed_stack: ^0.2.2
 
 
 dev_dependencies:

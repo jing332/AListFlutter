@@ -25,7 +25,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void initState() {
     _lifecycleListener = AppLifecycleListener(
       onResume: () async {
-        log("onResume");
         final controller = Get.put(_SettingsController());
         controller.updateData();
       },
@@ -194,7 +193,6 @@ class _SettingsController extends GetxController {
 
   @override
   void onInit() async {
-    log("onInit");
     updateData();
 
     super.onInit();
@@ -214,9 +212,6 @@ class _SettingsController extends GetxController {
     if (sdk >= 30) {
       _managerStorageGranted.value =
           await Permission.manageExternalStorage.isGranted;
-
-      Permission.manageExternalStorage.status
-          .then((value) => log(value.toString()));
     } else {
       _managerStorageGranted.value = true;
       _storageGranted.value = await Permission.storage.isGranted;

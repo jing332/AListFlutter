@@ -34,5 +34,5 @@
   "autoStartWebPage": "将网页设置为打开首页",
   "autoStartWebPageDesc": "打开主界面时的首页",
   "dataDirectory": "data 文件夹路径",
-  "setDefaultDirectory": "是否设为默认目录？"
+  "setDefaultDirectory": "是否设为初始目录？"
 }
