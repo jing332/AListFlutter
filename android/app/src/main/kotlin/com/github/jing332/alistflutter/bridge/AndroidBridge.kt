@@ -45,11 +45,12 @@ class AndroidBridge(private val context: Context) : GeneratedApi.Android {
     override fun getAListVersion() = BuildConfig.ALIST_VERSION
 
 
+    @Suppress("DEPRECATION")
     override fun getDeviceCPUABI(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Build.SUPPORTED_ABIS[0]
         } else {
-            android.os.Build.CPU_ABI
+            Build.CPU_ABI
         }
     }
 

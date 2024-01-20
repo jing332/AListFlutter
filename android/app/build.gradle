@@ -129,6 +129,8 @@ flutter {
 //    throw new Exception("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 //}
 dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+
 //    compileOnly files("$flutterRoot/bin/cache/artifacts/engine/android-arm/flutter.jar")
     implementation project(":utils")
     //noinspection GradleDependency

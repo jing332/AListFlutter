@@ -1,114 +1,103 @@
 package com.github.jing332.alistflutter.model.alist
 
+import alistlib.Alistlib
+import alistlib.Event
+import alistlib.LogCallback
 import android.annotation.SuppressLint
+import android.util.Log
 import com.github.jing332.alistflutter.R
 import com.github.jing332.alistflutter.app
 import com.github.jing332.alistflutter.config.AppConfig
 import com.github.jing332.alistflutter.constant.LogLevel
-import com.github.jing332.alistflutter.data.entities.ServerLog.Companion.evalLog
-import com.github.jing332.alistflutter.utils.StringUtils.removeAnsiCodes
 import com.github.jing332.alistflutter.utils.ToastUtils.longToast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import java.io.File
-import java.io.IOException
-import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-object AList {
+object AList : Event, LogCallback {
     const val TAG = "AList"
-
-    private val execPath by lazy {
-        context.applicationInfo.nativeLibraryDir + File.separator + "libalist.so"
-    }
 
     val context = app
 
-    val dataPath: String
+    val dataDir: String
         get() = AppConfig.dataDir
 
     val configPath: String
-        get() = "$dataPath${File.separator}config.json"
+        get() = "$dataDir${File.separator}config.json"
 
+
+    fun init() {
+        runCatching {
+            Alistlib.setConfigData(dataDir)
+            Alistlib.setConfigLogStd(true)
+            Alistlib.init(this, this)
+        }.onFailure {
+            Log.e(TAG, "init:", it)
+        }
+    }
+
+    interface Listener {
+        fun onShutdown(type: String)
+    }
+
+    private val mListeners = mutableListOf<Listener>()
+
+    fun addListener(listener: Listener) {
+        mListeners.add(listener)
+    }
+
+    fun removeListener(listener: Listener) {
+        mListeners.remove(listener)
+    }
+
+    override fun onShutdown(p0: String) {
+        Log.d(TAG, "onShutdown: $p0")
+        mListeners.forEach { it.onShutdown(p0) }
+    }
+
+    override fun onStartError(type: String, msg: String) {
+        Log.e(TAG, "onStartError: $type, $msg")
+        Logger.log(LogLevel.FATAL, type, msg)
+    }
+
+    private val mDateFormatter by lazy  { SimpleDateFormat("MM-dd HH:mm:ss", Locale.getDefault())}
+
+    override fun onLog(level: Short, time: Long, log: String) {
+        Log.d(TAG, "onLog: $level, $time, $log")
+        Logger.log(level.toInt(), mDateFormatter.format(time), log)
+    }
+
+    override fun onProcessExit(code: Long) {
+
+    }
+
+    fun isRunning(): Boolean {
+        return Alistlib.isRunning("")
+    }
 
     fun setAdminPassword(pwd: String) {
-        execWithParams(
-            redirect = true,
-            params = arrayOf("admin", "set", pwd, "--data", dataPath)
-        ).inputStream.logWatcher {
-            handleLog(it)
-        }
+        if (!isRunning()) init()
+
+        Log.d(TAG, "setAdminPassword: $dataDir")
+        Alistlib.setConfigData(dataDir)
+        Alistlib.setAdminPassword(pwd)
     }
 
 
     fun shutdown() {
+        Log.d(TAG, "shutdown")
         runCatching {
-            mProcess?.destroy()
+            Alistlib.shutdown(5000)
         }.onFailure {
-            context.longToast(R.string.server_shutdown_failed, it.toString())
+            context.longToast(R.string.shutdown_failed)
         }
     }
-
-    private var mProcess: Process? = null
-
-    private fun handleLog(log: String) {
-        log.removeAnsiCodes().evalLog()?.let {
-            Logger.log(level = it.level, time = it.time, msg = it.message)
-        } ?: run {
-            Logger.log(level = LogLevel.INFO, time = "", msg = log)
-        }
-    }
-
-    private fun InputStream.logWatcher(onNewLine: (String) -> Unit) {
-        bufferedReader().use {
-            while (true) {
-                runCatching {
-                    val line = it.readLine() ?: return@use
-                    onNewLine(line)
-                }.onFailure {
-                    return@use
-                }
-            }
-
-        }
-    }
-
-
-    private val mScope = CoroutineScope(Dispatchers.IO + Job())
-    private fun initOutput() {
-
-        mScope.launch {
-            mProcess?.inputStream?.logWatcher(::handleLog)
-        }
-        mScope.launch {
-            mProcess?.errorStream?.logWatcher(::handleLog)
-        }
-    }
-
 
     @SuppressLint("SdCardPath")
-    fun startup(
-        dataFolder: String = dataPath
-    ): Int {
-//        appDb.serverLogDao.deleteAll()
-        mProcess =
-            execWithParams(params = arrayOf("server", "--data", dataFolder))
-        initOutput()
-
-        return mProcess!!.waitFor()
-    }
-
-
-    private fun execWithParams(
-        redirect: Boolean = false,
-        vararg params: String
-    ): Process {
-        val cmdline = arrayOfNulls<String>(params.size + 1)
-        cmdline[0] = execPath
-        System.arraycopy(params, 0, cmdline, 1, params.size)
-        return ProcessBuilder(*cmdline).redirectErrorStream(redirect).start()
-            ?: throw IOException("Process is null!")
+    fun startup() {
+        Log.d(TAG, "startup: $dataDir")
+        init()
+        Alistlib.start()
     }
 
     fun getHttpPort(): Int {

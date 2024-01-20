@@ -71,4 +71,5 @@
     <string name="last_used">上次使用</string>
     <string name="start_at_boot">开机自启动服务</string>
     <string name="start_at_boot_desc">在开机时自动开启AList服务。</string>
+    <string name="shutdown_failed">关闭失败</string>
 </resources>

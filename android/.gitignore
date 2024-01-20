@@ -12,11 +12,6 @@ key.properties
 **/*.keystore
 **/*.jks
 
-/alist-lib/*
-alist-main
-!../alist-lib/alistlib
-!../alist-lib/scripts
-
 *.aar
 *.exe
 *.tgz

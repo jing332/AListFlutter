@@ -1,5 +1,6 @@
 package com.github.jing332.alistflutter
 
+import alistlib.Alistlib
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
@@ -19,15 +20,11 @@ import com.github.jing332.alistflutter.model.alist.AList
 import com.github.jing332.alistflutter.utils.AndroidUtils.registerReceiverCompat
 import com.github.jing332.alistflutter.utils.ClipboardUtils
 import com.github.jing332.alistflutter.utils.ToastUtils.toast
-import com.github.jing332.utils.NativeLib
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import splitties.systemservices.powerManager
 
-class AListService : Service() {
+class AListService : Service(), AList.Listener {
     companion object {
         const val TAG = "AlistService"
         const val ACTION_SHUTDOWN =
@@ -53,9 +50,19 @@ class AListService : Service() {
 
     override fun onBind(p0: Intent?): IBinder? = null
 
+    @Suppress("DEPRECATION")
     private fun notifyStatusChanged() {
         LocalBroadcastManager.getInstance(this)
             .sendBroadcast(Intent(ACTION_STATUS_CHANGED))
+
+        if (!isRunning) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                stopForeground(STOP_FOREGROUND_REMOVE)
+            } else
+                stopForeground(true)
+
+            stopSelf()
+        }
     }
 
     @SuppressLint("WakelockTimeout")
@@ -82,6 +89,8 @@ class AListService : Service() {
             ACTION_SHUTDOWN,
             ACTION_COPY_ADDRESS
         )
+
+        AList.addListener(this)
     }
 
 
@@ -96,6 +105,15 @@ class AListService : Service() {
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver)
         unregisterReceiver(mNotificationReceiver)
+
+        AList.removeListener(this)
+    }
+
+    override fun onShutdown(type: String) {
+        if (!AList.isRunning()) {
+            isRunning = false
+            notifyStatusChanged()
+        }
     }
 
     private fun startOrShutdown() {
@@ -104,40 +122,29 @@ class AListService : Service() {
         } else {
             toast(getString(R.string.starting))
             isRunning = true
+            AList.startup()
             notifyStatusChanged()
-            mScope.launch(Dispatchers.IO) {
-                val ret = AList.startup()
-                isRunning = false
-                withContext(Dispatchers.Main) {
-                    toast(getString(R.string.shutdowned, ret.toString()))
-                    notifyStatusChanged()
-                }
-            }
         }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-       startOrShutdown()
+        startOrShutdown()
 
         return super.onStartCommand(intent, flags, startId)
     }
 
-    @Suppress("DEPRECATION")
     inner class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             when (intent.action) {
                 ACTION_STATUS_CHANGED -> {
-                    if (!isRunning) {
-                        stopForeground(true)
-                        stopSelf()
-                    }
+
                 }
             }
 
         }
     }
 
-    private fun localAddress(): String = NativeLib.getLocalIp()
+    private fun localAddress(): String = Alistlib.getOutboundIPString()
 
 
     @Suppress("DEPRECATION")
@@ -213,7 +220,7 @@ class AListService : Service() {
     inner class NotificationActionReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             when (intent?.action) {
-                ACTION_SHUTDOWN ->{
+                ACTION_SHUTDOWN -> {
                     startOrShutdown()
                 }
 
