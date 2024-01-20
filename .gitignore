@@ -1,4 +1,7 @@
-/
+#/alist-lib/*
+#!../alist-lib/alistlib
+#!../alist-lib/scripts
+
 # Miscellaneous
 *.class
 *.log
@@ -44,10 +47,6 @@ app.*.map.json
 /android/app/release
 
 local.properties
-/alist-lib/*
-alist-main
-!../alist-lib/alistlib
-!../alist-lib/scripts
 
 *.aar
 *.exe
