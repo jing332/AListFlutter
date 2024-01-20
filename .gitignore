@@ -1,6 +1,6 @@
-#/alist-lib/*
-#!../alist-lib/alistlib
-#!../alist-lib/scripts
+/alist-lib/*
+!/alist-lib/alistlib
+!/alist-lib/scripts
 
 # Miscellaneous
 *.class
