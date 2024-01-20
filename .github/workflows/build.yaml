@@ -49,6 +49,12 @@ jobs:
             ./init_gomobile.sh
             ./gobind.sh
 
+      - name: Upload AAR
+        uses: actions/upload-artifact@v3
+        with:
+          name: "AList"
+          path: "${{ github.workspace }}/android/app/libs/*.aar"
+
       - name: Init Signature
         run: |
           touch local.properties
