@@ -1,10 +1,10 @@
 #!/bin/bash
 
-mv androidlib /tmp
-mv scripts /tmp
+mkdir /tmp/alist
+rm -rf /tmp/alist/*
+cp -r ../scripts /tmp/alist
+cp -r ../alistlib /tmp/alist
 
-rm -rf *
+rm -rf ../*
 
-mv /tmp/androidlib ./
-mv /tmp/scripts ./
-
+cp -r /tmp/alist/* ../
