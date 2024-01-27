@@ -84,7 +84,7 @@ android {
         abi {
             enable gradle.startParameter.taskNames.any { it.contains("Release") }
             reset()
-            include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            include 'armeabi-v7a', 'arm64-v8a', 'x86_64'
             universalApk true
         }
     }
