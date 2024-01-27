@@ -18,6 +18,7 @@ func GetOutboundIPString() string {
 	if err != nil {
 		return "localhost"
 	}
+
 	return netIp.String()
 }
 
