@@ -42,6 +42,11 @@ class MyApp extends StatelessWidget {
           border: OutlineInputBorder(),
         ),
       ),
+      darkTheme:ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        /* dark theme settings */
+      ),
       supportedLocales: S.delegate.supportedLocales,
       localizationsDelegates: const [
         S.delegate,

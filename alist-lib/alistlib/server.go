@@ -148,9 +148,6 @@ func shutdown(srv *http.Server, timeout time.Duration) error {
 	defer cancel()
 
 	err := srv.Shutdown(ctx)
-	if err == nil {
-		cmd.Release()
-	}
 
 	return err
 }
@@ -184,5 +181,6 @@ func Shutdown(timeout int64) (err error) {
 		utils.Log.Println("Server UNIX Shutdown")
 	}
 
+	//cmd.Release()
 	return nil
 }
