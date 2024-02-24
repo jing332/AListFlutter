@@ -18,9 +18,11 @@ AListFlutter是一个基于AList的Android客户端，使用Google Flutter作为
 
 ### Bug
 - 因上游AList原因，故同一进程无法二次启动服务。
+- Android4.4闪退 https://github.com/jing332/AListFlutter/issues/5
+- 部分设备无法添加本地存储 https://github.com/jing332/AListFlutter/issues/2
 
 ### 关于IOS
-理论上 [Gomobile](https://pkg.go.dev/golang.org/x/mobile/cmd/gomobile?utm_source=godoc#hdr-Build_a_library_for_Android_and_iOS) 支持IOS，但由于本人无IOS开发设备，故无法支持。
+理论上 [Gomobile](https://pkg.go.dev/golang.org/x/mobile/cmd/gomobile?utm_source=godoc#hdr-Build_a_library_for_Android_and_iOS) 支持IOS，但由于本人无IOS相关开发设备，故无法支持。
 
 # Download
 
