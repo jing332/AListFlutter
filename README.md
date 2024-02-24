@@ -16,6 +16,12 @@ AListFlutter是一个基于AList的Android客户端，使用Google Flutter作为
 
 <img src="./images/1.jpg" height="150px">
 
+### Bug
+- 因上游AList原因，故同一进程无法二次启动服务。
+
+### 关于IOS
+理论上 [Gomobile](https://pkg.go.dev/golang.org/x/mobile/cmd/gomobile?utm_source=godoc#hdr-Build_a_library_for_Android_and_iOS) 支持IOS，但由于本人无IOS开发设备，故无法支持。
+
 # Download
 
 - [Github Action (DEV)](https://github.com/jing332/AListFlutter/actions/workflows/build.yaml) 开发版
