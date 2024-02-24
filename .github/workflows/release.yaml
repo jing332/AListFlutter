@@ -9,54 +9,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  go:
+ android:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        GO_ARCH: [ "386", amd64, arm, arm64 ]
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download AList Source Code
-        run: |
-          cd $GITHUB_WORKSPACE/alist-lib/scripts
-          chmod +x *.sh
-          ./init_alist_core.sh
-          ./init_alist_web.sh
-
-      - uses: actions/setup-go@v4
-        with:
-          go-version: 1.21.5
-          cache-dependency-path: ${{ github.workspace }}/alist-lib/alist/go.sum
-
-      - name: Build
-        run: |
-          GOARCH=${{ matrix.GO_ARCH }}                   
-          
-          declare -A goarch2cc=( ["arm64"]="aarch64-linux-android32-clang" ["arm"]="armv7a-linux-androideabi32-clang" ["amd64"]="x86_64-linux-android32-clang" ["386"]="i686-linux-android32-clang")
-          export CC="$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/${goarch2cc[$GOARCH]}"
-          
-          declare -A arch2lib=( ["arm64"]="arm64-v8a" ["arm"]="armeabi-v7a" ["amd64"]="x86_64" ["386"]="x86")
-          export LIB="${arch2lib[$GOARCH]}"
-          
-          cd $GITHUB_WORKSPACE/alist-lib/scripts
-          ./install_alist.sh $GOARCH $LIB  
-
-      - name: Upload to Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: "app_libs"
-          path: "${{ github.workspace }}/android/app/libs"
-
-  android:
-    runs-on: ubuntu-latest
-    needs: [ go ]
     env:
       output: "${{ github.workspace }}/build/app/outputs/apk/release"
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Download AList Source Code
+        run: |
+          cd $GITHUB_WORKSPACE/alist-lib/scripts
+          chmod +x *.sh
+          ./init_alist.sh
+          ./init_web.sh
+
+      - uses: actions/setup-go@v4
+        with:
+          go-version: 1.21.5
+          cache-dependency-path: ${{ github.workspace }}/alist-lib/alist/go.sum
 
       - uses: actions/setup-java@v3
         with:
@@ -66,11 +38,18 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.4.2
 
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
+      - name: Build AList
+        run: |
+            cd $GITHUB_WORKSPACE/alist-lib/scripts
+            chmod +x *.sh
+            ./init_gomobile.sh
+            ./gobind.sh
+
+      - name: Upload AAR
+        uses: actions/upload-artifact@v3
         with:
-          name: "app_libs"
-          path: "${{ github.workspace }}/android/app/libs"
+          name: "AList"
+          path: "${{ github.workspace }}/android/app/libs/*.aar"
 
       - name: Init Signature
         run: |
@@ -98,8 +77,8 @@ jobs:
       - name: Init APP Version Name
         run: |
           echo "ver_name=$(grep -m 1 'versionName' ${{ env.output }}/output-metadata.json | cut -d\" -f4)" >> $GITHUB_ENV
-
-      - uses: softprops/action-gh-release@v0.1.15
+          
+      - uses: softprops/action-gh-release@v1.1.0
         with:
           name: ${{ env.ver_name }}
           tag_name: ${{ env.ver_name }}
