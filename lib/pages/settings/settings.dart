@@ -77,7 +77,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: BasicPreference(
                 title: S.of(context).grantNotificationPermission,
                 subtitle: S.of(context).grantNotificationPermissionDesc,
-                onTap: () {},
+                onTap: () {
+                  Permission.notification.request();
+                },
               )),
 
           DividerPreference(title: S.of(context).general),
