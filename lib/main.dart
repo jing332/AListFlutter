@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
       darkTheme:ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
+        colorSchemeSeed: Colors.blueGrey,
         /* dark theme settings */
       ),
       supportedLocales: S.delegate.supportedLocales,
