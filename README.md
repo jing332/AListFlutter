@@ -17,7 +17,6 @@ AListFlutter是一个基于AList的Android客户端，使用Google Flutter作为
 <img src="./images/1.jpg" height="150px">
 
 ### Bug
-- 因上游AList原因，故同一进程无法二次启动服务。
 - Android4.4闪退 https://github.com/jing332/AListFlutter/issues/5
 - 部分设备无法添加本地存储 https://github.com/jing332/AListFlutter/issues/2
 

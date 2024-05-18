@@ -11,3 +11,6 @@ rm -rf ./src/.git
 
 mv -f ./src/* ../
 rm -rf ./src
+
+cd ../
+go mod edit -replace github.com/djherbis/times@v1.6.0=github.com/jing332/times@latest
