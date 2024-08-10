@@ -2,9 +2,9 @@
 
 cd ../alistlib || exit
 if [ "$1" == "debug" ]; then
-  gomobile bind -ldflags "-s -w" -v -target="android/arm64"
+  gomobile bind -ldflags "-s -w" -v -androidapi 21 -target="android/arm64"
 else
-  gomobile bind -ldflags "-s -w" -v
+  gomobile bind -ldflags "-s -w" -v -androidapi 21
 fi
 
 echo "Moving aar and jar files to android/app/libs"
