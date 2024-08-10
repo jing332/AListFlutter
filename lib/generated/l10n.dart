@@ -60,320 +60,310 @@ class S {
     );
   }
 
-  /// `Desktop shortcut`
+  /// `桌面快捷方式`
   String get desktopShortcut {
     return Intl.message(
-      'Desktop shortcut',
+      '桌面快捷方式',
       name: 'desktopShortcut',
       desc: '',
       args: [],
     );
   }
 
-  /// `Set admin password`
+  /// `设置admin密码`
   String get setAdminPassword {
     return Intl.message(
-      'Set admin password',
+      '设置admin密码',
       name: 'setAdminPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `More options`
+  /// `更多选项`
   String get moreOptions {
     return Intl.message(
-      'More options',
+      '更多选项',
       name: 'moreOptions',
       desc: '',
       args: [],
     );
   }
 
-  /// `Check for updates`
+  /// `检查更新`
   String get checkForUpdates {
     return Intl.message(
-      'Check for updates',
+      '检查更新',
       name: 'checkForUpdates',
       desc: '',
       args: [],
     );
   }
 
-  /// `Current is latest version`
+  /// `已经是最新版本`
   String get currentIsLatestVersion {
     return Intl.message(
-      'Current is latest version',
+      '已经是最新版本',
       name: 'currentIsLatestVersion',
       desc: '',
       args: [],
     );
   }
 
-  /// `OK`
+  /// `确认`
   String get confirm {
     return Intl.message(
-      'OK',
+      '确认',
       name: 'confirm',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cancel`
+  /// `取消`
   String get cancel {
     return Intl.message(
-      'Cancel',
+      '取消',
       name: 'cancel',
       desc: '',
       args: [],
     );
   }
 
-  /// `Release Page`
+  /// `发布页面`
   String get releasePage {
     return Intl.message(
-      'Release Page',
+      '发布页面',
       name: 'releasePage',
       desc: '',
       args: [],
     );
   }
 
-  /// `Download APK`
+  /// `下载APK`
   String get downloadApk {
     return Intl.message(
-      'Download APK',
+      '下载APK',
       name: 'downloadApk',
       desc: '',
       args: [],
     );
   }
 
-  /// `About`
+  /// `关于`
   String get about {
     return Intl.message(
-      'About',
+      '关于',
       name: 'about',
       desc: '',
       args: [],
     );
   }
 
-  /// `General`
+  /// `通用`
   String get general {
     return Intl.message(
-      'General',
+      '通用',
       name: 'general',
       desc: '',
       args: [],
     );
   }
 
-  /// `Auto check for updates`
+  /// `自动检查更新`
   String get autoCheckForUpdates {
     return Intl.message(
-      'Auto check for updates',
+      '自动检查更新',
       name: 'autoCheckForUpdates',
       desc: '',
       args: [],
     );
   }
 
-  /// `Check for updates when app starts`
+  /// `启动时自动检查更新`
   String get autoCheckForUpdatesDesc {
     return Intl.message(
-      'Check for updates when app starts',
+      '启动时自动检查更新',
       name: 'autoCheckForUpdatesDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wake lock`
+  /// `唤醒锁`
   String get wakeLock {
     return Intl.message(
-      'Wake lock',
+      '唤醒锁',
       name: 'wakeLock',
       desc: '',
       args: [],
     );
   }
 
-  /// `Prevent CPU from sleeping when screen is off. (May cause app killed in background on some devices)`
+  /// `开启防止锁屏后CPU休眠，保持进程在后台运行。（部分系统可能导致杀后台）`
   String get wakeLockDesc {
     return Intl.message(
-      'Prevent CPU from sleeping when screen is off. (May cause app killed in background on some devices)',
+      '开启防止锁屏后CPU休眠，保持进程在后台运行。（部分系统可能导致杀后台）',
       name: 'wakeLockDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Boot auto-start service`
+  /// `开机自启动服务`
   String get bootAutoStartService {
     return Intl.message(
-      'Boot auto-start service',
+      '开机自启动服务',
       name: 'bootAutoStartService',
       desc: '',
       args: [],
     );
   }
 
-  /// `Automatically start AList service after boot. (Please make sure to grant auto-start permission)`
+  /// `在开机后自动启动AList服务。（请确保授予自启动权限）`
   String get bootAutoStartServiceDesc {
     return Intl.message(
-      'Automatically start AList service after boot. (Please make sure to grant auto-start permission)',
+      '在开机后自动启动AList服务。（请确保授予自启动权限）',
       name: 'bootAutoStartServiceDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Web Page`
+  /// `网页`
   String get webPage {
     return Intl.message(
-      'Web Page',
+      '网页',
       name: 'webPage',
       desc: '',
       args: [],
     );
   }
 
-  /// `Settings`
+  /// `设置`
   String get settings {
     return Intl.message(
-      'Settings',
+      '设置',
       name: 'settings',
       desc: '',
       args: [],
     );
   }
 
-  /// `Jump to other app？`
-  String get jumpToOtherApp {
-    return Intl.message(
-      'Jump to other app？',
-      name: 'jumpToOtherApp',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Select app to open`
+  /// `选择应用打开`
   String get selectAppToOpen {
     return Intl.message(
-      'Select app to open',
+      '选择应用打开',
       name: 'selectAppToOpen',
       desc: '',
       args: [],
     );
   }
 
-  /// `GO`
+  /// `前往`
   String get goTo {
     return Intl.message(
-      'GO',
+      '前往',
       name: 'goTo',
       desc: '',
       args: [],
     );
   }
 
-  /// `Download this file？`
+  /// `下载此文件吗？`
   String get downloadThisFile {
     return Intl.message(
-      'Download this file？',
+      '下载此文件吗？',
       name: 'downloadThisFile',
       desc: '',
       args: [],
     );
   }
 
-  /// `download`
+  /// `下载`
   String get download {
     return Intl.message(
-      'download',
+      '下载',
       name: 'download',
       desc: '',
       args: [],
     );
   }
 
-  /// `Copied to clipboard`
+  /// `已复制到剪贴板`
   String get copiedToClipboard {
     return Intl.message(
-      'Copied to clipboard',
+      '已复制到剪贴板',
       name: 'copiedToClipboard',
       desc: '',
       args: [],
     );
   }
 
-  /// `Important settings`
+  /// `重要`
   String get importantSettings {
     return Intl.message(
-      'Important settings',
+      '重要',
       name: 'importantSettings',
       desc: '',
       args: [],
     );
   }
 
-  /// `UI`
+  /// `界面`
   String get uiSettings {
     return Intl.message(
-      'UI',
+      '界面',
       name: 'uiSettings',
       desc: '',
       args: [],
     );
   }
 
-  /// `Grant 【Manage external storage】 permission`
+  /// `申请【所有文件访问权限】`
   String get grantManagerStoragePermission {
     return Intl.message(
-      'Grant 【Manage external storage】 permission',
+      '申请【所有文件访问权限】',
       name: 'grantManagerStoragePermission',
       desc: '',
       args: [],
     );
   }
 
-  /// `Mounting local storage is a must, otherwise no permission to read and write files`
+  /// `挂载本地存储时必须授予，否则无权限读写文件`
   String get grantStoragePermissionDesc {
     return Intl.message(
-      'Mounting local storage is a must, otherwise no permission to read and write files',
+      '挂载本地存储时必须授予，否则无权限读写文件',
       name: 'grantStoragePermissionDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Grant 【external storage】 permission`
+  /// `申请【读写外置存储权限】`
   String get grantStoragePermission {
     return Intl.message(
-      'Grant 【external storage】 permission',
+      '申请【读写外置存储权限】',
       name: 'grantStoragePermission',
       desc: '',
       args: [],
     );
   }
 
-  /// `Grant 【Notification】 permission`
+  /// `申请【通知权限】`
   String get grantNotificationPermission {
     return Intl.message(
-      'Grant 【Notification】 permission',
+      '申请【通知权限】',
       name: 'grantNotificationPermission',
       desc: '',
       args: [],
     );
   }
 
-  /// `Used for foreground service keep alive`
+  /// `用于前台服务保活`
   String get grantNotificationPermissionDesc {
     return Intl.message(
-      'Used for foreground service keep alive',
+      '用于前台服务保活',
       name: 'grantNotificationPermissionDesc',
       desc: '',
       args: [],
@@ -390,6 +380,16 @@ class S {
     );
   }
 
+  /// `跳转到其他APP ？`
+  String get jumpToOtherApp {
+    return Intl.message(
+      '跳转到其他APP ？',
+      name: 'jumpToOtherApp',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `打开主界面时的首页`
   String get autoStartWebPageDesc {
     return Intl.message(
@@ -400,40 +400,40 @@ class S {
     );
   }
 
-  /// `data Directory`
+  /// `data 文件夹路径`
   String get dataDirectory {
     return Intl.message(
-      'data Directory',
+      'data 文件夹路径',
       name: 'dataDirectory',
       desc: '',
       args: [],
     );
   }
 
-  /// `是否设为默认目录？`
+  /// `是否设为初始目录？`
   String get setDefaultDirectory {
     return Intl.message(
-      '是否设为默认目录？',
+      '是否设为初始目录？',
       name: 'setDefaultDirectory',
       desc: '',
       args: [],
     );
   }
 
-  /// `silent jump app`
+  /// `静默跳转APP`
   String get silentJumpApp {
     return Intl.message(
-      'silent jump app',
+      '静默跳转APP',
       name: 'silentJumpApp',
       desc: '',
       args: [],
     );
   }
 
-  /// `Jump to other app without prompt`
+  /// `跳转APP时，不弹出提示框`
   String get silentJumpAppDesc {
     return Intl.message(
-      'Jump to other app without prompt',
+      '跳转APP时，不弹出提示框',
       name: 'silentJumpAppDesc',
       desc: '',
       args: [],
@@ -446,8 +446,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'zh'),
+      Locale.fromSubtags(languageCode: 'en'),
     ];
   }
 
