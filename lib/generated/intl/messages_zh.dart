@@ -56,7 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("申请【读写外置存储权限】"),
         "grantStoragePermissionDesc":
             MessageLookupByLibrary.simpleMessage("挂载本地存储时必须授予，否则无权限读写文件"),
-        "importantSettings": MessageLookupByLibrary.simpleMessage("重要设置"),
+        "importantSettings": MessageLookupByLibrary.simpleMessage("重要"),
+        "jumpToOtherApp": MessageLookupByLibrary.simpleMessage("跳转到其他APP ？"),
         "moreOptions": MessageLookupByLibrary.simpleMessage("更多选项"),
         "releasePage": MessageLookupByLibrary.simpleMessage("发布页面"),
         "selectAppToOpen": MessageLookupByLibrary.simpleMessage("选择应用打开"),
@@ -64,6 +65,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "setDefaultDirectory":
             MessageLookupByLibrary.simpleMessage("是否设为初始目录？"),
         "settings": MessageLookupByLibrary.simpleMessage("设置"),
+        "silentJumpApp": MessageLookupByLibrary.simpleMessage("静默跳转APP"),
+        "silentJumpAppDesc":
+            MessageLookupByLibrary.simpleMessage("跳转APP时，不弹出提示框"),
+        "uiSettings": MessageLookupByLibrary.simpleMessage("界面"),
         "wakeLock": MessageLookupByLibrary.simpleMessage("唤醒锁"),
         "wakeLockDesc": MessageLookupByLibrary.simpleMessage(
             "开启防止锁屏后CPU休眠，保持进程在后台运行。（部分系统可能导致杀后台）"),

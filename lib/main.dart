@@ -14,6 +14,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import 'contant/native_bridge.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Android
@@ -133,13 +135,13 @@ class _MainController extends GetxController {
 
   @override
   void onInit() async {
-    final webPage = await AppConfig().isAutoOpenWebPageEnabled();
+    final webPage = await NativeBridge.appConfig.isAutoOpenWebPageEnabled();
     if (webPage) {
       setPageIndex(MyHomePage.webPageIndex);
     }
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      if (await AppConfig().isAutoCheckUpdateEnabled()) {
+      if (await NativeBridge.appConfig.isAutoCheckUpdateEnabled()) {
         AppUpdateDialog.checkUpdateAndShowDialog(Get.context!, null);
       }
     });

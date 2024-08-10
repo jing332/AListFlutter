@@ -114,6 +114,11 @@ public class GeneratedApi {
 
     void setDataDir(@NonNull String dir);
 
+    @NonNull 
+    Boolean isSilentJumpAppEnabled();
+
+    void setSilentJumpAppEnabled(@NonNull Boolean enabled);
+
     /** The codec used by AppConfig. */
     static @NonNull MessageCodec<Object> getCodec() {
       return new StandardMessageCodec();
@@ -350,6 +355,242 @@ public class GeneratedApi {
           channel.setMessageHandler(null);
         }
       }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.AppConfig.isSilentJumpAppEnabled", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  Boolean output = api.isSilentJumpAppEnabled();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.AppConfig.setSilentJumpAppEnabled", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                ArrayList<Object> args = (ArrayList<Object>) message;
+                Boolean enabledArg = (Boolean) args.get(0);
+                try {
+                  api.setSilentJumpAppEnabled(enabledArg);
+                  wrapped.add(0, null);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+    }
+  }
+  /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
+  public interface NativeCommon {
+
+    @NonNull 
+    Boolean startActivityFromUri(@NonNull String intentUri);
+
+    @NonNull 
+    Long getDeviceSdkInt();
+
+    @NonNull 
+    String getDeviceCPUABI();
+
+    @NonNull 
+    String getVersionName();
+
+    @NonNull 
+    Long getVersionCode();
+
+    void toast(@NonNull String msg);
+
+    void longToast(@NonNull String msg);
+
+    /** The codec used by NativeCommon. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /**Sets up an instance of `NativeCommon` to handle messages through the `binaryMessenger`. */
+    static void setUp(@NonNull BinaryMessenger binaryMessenger, @Nullable NativeCommon api) {
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.NativeCommon.startActivityFromUri", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                ArrayList<Object> args = (ArrayList<Object>) message;
+                String intentUriArg = (String) args.get(0);
+                try {
+                  Boolean output = api.startActivityFromUri(intentUriArg);
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.NativeCommon.getDeviceSdkInt", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  Long output = api.getDeviceSdkInt();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.NativeCommon.getDeviceCPUABI", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  String output = api.getDeviceCPUABI();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.NativeCommon.getVersionName", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  String output = api.getVersionName();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.NativeCommon.getVersionCode", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                try {
+                  Long output = api.getVersionCode();
+                  wrapped.add(0, output);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.NativeCommon.toast", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                ArrayList<Object> args = (ArrayList<Object>) message;
+                String msgArg = (String) args.get(0);
+                try {
+                  api.toast(msgArg);
+                  wrapped.add(0, null);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(
+                binaryMessenger, "dev.flutter.pigeon.alist_flutter.NativeCommon.longToast", getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              (message, reply) -> {
+                ArrayList<Object> wrapped = new ArrayList<Object>();
+                ArrayList<Object> args = (ArrayList<Object>) message;
+                String msgArg = (String) args.get(0);
+                try {
+                  api.longToast(msgArg);
+                  wrapped.add(0, null);
+                }
+ catch (Throwable exception) {
+                  ArrayList<Object> wrappedError = wrapError(exception);
+                  wrapped = wrappedError;
+                }
+                reply.reply(wrapped);
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
     }
   }
   /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
@@ -368,23 +609,7 @@ public class GeneratedApi {
     Boolean isRunning();
 
     @NonNull 
-    Long getDeviceSdkInt();
-
-    @NonNull 
-    String getDeviceCPUABI();
-
-    @NonNull 
     String getAListVersion();
-
-    @NonNull 
-    String getVersionName();
-
-    @NonNull 
-    Long getVersionCode();
-
-    void toast(@NonNull String msg);
-
-    void longToast(@NonNull String msg);
 
     /** The codec used by Android. */
     static @NonNull MessageCodec<Object> getCodec() {
@@ -507,50 +732,6 @@ public class GeneratedApi {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.getDeviceSdkInt", getCodec());
-        if (api != null) {
-          channel.setMessageHandler(
-              (message, reply) -> {
-                ArrayList<Object> wrapped = new ArrayList<Object>();
-                try {
-                  Long output = api.getDeviceSdkInt();
-                  wrapped.add(0, output);
-                }
- catch (Throwable exception) {
-                  ArrayList<Object> wrappedError = wrapError(exception);
-                  wrapped = wrappedError;
-                }
-                reply.reply(wrapped);
-              });
-        } else {
-          channel.setMessageHandler(null);
-        }
-      }
-      {
-        BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.getDeviceCPUABI", getCodec());
-        if (api != null) {
-          channel.setMessageHandler(
-              (message, reply) -> {
-                ArrayList<Object> wrapped = new ArrayList<Object>();
-                try {
-                  String output = api.getDeviceCPUABI();
-                  wrapped.add(0, output);
-                }
- catch (Throwable exception) {
-                  ArrayList<Object> wrappedError = wrapError(exception);
-                  wrapped = wrappedError;
-                }
-                reply.reply(wrapped);
-              });
-        } else {
-          channel.setMessageHandler(null);
-        }
-      }
-      {
-        BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(
                 binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.getAListVersion", getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -559,98 +740,6 @@ public class GeneratedApi {
                 try {
                   String output = api.getAListVersion();
                   wrapped.add(0, output);
-                }
- catch (Throwable exception) {
-                  ArrayList<Object> wrappedError = wrapError(exception);
-                  wrapped = wrappedError;
-                }
-                reply.reply(wrapped);
-              });
-        } else {
-          channel.setMessageHandler(null);
-        }
-      }
-      {
-        BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.getVersionName", getCodec());
-        if (api != null) {
-          channel.setMessageHandler(
-              (message, reply) -> {
-                ArrayList<Object> wrapped = new ArrayList<Object>();
-                try {
-                  String output = api.getVersionName();
-                  wrapped.add(0, output);
-                }
- catch (Throwable exception) {
-                  ArrayList<Object> wrappedError = wrapError(exception);
-                  wrapped = wrappedError;
-                }
-                reply.reply(wrapped);
-              });
-        } else {
-          channel.setMessageHandler(null);
-        }
-      }
-      {
-        BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.getVersionCode", getCodec());
-        if (api != null) {
-          channel.setMessageHandler(
-              (message, reply) -> {
-                ArrayList<Object> wrapped = new ArrayList<Object>();
-                try {
-                  Long output = api.getVersionCode();
-                  wrapped.add(0, output);
-                }
- catch (Throwable exception) {
-                  ArrayList<Object> wrappedError = wrapError(exception);
-                  wrapped = wrappedError;
-                }
-                reply.reply(wrapped);
-              });
-        } else {
-          channel.setMessageHandler(null);
-        }
-      }
-      {
-        BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.toast", getCodec());
-        if (api != null) {
-          channel.setMessageHandler(
-              (message, reply) -> {
-                ArrayList<Object> wrapped = new ArrayList<Object>();
-                ArrayList<Object> args = (ArrayList<Object>) message;
-                String msgArg = (String) args.get(0);
-                try {
-                  api.toast(msgArg);
-                  wrapped.add(0, null);
-                }
- catch (Throwable exception) {
-                  ArrayList<Object> wrappedError = wrapError(exception);
-                  wrapped = wrappedError;
-                }
-                reply.reply(wrapped);
-              });
-        } else {
-          channel.setMessageHandler(null);
-        }
-      }
-      {
-        BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.alist_flutter.Android.longToast", getCodec());
-        if (api != null) {
-          channel.setMessageHandler(
-              (message, reply) -> {
-                ArrayList<Object> wrapped = new ArrayList<Object>();
-                ArrayList<Object> args = (ArrayList<Object>) message;
-                String msgArg = (String) args.get(0);
-                try {
-                  api.longToast(msgArg);
-                  wrapped.add(0, null);
                 }
  catch (Throwable exception) {
                   ArrayList<Object> wrappedError = wrapError(exception);

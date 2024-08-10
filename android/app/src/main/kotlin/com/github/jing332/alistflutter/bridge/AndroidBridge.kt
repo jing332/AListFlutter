@@ -38,31 +38,6 @@ class AndroidBridge(private val context: Context) : GeneratedApi.Android {
 
     override fun isRunning() = AListService.isRunning
 
-    override fun getDeviceSdkInt(): Long {
-        return Build.VERSION.SDK_INT.toLong()
-    }
 
     override fun getAListVersion() = BuildConfig.ALIST_VERSION
-
-
-    @Suppress("DEPRECATION")
-    override fun getDeviceCPUABI(): String {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Build.SUPPORTED_ABIS[0]
-        } else {
-            Build.CPU_ABI
-        }
-    }
-
-    override fun getVersionName() = BuildConfig.VERSION_NAME
-    override fun getVersionCode() = BuildConfig.VERSION_CODE.toLong()
-
-
-    override fun toast(msg: String) {
-        context.toast(msg)
-    }
-
-    override fun longToast(msg: String) {
-        context.longToast(msg)
-    }
 }

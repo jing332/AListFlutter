@@ -1,8 +1,8 @@
 import 'dart:developer';
 
+import 'package:alist_flutter/contant/native_bridge.dart';
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/utils/intent_utils.dart';
-import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -23,6 +23,15 @@ class WebScreen extends StatefulWidget {
 
 class WebScreenState extends State<WebScreen> {
   InAppWebViewController? _webViewController;
+  InAppWebViewSettings settings = InAppWebViewSettings(
+    allowsInlineMediaPlayback: true,
+    allowBackgroundAudioPlaying: true,
+    iframeAllowFullscreen: true,
+    javaScriptEnabled: true,
+    mediaPlaybackRequiresUserGesture: false,
+    useShouldOverrideUrlLoading: true,
+  );
+
   double _progress = 0;
   String _url = "http://localhost:5244";
   bool _canGoBack = false;
@@ -37,6 +46,10 @@ class WebScreenState extends State<WebScreen> {
     Android()
         .getAListHttpPort()
         .then((port) => {_url = "http://localhost:$port"});
+
+    // NativeEvent().addServiceStatusListener((isRunning) {
+    //   if (isRunning) _webViewController?.reload();
+    // });
     super.initState();
   }
 
@@ -65,44 +78,65 @@ class WebScreenState extends State<WebScreen> {
             ),
             Expanded(
               child: InAppWebView(
+                initialSettings: settings,
                 initialUrlRequest: URLRequest(url: WebUri(_url)),
                 onWebViewCreated: (InAppWebViewController controller) {
                   _webViewController = controller;
                 },
                 onLoadStart: (InAppWebViewController controller, Uri? url) {
+                  log("onLoadStart $url");
                   setState(() {
                     _progress = 0;
                   });
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
-                  if (navigationAction.request.url?.scheme.startsWith("http") ==
-                      true) {
-                    return NavigationActionPolicy.ALLOW;
+                  log("shouldOverrideUrlLoading ${navigationAction.request.url}");
+
+                  var uri = navigationAction.request.url!;
+                  if (![
+                    "http",
+                    "https",
+                    "file",
+                    "chrome",
+                    "data",
+                    "javascript",
+                    "about"
+                  ].contains(uri.scheme)) {
+                    log("shouldOverrideUrlLoading ${uri.toString()}");
+                    final silentMode =
+                        await NativeBridge.appConfig.isSilentJumpAppEnabled();
+                    if (silentMode) {
+                      NativeCommon().startActivityFromUri(uri.toString());
+                    } else {
+                      Get.showSnackbar(GetSnackBar(
+                          message: S.current.jumpToOtherApp,
+                          duration: const Duration(seconds: 5),
+                          mainButton: TextButton(
+                            onPressed: () {
+                              NativeCommon()
+                                  .startActivityFromUri(uri.toString());
+                            },
+                            child: Text(S.current.goTo),
+                          )));
+                    }
+
+                    return NavigationActionPolicy.CANCEL;
                   }
-                  Get.showSnackbar(GetSnackBar(
-                      message: S.of(context).jumpToOtherApp,
-                      duration: const Duration(seconds: 3),
-                      mainButton: TextButton(
-                        onPressed: () {
-                          final intent = AndroidIntent(
-                              action: "action_view",
-                              data: navigationAction.request.url!.toString());
 
-                          intent.launchChooser(S.of(context).selectAppToOpen);
-                        },
-                        child: Text(S.of(context).goTo),
-                      )));
-
-                  return NavigationActionPolicy.CANCEL;
+                  return NavigationActionPolicy.ALLOW;
                 },
                 onReceivedError: (controller, request, error) async {
-                  final isRunning = await Android().isRunning();
-                  if (!isRunning) {
-                    Android().startService();
-                  } else {
-                    await Future.delayed(const Duration(milliseconds: 100));
+                  if (!await Android().isRunning()) {
+                    await Android().startService();
+
+                    for (int i = 0; i < 3; i++) {
+                      await Future.delayed(const Duration(milliseconds: 500));
+                      if (await Android().isRunning()) {
+                        _webViewController?.reload();
+                        break;
+                      }
+                    }
                   }
-                    controller.reload();
                 },
                 onDownloadStartRequest: (controller, url) async {
                   Get.showSnackbar(GetSnackBar(
@@ -152,6 +186,10 @@ class WebScreenState extends State<WebScreen> {
                   controller.canGoBack().then((value) => setState(() {
                         _canGoBack = value;
                       }));
+                },
+                onUpdateVisitedHistory: (InAppWebViewController controller,
+                    WebUri? url, bool? isReload) {
+                  _url = url.toString();
                 },
               ),
             ),

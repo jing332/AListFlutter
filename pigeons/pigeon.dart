@@ -19,7 +19,29 @@ abstract class AppConfig {
   void setAutoOpenWebPageEnabled(bool enabled);
 
   String getDataDir();
+
   void setDataDir(String dir);
+
+  bool isSilentJumpAppEnabled();
+
+  void setSilentJumpAppEnabled(bool enabled);
+}
+
+@HostApi()
+abstract class NativeCommon {
+  bool startActivityFromUri(String intentUri);
+
+  int getDeviceSdkInt();
+
+  String getDeviceCPUABI();
+
+  String getVersionName();
+
+  int getVersionCode();
+
+  void toast(String msg);
+
+  void longToast(String msg);
 }
 
 @HostApi()
@@ -34,26 +56,16 @@ abstract class Android {
 
   bool isRunning();
 
-  int getDeviceSdkInt();
-
-  String getDeviceCPUABI();
-
   String getAListVersion();
-
-  String getVersionName();
-
-  int getVersionCode();
-
-  void toast(String msg);
-
-  void longToast(String msg);
 }
 
 @FlutterApi()
 abstract class Event {
   void onServiceStatusChanged(bool isRunning);
 
-  void onServerLog(int level,
-      String time,
-      String log,);
+  void onServerLog(
+    int level,
+    String time,
+    String log,
+  );
 }

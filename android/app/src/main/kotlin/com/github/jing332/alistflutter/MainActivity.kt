@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.github.jing332.alistflutter.bridge.AndroidBridge
 import com.github.jing332.alistflutter.bridge.AppConfigBridge
+import com.github.jing332.alistflutter.bridge.CommonBridge
 import com.github.jing332.alistflutter.model.ShortCuts
 import com.github.jing332.alistflutter.model.alist.Logger
 import com.github.jing332.pigeon.GeneratedApi
@@ -41,6 +42,7 @@ class MainActivity : FlutterActivity() {
         val binaryMessage = flutterEngine!!.dartExecutor.binaryMessenger
         GeneratedApi.AppConfig.setUp(binaryMessage, AppConfigBridge)
         GeneratedApi.Android.setUp(binaryMessage, AndroidBridge(this))
+        GeneratedApi.NativeCommon.setUp(binaryMessage, CommonBridge(this))
         mEvent = GeneratedApi.Event(binaryMessage)
 
         Logger.addListener(object : Logger.Listener {

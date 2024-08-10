@@ -320,6 +320,16 @@ class S {
     );
   }
 
+  /// `UI`
+  String get uiSettings {
+    return Intl.message(
+      'UI',
+      name: 'uiSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Grant 【Manage external storage】 permission`
   String get grantManagerStoragePermission {
     return Intl.message(
@@ -405,6 +415,26 @@ class S {
     return Intl.message(
       '是否设为默认目录？',
       name: 'setDefaultDirectory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `silent jump app`
+  String get silentJumpApp {
+    return Intl.message(
+      'silent jump app',
+      name: 'silentJumpApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Jump to other app without prompt`
+  String get silentJumpAppDesc {
+    return Intl.message(
+      'Jump to other app without prompt',
+      name: 'silentJumpAppDesc',
       desc: '',
       args: [],
     );

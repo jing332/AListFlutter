@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:alist_flutter/contant/native_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,8 +26,8 @@ class _AppAboutDialogState extends State<AppAboutDialog> {
 
   Future<Void?> updateVer() async {
     _alistVersion = await Android().getAListVersion();
-    _version = await Android().getVersionName();
-    _versionCode = await Android().getVersionCode();
+    _version = await NativeBridge.common.getVersionName();
+    _versionCode = await NativeBridge.common.getVersionCode();
     return null;
   }
 

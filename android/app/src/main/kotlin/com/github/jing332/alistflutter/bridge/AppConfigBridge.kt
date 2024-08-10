@@ -17,6 +17,12 @@ object AppConfigBridge : GeneratedApi.AppConfig {
         AppConfig.dataDir = dir
     }
 
+    override fun isSilentJumpAppEnabled(): Boolean = AppConfig.isSilentJumpAppEnabled
+
+    override fun setSilentJumpAppEnabled(enabled: Boolean) {
+        AppConfig.isSilentJumpAppEnabled = enabled
+    }
+
     override fun setAutoOpenWebPageEnabled(enabled: Boolean) {
         AppConfig.isAutoOpenWebPageEnabled = enabled
     }

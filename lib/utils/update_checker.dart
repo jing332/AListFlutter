@@ -3,6 +3,7 @@ import 'dart:core';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:alist_flutter/contant/native_bridge.dart';
 import 'package:alist_flutter/generated_api.dart';
 
 class UpdateChecker {
@@ -18,8 +19,8 @@ class UpdateChecker {
 
   downloadData() async {
     _data = await _getLatestRelease(owner, repo);
-    _versionName = await Android().getVersionName();
-    _systemABI = await Android().getDeviceCPUABI();
+    _versionName = await NativeBridge.common.getVersionName();
+    _systemABI = await NativeBridge.common.getDeviceCPUABI();
   }
 
   Map<String, dynamic> get data {

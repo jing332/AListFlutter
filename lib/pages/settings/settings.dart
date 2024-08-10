@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:ffi';
 
+import 'package:alist_flutter/contant/native_bridge.dart';
 import 'package:alist_flutter/generated_api.dart';
 import 'package:alist_flutter/pages/settings/preference_widgets.dart';
 import 'package:file_picker/file_picker.dart';
@@ -145,6 +147,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             },
           ),
+          DividerPreference(title: S.of(context).uiSettings),
+          SwitchPreference(
+              icon: const Icon(Icons.pan_tool_alt_outlined),
+              title: S.of(context).silentJumpApp,
+              subtitle: S.of(context).silentJumpAppDesc,
+              value: controller._silentJumpApp.value,
+              onChanged: (value) {
+                controller.silentJumpApp = value;
+              })
         ],
       ),
     ));
@@ -159,28 +170,34 @@ class _SettingsController extends GetxController {
   final _storageGranted = true.obs;
 
   setDataDir(String value) async {
-    AppConfig().setDataDir(value);
-    _dataDir.value = await AppConfig().getDataDir();
+    NativeBridge.appConfig.setDataDir(value);
+    _dataDir.value = await NativeBridge.appConfig.getDataDir();
   }
 
   get dataDir => _dataDir.value;
 
-  set autoUpdate(value) =>
-      {_autoUpdate.value = value, AppConfig().setAutoCheckUpdateEnabled(value)};
+  set autoUpdate(value) => {
+        _autoUpdate.value = value,
+        NativeBridge.appConfig.setAutoCheckUpdateEnabled(value)
+      };
 
   get autoUpdate => _autoUpdate.value;
 
   final _wakeLock = true.obs;
 
-  set wakeLock(value) =>
-      {_wakeLock.value = value, AppConfig().setWakeLockEnabled(value)};
+  set wakeLock(value) => {
+        _wakeLock.value = value,
+        NativeBridge.appConfig.setWakeLockEnabled(value)
+      };
 
   get wakeLock => _wakeLock.value;
 
   final _autoStart = true.obs;
 
-  set startAtBoot(value) =>
-      {_autoStart.value = value, AppConfig().setStartAtBootEnabled(value)};
+  set startAtBoot(value) => {
+        _autoStart.value = value,
+        NativeBridge.appConfig.setStartAtBootEnabled(value)
+      };
 
   get startAtBoot => _autoStart.value;
 
@@ -188,10 +205,19 @@ class _SettingsController extends GetxController {
 
   set autoStartWebPage(value) => {
         _autoStartWebPage.value = value,
-        AppConfig().setAutoOpenWebPageEnabled(value)
+        NativeBridge.appConfig.setAutoOpenWebPageEnabled(value)
       };
 
   get autoStartWebPage => _autoStartWebPage.value;
+
+  final _silentJumpApp = false.obs;
+
+  get silentJumpApp => _silentJumpApp.value;
+
+  set silentJumpApp(value) => {
+        _silentJumpApp.value = value,
+        NativeBridge.appConfig.setSilentJumpAppEnabled(value)
+      };
 
   @override
   void onInit() async {
@@ -206,10 +232,11 @@ class _SettingsController extends GetxController {
     cfg.isWakeLockEnabled().then((value) => wakeLock = value);
     cfg.isStartAtBootEnabled().then((value) => startAtBoot = value);
     cfg.isAutoOpenWebPageEnabled().then((value) => autoStartWebPage = value);
+    cfg.isSilentJumpAppEnabled().then((value) => silentJumpApp = value);
 
     _dataDir.value = await cfg.getDataDir();
 
-    final sdk = await Android().getDeviceSdkInt();
+    final sdk = await NativeBridge.common.getDeviceSdkInt();
     // A11
     if (sdk >= 30) {
       _managerStorageGranted.value =

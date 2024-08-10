@@ -75,6 +75,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "setDefaultDirectory":
             MessageLookupByLibrary.simpleMessage("是否设为默认目录？"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "silentJumpApp":
+            MessageLookupByLibrary.simpleMessage("silent jump app"),
+        "silentJumpAppDesc": MessageLookupByLibrary.simpleMessage(
+            "Jump to other app without prompt"),
+        "uiSettings": MessageLookupByLibrary.simpleMessage("UI"),
         "wakeLock": MessageLookupByLibrary.simpleMessage("Wake lock"),
         "wakeLockDesc": MessageLookupByLibrary.simpleMessage(
             "Prevent CPU from sleeping when screen is off. (May cause app killed in background on some devices)"),

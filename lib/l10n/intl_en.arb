@@ -27,6 +27,7 @@
   "download": "download",
   "copiedToClipboard": "Copied to clipboard",
   "importantSettings": "Important settings",
+  "uiSettings": "UI",
   "grantManagerStoragePermission": "Grant 【Manage external storage】 permission",
   "grantStoragePermissionDesc": "Mounting local storage is a must, otherwise no permission to read and write files",
   "grantStoragePermission": "Grant 【external storage】 permission",
@@ -35,5 +36,7 @@
   "autoStartWebPage": "将网页设置为打开首页",
   "autoStartWebPageDesc": "打开主界面时的首页",
   "dataDirectory": "data Directory",
-  "setDefaultDirectory": "是否设为默认目录？"
+  "setDefaultDirectory": "是否设为默认目录？",
+  "silentJumpApp": "silent jump app",
+  "silentJumpAppDesc": "Jump to other app without prompt"
 }
