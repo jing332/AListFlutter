@@ -8,12 +8,12 @@ on:
       - "*.md"
       - "*.sh"
       - "release.yaml"
-#      - "sync_frp.yaml"
+  #      - "sync_frp.yaml"
 
   workflow_dispatch:
 
 jobs:
- android:
+  android:
     runs-on: ubuntu-latest
     env:
       output: "${{ github.workspace }}/build/app/outputs/apk/release"
@@ -31,7 +31,7 @@ jobs:
 
       - uses: actions/setup-go@v4
         with:
-          # go-version: 1.22
+          go-version: 1.22
           cache-dependency-path: ${{ github.workspace }}/alist-lib/alist/go.sum
 
       - uses: actions/setup-java@v3
@@ -44,10 +44,10 @@ jobs:
 
       - name: Build AList
         run: |
-            cd $GITHUB_WORKSPACE/alist-lib/scripts
-            chmod +x *.sh
-            ./init_gomobile.sh
-            ./gobind.sh
+          cd $GITHUB_WORKSPACE/alist-lib/scripts
+          chmod +x *.sh
+          ./init_gomobile.sh
+          ./gobind.sh
 
       - name: Upload AAR
         uses: actions/upload-artifact@v3
@@ -68,7 +68,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.7'
+          flutter-version: '3.22'
       - run: flutter build apk --split-per-abi --release
 
       - name: Upload missing_rules.txt
