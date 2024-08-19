@@ -8,7 +8,7 @@
         <key>CFBundleDevelopmentRegion</key>
         <string>$(DEVELOPMENT_LANGUAGE)</string>
         <key>CFBundleDisplayName</key>
-        <string>Qbittorrent</string>
+        <string>AListServer</string>
         <key>CFBundleExecutable</key>
         <string>$(EXECUTABLE_NAME)</string>
         <key>CFBundleIdentifier</key>
@@ -32,10 +32,24 @@
         <key>NSAppTransportSecurity</key>
         <dict>
             <key>NSAllowsArbitraryLoads</key>
-            <false/>
+            <true/>
             <key>NSAllowsLocalNetworking</key>
             <true/>
+            <key>NSExceptionDomains</key>
+            <dict>
+               <key>localhost</key>
+               <dict>
+                  <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                  <true/>
+               </dict>
+            </dict>
         </dict>
+        <key>UIBackgroundModes</key>
+        <array>
+       		<string>audio</string>
+       	</array>
+       	<key>UIFileSharingEnabled</key>
+        <true/>
         <key>UIApplicationSupportsIndirectInputEvents</key>
         <true/>
         <key>UILaunchStoryboardName</key>
@@ -57,5 +71,19 @@
         </array>
         <key>UIViewControllerBasedStatusBarAppearance</key>
         <false/>
+        <key>LSApplicationQueriesSchemes</key>
+        	<array>
+        		<string>iina</string>
+        		<string>potplayer</string>
+        		<string>vlc</string>
+        		<string>nplayer-http</string>
+        		<string>omniplayer</string>
+        		<string>figplayer</string>
+        		<string>infuse</string>
+        		<string>intent</string>
+        		<string>filebox</string>
+        		<string>open-vidhub</string>
+        		<string>yybx</string>
+        	</array>
     </dict>
 </plist>

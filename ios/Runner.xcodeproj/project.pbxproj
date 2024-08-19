@@ -16,9 +16,12 @@
 		180331812C6E4E330081F57F /* AList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331802C6E4E330081F57F /* AList.swift */; };
 		180331842C6EE1E20081F57F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180331832C6EE1E20081F57F /* IOKit.framework */; };
 		180331882C6F29BF0081F57F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331872C6F29BF0081F57F /* Logger.swift */; };
-		1803318E2C6F393F0081F57F /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1803318D2C6F393F0081F57F /* LogLevel.swift */; };
 		1803318F2C6F47190081F57F /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180331852C6F23890081F57F /* libresolv.9.tbd */; };
 		180331902C6F47190081F57F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180331862C6F23890081F57F /* libresolv.tbd */; };
+		180331972C71C2E80081F57F /* HCKeepBGRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331932C71C2E80081F57F /* HCKeepBGRunManager.swift */; };
+		180331982C71C2E80081F57F /* jm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 180331942C71C2E80081F57F /* jm.mp3 */; };
+		1803319D2C733CB50081F57F /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1803319C2C733CB50081F57F /* LogLevel.swift */; };
+		1803319F2C733D1B0081F57F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1803319E2C733D1B0081F57F /* NotificationManager.swift */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		73E671654AEAD0DEF71E4B59 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A9FCB7F535288ADC41BF69 /* Pods_Runner.framework */; };
@@ -66,7 +69,10 @@
 		180331852C6F23890081F57F /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		180331862C6F23890081F57F /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		180331872C6F29BF0081F57F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		1803318D2C6F393F0081F57F /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		180331932C71C2E80081F57F /* HCKeepBGRunManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCKeepBGRunManager.swift; sourceTree = "<group>"; };
+		180331942C71C2E80081F57F /* jm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jm.mp3; sourceTree = "<group>"; };
+		1803319C2C733CB50081F57F /* LogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogLevel.swift; path = Alist/constant/LogLevel.swift; sourceTree = "<group>"; };
+		1803319E2C733D1B0081F57F /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		24463DE7854820229CDBB076 /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,9 +162,26 @@
 		1803318A2C6F38E00081F57F /* constant */ = {
 			isa = PBXGroup;
 			children = (
-				1803318D2C6F393F0081F57F /* LogLevel.swift */,
+				1803319C2C733CB50081F57F /* LogLevel.swift */,
 			);
 			name = constant;
+			sourceTree = "<group>";
+		};
+		180331952C71C2E80081F57F /* BGRunManager */ = {
+			isa = PBXGroup;
+			children = (
+				180331932C71C2E80081F57F /* HCKeepBGRunManager.swift */,
+				180331942C71C2E80081F57F /* jm.mp3 */,
+			);
+			path = BGRunManager;
+			sourceTree = "<group>";
+		};
+		1803319B2C733C420081F57F /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				1803319E2C733D1B0081F57F /* NotificationManager.swift */,
+			);
+			path = NotificationManager;
 			sourceTree = "<group>";
 		};
 		19C9A9FDA00E0524246C5C66 /* Frameworks */ = {
@@ -216,6 +239,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				1803319B2C733C420081F57F /* NotificationManager */,
+				180331952C71C2E80081F57F /* BGRunManager */,
 				180331722C6E45510081F57F /* Alist */,
 				1803318A2C6F38E00081F57F /* constant */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -349,6 +374,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180331982C71C2E80081F57F /* jm.mp3 in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
@@ -487,10 +513,12 @@
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1803317B2C6E47F30081F57F /* AppConfigBridge.swift in Sources */,
 				180331812C6E4E330081F57F /* AList.swift in Sources */,
+				1803319F2C733D1B0081F57F /* NotificationManager.swift in Sources */,
+				1803319D2C733CB50081F57F /* LogLevel.swift in Sources */,
 				180331792C6E463D0081F57F /* IosBridge.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				1803317D2C6E493A0081F57F /* CommonBridge.swift in Sources */,
-				1803318E2C6F393F0081F57F /* LogLevel.swift in Sources */,
+				180331972C71C2E80081F57F /* HCKeepBGRunManager.swift in Sources */,
 				180331882C6F29BF0081F57F /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

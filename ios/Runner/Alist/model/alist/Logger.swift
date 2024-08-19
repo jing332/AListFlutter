@@ -7,7 +7,7 @@
 
 import Foundation
 
-// @objc(Logger)
+// Alist 运行日志处理
 class Logger {
     static let instance = Logger()
 
@@ -21,7 +21,7 @@ class Logger {
     }
 
     func removeListener(listener: ListenerProtocol) {
-
+    
     }
 
     func log(level: Int, time: String, msg: String) {

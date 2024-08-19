@@ -8,7 +8,15 @@
 import Foundation
 import Alistlib
 
-class AppConfigBridge: AppConfig {
+/**
+ * Alist 一些参数配置, 这些应该在 Flutter 实现
+ */
+class AppConfigBridge:NSObject, AppConfig {
+    
+    static var instance = AppConfigBridge()
+    
+    private override init() {}
+
     func isWakeLockEnabled() throws -> Bool {
         let retVal = UserDefaults.standard.bool(forKey: "WakeLockEnabled")
         if(retVal){
@@ -46,12 +54,12 @@ class AppConfigBridge: AppConfig {
     }
 
     func getDataDir() throws -> String {
-        let greeting = UserDefaults.standard.string(forKey: "DataDir")
-        if (greeting != nil){
-            return greeting!
+        let dataDir = UserDefaults.standard.string(forKey: "DataDir")
+        if (dataDir != nil && !dataDir!.isEmpty){
+            return dataDir!
         } else {
-            let documentsDirectory = NSHomeDirectory().appending("/Documents")
-            return documentsDirectory
+            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            return documentsDirectory.path
         }
     }
 

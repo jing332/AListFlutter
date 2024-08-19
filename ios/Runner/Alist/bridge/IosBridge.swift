@@ -7,7 +7,11 @@
 
 import Foundation
 import Alistlib
+import Combine
 
+/**
+ * 提供给 Flutter 调用的接口
+ */
 class IosBridge: Android {
 
     var event: Event
@@ -24,19 +28,33 @@ class IosBridge: Android {
 
     func startService() throws {
         if (!isRuning) {
-            AList.instance.startup()
             isRuning = true
+            AList.instance.startup()
+            HCKeepBGRunManager.shared.startBGRun()
+            NotificationManager.shared.scheduleNotification("AListServer", body: "服务正在运行中")
+            CommonBridge.showToast(message: "启动中...")
         } else {
-            AList.instance.shutdown()
             isRuning = false
+            AList.instance.shutdown()
+            HCKeepBGRunManager.shared.stopBGRun()
+            NotificationManager.shared.removeNotification()
         }
         
-        event.onServiceStatusChanged(isRunning: isRuning){ result in
-            switch result {
-            case .success:
-                print("状态日志已成功上报")
-            case .failure(let error):
-                print("状态上报失败: \(error)")
+        // 延迟3秒上报启动状态
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+            if(AList.instance.isRunning()){
+                print("Alist 运行中....")
+            }else{
+                print("Alist 未运行....")
+            }
+            self.event.onServiceStatusChanged(isRunning: self.isRuning){ result in
+                switch result {
+                case .success:
+                    print("状态日志已成功上报")
+                case .failure(let error):
+                    print("状态上报失败: \(error)")
+                }
             }
         }
     }
@@ -50,14 +68,11 @@ class IosBridge: Android {
     }
 
     func isRunning() throws -> Bool {
-        return AList.instance.isRunning()
+        // return AList.instance.isRunning()
+        return isRuning
     }
 
     func getAListVersion() throws -> String {
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-              return version
-            } else {
-              return "ios"
-            }
+        return "v3.36.0"
     }
 }
