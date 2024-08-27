@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -28,7 +29,7 @@ class AListScreen extends StatelessWidget {
             actions: [
               IconButton(
                 tooltip: S.of(context).desktopShortcut,
-                onPressed: () async  {
+                onPressed: () async {
                   Android().addShortcut();
                 },
                 icon: const Icon(Icons.add_home),
@@ -88,7 +89,10 @@ class AListScreen extends StatelessWidget {
                 Android().startService();
               }),
         ),
-        body: Obx(() => LogListView(logs: ui.logs.value)));
+        body: Obx(() => LogListView(
+              logs: ui.logs.value,
+              controller: ui._scrollController,
+            )));
   }
 }
 
@@ -120,10 +124,22 @@ class AListController extends GetxController {
     logs.clear();
   }
 
-  void addLog(Log log) {
-    logs.add(log);
-    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+  void addLog(Log logContent) {
+    logs.add(logContent);
+    // _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    if (timer != null) {
+      timer!.cancel();
+    }
+    timer = Timer(const Duration(milliseconds: 1000), () {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
   }
+
+  Timer? timer;
 
   @override
   void onInit() {

@@ -16,7 +16,7 @@ class DividerPreference extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         child: Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor),
+          style: Theme.of(context).textTheme.titleMedium/*?.copyWith(color: Theme.of(context).primaryColorDark)*/,
         ),
       ),
     ]);

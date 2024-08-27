@@ -8,20 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
-		180331762C6E457C0081F57F /* GeneratedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331732C6E457C0081F57F /* GeneratedApi.swift */; };
-		180331772C6E457C0081F57F /* Alistlib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180331752C6E457C0081F57F /* Alistlib.xcframework */; };
-		180331792C6E463D0081F57F /* IosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331782C6E463D0081F57F /* IosBridge.swift */; };
-		1803317B2C6E47F30081F57F /* AppConfigBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1803317A2C6E47F30081F57F /* AppConfigBridge.swift */; };
-		1803317D2C6E493A0081F57F /* CommonBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1803317C2C6E493A0081F57F /* CommonBridge.swift */; };
-		180331812C6E4E330081F57F /* AList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331802C6E4E330081F57F /* AList.swift */; };
 		180331842C6EE1E20081F57F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180331832C6EE1E20081F57F /* IOKit.framework */; };
-		180331882C6F29BF0081F57F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331872C6F29BF0081F57F /* Logger.swift */; };
 		1803318F2C6F47190081F57F /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180331852C6F23890081F57F /* libresolv.9.tbd */; };
 		180331902C6F47190081F57F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180331862C6F23890081F57F /* libresolv.tbd */; };
-		180331972C71C2E80081F57F /* HCKeepBGRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180331932C71C2E80081F57F /* HCKeepBGRunManager.swift */; };
-		180331982C71C2E80081F57F /* jm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 180331942C71C2E80081F57F /* jm.mp3 */; };
-		1803319D2C733CB50081F57F /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1803319C2C733CB50081F57F /* LogLevel.swift */; };
-		1803319F2C733D1B0081F57F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1803319E2C733D1B0081F57F /* NotificationManager.swift */; };
+		182328292C7E1C2200074D5B /* HCKeepBGRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182328152C7E1C2200074D5B /* HCKeepBGRunManager.swift */; };
+		1823282A2C7E1C2200074D5B /* jm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 182328162C7E1C2200074D5B /* jm.mp3 */; };
+		1823282B2C7E1C2200074D5B /* AppConfigBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182328182C7E1C2200074D5B /* AppConfigBridge.swift */; };
+		1823282C2C7E1C2200074D5B /* CommonBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182328192C7E1C2200074D5B /* CommonBridge.swift */; };
+		1823282D2C7E1C2200074D5B /* IosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823281A2C7E1C2200074D5B /* IosBridge.swift */; };
+		1823282E2C7E1C2200074D5B /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823281C2C7E1C2200074D5B /* LogLevel.swift */; };
+		1823282F2C7E1C2200074D5B /* AList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823281E2C7E1C2200074D5B /* AList.swift */; };
+		182328302C7E1C2200074D5B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823281F2C7E1C2200074D5B /* Logger.swift */; };
+		182328312C7E1C2200074D5B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182328222C7E1C2200074D5B /* NotificationManager.swift */; };
+		182328322C7E1C2200074D5B /* Alistlib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182328242C7E1C2200074D5B /* Alistlib.xcframework */; };
+		182328332C7E1C2200074D5B /* AListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182328252C7E1C2200074D5B /* AListService.swift */; };
+		182328342C7E1C2200074D5B /* GeneratedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182328262C7E1C2200074D5B /* GeneratedApi.swift */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		73E671654AEAD0DEF71E4B59 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A9FCB7F535288ADC41BF69 /* Pods_Runner.framework */; };
@@ -59,20 +60,21 @@
 		0E1AE96739115C64F69F74BA /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
-		180331732C6E457C0081F57F /* GeneratedApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneratedApi.swift; path = Alist/GeneratedApi.swift; sourceTree = "<group>"; };
-		180331752C6E457C0081F57F /* Alistlib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alistlib.xcframework; path = Alist/Alistlib.xcframework; sourceTree = "<group>"; };
-		180331782C6E463D0081F57F /* IosBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosBridge.swift; sourceTree = "<group>"; };
-		1803317A2C6E47F30081F57F /* AppConfigBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigBridge.swift; sourceTree = "<group>"; };
-		1803317C2C6E493A0081F57F /* CommonBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBridge.swift; sourceTree = "<group>"; };
-		180331802C6E4E330081F57F /* AList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AList.swift; sourceTree = "<group>"; };
 		180331832C6EE1E20081F57F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		180331852C6F23890081F57F /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		180331862C6F23890081F57F /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		180331872C6F29BF0081F57F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		180331932C71C2E80081F57F /* HCKeepBGRunManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCKeepBGRunManager.swift; sourceTree = "<group>"; };
-		180331942C71C2E80081F57F /* jm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jm.mp3; sourceTree = "<group>"; };
-		1803319C2C733CB50081F57F /* LogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogLevel.swift; path = Alist/constant/LogLevel.swift; sourceTree = "<group>"; };
-		1803319E2C733D1B0081F57F /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		182328152C7E1C2200074D5B /* HCKeepBGRunManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCKeepBGRunManager.swift; sourceTree = "<group>"; };
+		182328162C7E1C2200074D5B /* jm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jm.mp3; sourceTree = "<group>"; };
+		182328182C7E1C2200074D5B /* AppConfigBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfigBridge.swift; sourceTree = "<group>"; };
+		182328192C7E1C2200074D5B /* CommonBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonBridge.swift; sourceTree = "<group>"; };
+		1823281A2C7E1C2200074D5B /* IosBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IosBridge.swift; sourceTree = "<group>"; };
+		1823281C2C7E1C2200074D5B /* LogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		1823281E2C7E1C2200074D5B /* AList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AList.swift; sourceTree = "<group>"; };
+		1823281F2C7E1C2200074D5B /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		182328222C7E1C2200074D5B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		182328242C7E1C2200074D5B /* Alistlib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Alistlib.xcframework; sourceTree = "<group>"; };
+		182328252C7E1C2200074D5B /* AListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AListService.swift; sourceTree = "<group>"; };
+		182328262C7E1C2200074D5B /* GeneratedApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedApi.swift; sourceTree = "<group>"; };
 		24463DE7854820229CDBB076 /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,10 +103,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1803318F2C6F47190081F57F /* libresolv.9.tbd in Frameworks */,
+				182328322C7E1C2200074D5B /* Alistlib.xcframework in Frameworks */,
 				180331842C6EE1E20081F57F /* IOKit.framework in Frameworks */,
 				180331902C6F47190081F57F /* libresolv.tbd in Frameworks */,
 				73E671654AEAD0DEF71E4B59 /* Pods_Runner.framework in Frameworks */,
-				180331772C6E457C0081F57F /* Alistlib.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,69 +121,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		180331722C6E45510081F57F /* Alist */ = {
+		182328172C7E1C2200074D5B /* BGRunManager */ = {
 			isa = PBXGroup;
 			children = (
-				1803317E2C6E4DE90081F57F /* model */,
-				180331752C6E457C0081F57F /* Alistlib.xcframework */,
-				180331742C6E457C0081F57F /* bridge */,
-				180331732C6E457C0081F57F /* GeneratedApi.swift */,
-			);
-			name = Alist;
-			sourceTree = "<group>";
-		};
-		180331742C6E457C0081F57F /* bridge */ = {
-			isa = PBXGroup;
-			children = (
-				180331782C6E463D0081F57F /* IosBridge.swift */,
-				1803317A2C6E47F30081F57F /* AppConfigBridge.swift */,
-				1803317C2C6E493A0081F57F /* CommonBridge.swift */,
-			);
-			name = bridge;
-			path = Alist/bridge;
-			sourceTree = "<group>";
-		};
-		1803317E2C6E4DE90081F57F /* model */ = {
-			isa = PBXGroup;
-			children = (
-				1803317F2C6E4E0E0081F57F /* alist */,
-			);
-			name = model;
-			sourceTree = "<group>";
-		};
-		1803317F2C6E4E0E0081F57F /* alist */ = {
-			isa = PBXGroup;
-			children = (
-				180331802C6E4E330081F57F /* AList.swift */,
-				180331872C6F29BF0081F57F /* Logger.swift */,
-			);
-			name = alist;
-			path = Alist/model/alist;
-			sourceTree = "<group>";
-		};
-		1803318A2C6F38E00081F57F /* constant */ = {
-			isa = PBXGroup;
-			children = (
-				1803319C2C733CB50081F57F /* LogLevel.swift */,
-			);
-			name = constant;
-			sourceTree = "<group>";
-		};
-		180331952C71C2E80081F57F /* BGRunManager */ = {
-			isa = PBXGroup;
-			children = (
-				180331932C71C2E80081F57F /* HCKeepBGRunManager.swift */,
-				180331942C71C2E80081F57F /* jm.mp3 */,
+				182328152C7E1C2200074D5B /* HCKeepBGRunManager.swift */,
+				182328162C7E1C2200074D5B /* jm.mp3 */,
 			);
 			path = BGRunManager;
 			sourceTree = "<group>";
 		};
-		1803319B2C733C420081F57F /* NotificationManager */ = {
+		1823281B2C7E1C2200074D5B /* bridge */ = {
 			isa = PBXGroup;
 			children = (
-				1803319E2C733D1B0081F57F /* NotificationManager.swift */,
+				182328182C7E1C2200074D5B /* AppConfigBridge.swift */,
+				182328192C7E1C2200074D5B /* CommonBridge.swift */,
+				1823281A2C7E1C2200074D5B /* IosBridge.swift */,
+			);
+			path = bridge;
+			sourceTree = "<group>";
+		};
+		1823281D2C7E1C2200074D5B /* constant */ = {
+			isa = PBXGroup;
+			children = (
+				1823281C2C7E1C2200074D5B /* LogLevel.swift */,
+			);
+			path = constant;
+			sourceTree = "<group>";
+		};
+		182328202C7E1C2200074D5B /* alist */ = {
+			isa = PBXGroup;
+			children = (
+				1823281E2C7E1C2200074D5B /* AList.swift */,
+				1823281F2C7E1C2200074D5B /* Logger.swift */,
+			);
+			path = alist;
+			sourceTree = "<group>";
+		};
+		182328212C7E1C2200074D5B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				182328202C7E1C2200074D5B /* alist */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		182328232C7E1C2200074D5B /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				182328222C7E1C2200074D5B /* NotificationManager.swift */,
 			);
 			path = NotificationManager;
+			sourceTree = "<group>";
+		};
+		182328272C7E1C2200074D5B /* Alist */ = {
+			isa = PBXGroup;
+			children = (
+				182328172C7E1C2200074D5B /* BGRunManager */,
+				1823281B2C7E1C2200074D5B /* bridge */,
+				1823281D2C7E1C2200074D5B /* constant */,
+				182328212C7E1C2200074D5B /* model */,
+				182328232C7E1C2200074D5B /* NotificationManager */,
+				182328242C7E1C2200074D5B /* Alistlib.xcframework */,
+				182328252C7E1C2200074D5B /* AListService.swift */,
+				182328262C7E1C2200074D5B /* GeneratedApi.swift */,
+			);
+			path = Alist;
 			sourceTree = "<group>";
 		};
 		19C9A9FDA00E0524246C5C66 /* Frameworks */ = {
@@ -239,10 +243,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				1803319B2C733C420081F57F /* NotificationManager */,
-				180331952C71C2E80081F57F /* BGRunManager */,
-				180331722C6E45510081F57F /* Alist */,
-				1803318A2C6F38E00081F57F /* constant */,
+				182328272C7E1C2200074D5B /* Alist */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -374,7 +375,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180331982C71C2E80081F57F /* jm.mp3 in Resources */,
+				1823282A2C7E1C2200074D5B /* jm.mp3 in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
@@ -509,17 +510,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180331762C6E457C0081F57F /* GeneratedApi.swift in Sources */,
+				1823282F2C7E1C2200074D5B /* AList.swift in Sources */,
+				182328292C7E1C2200074D5B /* HCKeepBGRunManager.swift in Sources */,
+				182328332C7E1C2200074D5B /* AListService.swift in Sources */,
+				1823282B2C7E1C2200074D5B /* AppConfigBridge.swift in Sources */,
+				182328312C7E1C2200074D5B /* NotificationManager.swift in Sources */,
+				1823282E2C7E1C2200074D5B /* LogLevel.swift in Sources */,
+				182328302C7E1C2200074D5B /* Logger.swift in Sources */,
+				1823282D2C7E1C2200074D5B /* IosBridge.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
-				1803317B2C6E47F30081F57F /* AppConfigBridge.swift in Sources */,
-				180331812C6E4E330081F57F /* AList.swift in Sources */,
-				1803319F2C733D1B0081F57F /* NotificationManager.swift in Sources */,
-				1803319D2C733CB50081F57F /* LogLevel.swift in Sources */,
-				180331792C6E463D0081F57F /* IosBridge.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
-				1803317D2C6E493A0081F57F /* CommonBridge.swift in Sources */,
-				180331972C71C2E80081F57F /* HCKeepBGRunManager.swift in Sources */,
-				180331882C6F29BF0081F57F /* Logger.swift in Sources */,
+				1823282C2C7E1C2200074D5B /* CommonBridge.swift in Sources */,
+				182328342C7E1C2200074D5B /* GeneratedApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
