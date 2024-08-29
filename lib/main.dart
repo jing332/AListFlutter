@@ -21,7 +21,9 @@ import 'contant/native_bridge.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Android
-  if (!kIsWeb && kDebugMode && defaultTargetPlatform == TargetPlatform.android) {
+  if (!kIsWeb &&
+      kDebugMode &&
+      defaultTargetPlatform == TargetPlatform.android) {
     await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
   }
 
@@ -55,12 +57,13 @@ Future<void> ensureConfigDirectory() async {
   }
 
   // Define the pattern for UUID.
-  String patternString = r'\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/';
+  String patternString =
+      r'\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/';
   RegExp regexPattern = RegExp(patternString);
 
   // Replace the pattern with the document directory path.
-  String newConfigData =
-      configContent.replaceAll(regexPattern, regexPattern.firstMatch(documentDirectory.path)?.group(0) ?? '');
+  String newConfigData = configContent.replaceAll(regexPattern,
+      regexPattern.firstMatch(documentDirectory.path)?.group(0) ?? '');
 
   // Write the updated data back to the file.
   await configFile.writeAsString(newConfigData);
@@ -83,7 +86,7 @@ class MyApp extends StatelessWidget {
           border: OutlineInputBorder(),
         ),
       ),
-      darkTheme:ThemeData(
+      darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
         colorSchemeSeed: Colors.blueGrey,
@@ -125,7 +128,11 @@ class MyHomePage extends StatelessWidget {
           () => FadeIndexedStack(
             lazy: true,
             index: controller.selectedIndex.value,
-            children: [WebScreen(key: webGlobalKey), const AListScreen(), const SettingsScreen()],
+            children: [
+              WebScreen(key: webGlobalKey),
+              const AListScreen(),
+              const SettingsScreen()
+            ],
           ),
         ),
         bottomNavigationBar: Obx(() => NavigationBar(

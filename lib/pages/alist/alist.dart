@@ -69,9 +69,11 @@ class AListScreen extends StatelessWidget {
                     PopupMenuItem(
                       value: 2,
                       onTap: () {
-                        showDialog(context: context, builder: ((context){
-                          return const AppAboutDialog();
-                        }));
+                        showDialog(
+                            context: context,
+                            builder: ((context) {
+                              return const AppAboutDialog();
+                            }));
                       },
                       child: Text(S.of(context).about),
                     ),

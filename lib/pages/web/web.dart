@@ -43,7 +43,9 @@ class WebScreenState extends State<WebScreen> {
 
   @override
   void initState() {
-    Android().getAListHttpPort().then((port) => {_url = "http://localhost:$port"});
+    Android()
+        .getAListHttpPort()
+        .then((port) => {_url = "http://localhost:$port"});
 
     // NativeEvent().addServiceStatusListener((isRunning) {
     //   if (isRunning) _webViewController?.reload();
@@ -95,9 +97,18 @@ class WebScreenState extends State<WebScreen> {
                 log("shouldOverrideUrlLoading ${navigationAction.request.url}");
 
                 var uri = navigationAction.request.url!;
-                if (!["http", "https", "file", "chrome", "data", "javascript", "about"].contains(uri.scheme)) {
+                if (![
+                  "http",
+                  "https",
+                  "file",
+                  "chrome",
+                  "data",
+                  "javascript",
+                  "about"
+                ].contains(uri.scheme)) {
                   log("shouldOverrideUrlLoading ${uri.toString()}");
-                  final silentMode = await NativeBridge.appConfig.isSilentJumpAppEnabled();
+                  final silentMode =
+                      await NativeBridge.appConfig.isSilentJumpAppEnabled();
                   if (silentMode) {
                     NativeCommon().startActivityFromUri(uri.toString());
                   } else {
@@ -126,7 +137,8 @@ class WebScreenState extends State<WebScreen> {
                     await Future.delayed(const Duration(milliseconds: 500));
                     if (await Android().isRunning()) {
                       // _webViewController?.reload();
-                      _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri(_url)));
+                      _webViewController?.loadUrl(
+                          urlRequest: URLRequest(url: WebUri(_url)));
                       break;
                     }
                   }
@@ -135,12 +147,15 @@ class WebScreenState extends State<WebScreen> {
               onDownloadStartRequest: (controller, url) async {
                 Get.showSnackbar(GetSnackBar(
                   title: S.of(context).downloadThisFile,
-                  message: url.suggestedFilename ?? url.contentDisposition ?? url.toString(),
+                  message: url.suggestedFilename ??
+                      url.contentDisposition ??
+                      url.toString(),
                   duration: const Duration(seconds: 3),
                   mainButton: Column(children: [
                     TextButton(
                       onPressed: () {
-                        IntentUtils.getUrlIntent(url.url.toString()).launchChooser(S.of(context).selectAppToOpen);
+                        IntentUtils.getUrlIntent(url.url.toString())
+                            .launchChooser(S.of(context).selectAppToOpen);
                       },
                       child: Text(S.of(context).selectAppToOpen),
                     ),
@@ -166,7 +181,8 @@ class WebScreenState extends State<WebScreen> {
                   _progress = 0;
                 });
               },
-              onProgressChanged: (InAppWebViewController controller, int progress) {
+              onProgressChanged:
+                  (InAppWebViewController controller, int progress) {
                 setState(() {
                   _progress = progress / 100;
                   if (_progress == 1) _progress = 0;
@@ -175,7 +191,8 @@ class WebScreenState extends State<WebScreen> {
                       _canGoBack = value;
                     }));
               },
-              onUpdateVisitedHistory: (InAppWebViewController controller, WebUri? url, bool? isReload) {
+              onUpdateVisitedHistory: (InAppWebViewController controller,
+                  WebUri? url, bool? isReload) {
                 _url = url.toString();
               },
             ),
