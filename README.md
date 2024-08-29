@@ -7,7 +7,7 @@
 
 # AListFlutter
 
-AListFlutter是一个基于AList的Android客户端，使用Google Flutter作为UI框架。
+AListFlutter是一个基于AList的Android服务端，使用Google Flutter作为UI框架。
 
 > [Github Actions](https://github.com/jing332/AListFlutter/actions/workflows/sync_alist.yaml)
 > 每日早晚五点钟检查最新的 [AList](https://github.com/alist-org/alist/releases)
