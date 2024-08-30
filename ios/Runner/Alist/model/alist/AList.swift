@@ -104,8 +104,7 @@ class AList: NSObject, AlistlibEventProtocol, AlistlibLogCallbackProtocol {
     func startup() {
         // init()
         self.initAlist()
-        let dataChangeCallbackHandler = AlistlibDataChangeCallback()
-        Alistlib.AlistlibStart(dataChangeCallbackHandler)
+        Alistlib.AlistlibStart(nil)
     }
 
     /**
