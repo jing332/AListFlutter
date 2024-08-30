@@ -5,3 +5,6 @@ libresolv.9.tbd
 libresolv.tbd 
 IOKit.framework
 
+## flutter报错问题 pigeons 生成的文件中加入这个
+extension FlutterError: Swift.Error {
+}
