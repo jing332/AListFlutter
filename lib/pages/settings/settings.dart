@@ -44,121 +44,126 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final controller = Get.put(_SettingsController());
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          title: const Text("AList"),
+        ),
         body: Obx(
-      () => ListView(
-        children: [
-          // SizedBox(height: MediaQuery.of(context).padding.top),
-          Visibility(
-            visible: !controller._managerStorageGranted.value ||
-                !controller._notificationGranted.value ||
-                !controller._storageGranted.value,
-            child: DividerPreference(title: S.of(context).importantSettings),
-          ),
-          Visibility(
-            visible: !controller._managerStorageGranted.value,
-            child: BasicPreference(
-              title: S.of(context).grantManagerStoragePermission,
-              subtitle: S.of(context).grantStoragePermissionDesc,
-              onTap: () {
-                Permission.manageExternalStorage.request();
-              },
-            ),
-          ),
-          Visibility(
-              visible: !controller._storageGranted.value,
-              child: BasicPreference(
-                title: S.of(context).grantStoragePermission,
-                subtitle: S.of(context).grantStoragePermissionDesc,
-                onTap: () {
-                  Permission.storage.request();
+          () => ListView(
+            children: [
+              // SizedBox(height: MediaQuery.of(context).padding.top),
+              Visibility(
+                visible: !controller._managerStorageGranted.value ||
+                    !controller._notificationGranted.value ||
+                    !controller._storageGranted.value,
+                child:
+                    DividerPreference(title: S.of(context).importantSettings),
+              ),
+              Visibility(
+                visible: !controller._managerStorageGranted.value,
+                child: BasicPreference(
+                  title: S.of(context).grantManagerStoragePermission,
+                  subtitle: S.of(context).grantStoragePermissionDesc,
+                  onTap: () {
+                    Permission.manageExternalStorage.request();
+                  },
+                ),
+              ),
+              Visibility(
+                  visible: !controller._storageGranted.value,
+                  child: BasicPreference(
+                    title: S.of(context).grantStoragePermission,
+                    subtitle: S.of(context).grantStoragePermissionDesc,
+                    onTap: () {
+                      Permission.storage.request();
+                    },
+                  )),
+
+              Visibility(
+                  visible: !controller._notificationGranted.value,
+                  child: BasicPreference(
+                    title: S.of(context).grantNotificationPermission,
+                    subtitle: S.of(context).grantNotificationPermissionDesc,
+                    onTap: () {
+                      Permission.notification.request();
+                    },
+                  )),
+
+              DividerPreference(title: S.of(context).general),
+
+              SwitchPreference(
+                title: S.of(context).autoCheckForUpdates,
+                subtitle: S.of(context).autoCheckForUpdatesDesc,
+                icon: const Icon(Icons.system_update),
+                value: controller.autoUpdate,
+                onChanged: (value) {
+                  controller.autoUpdate = value;
                 },
-              )),
-
-          Visibility(
-              visible: !controller._notificationGranted.value,
-              child: BasicPreference(
-                title: S.of(context).grantNotificationPermission,
-                subtitle: S.of(context).grantNotificationPermissionDesc,
-                onTap: () {
-                  Permission.notification.request();
+              ),
+              SwitchPreference(
+                title: S.of(context).wakeLock,
+                subtitle: S.of(context).wakeLockDesc,
+                icon: const Icon(Icons.screen_lock_portrait),
+                value: controller.wakeLock,
+                onChanged: (value) {
+                  controller.wakeLock = value;
                 },
-              )),
+              ),
+              SwitchPreference(
+                title: S.of(context).bootAutoStartService,
+                subtitle: S.of(context).bootAutoStartServiceDesc,
+                icon: const Icon(Icons.power_settings_new),
+                value: controller.startAtBoot,
+                onChanged: (value) {
+                  controller.startAtBoot = value;
+                },
+              ),
+              // AutoStartWebPage
+              SwitchPreference(
+                title: S.of(context).autoStartWebPage,
+                subtitle: S.of(context).autoStartWebPageDesc,
+                icon: const Icon(Icons.open_in_browser),
+                value: controller._autoStartWebPage.value,
+                onChanged: (value) {
+                  controller.autoStartWebPage = value;
+                },
+              ),
 
-          DividerPreference(title: S.of(context).general),
+              BasicPreference(
+                title: S.of(context).dataDirectory,
+                subtitle: controller._dataDir.value,
+                leading: const Icon(Icons.folder),
+                onTap: () async {
+                  final path = await FilePicker.platform.getDirectoryPath();
 
-          SwitchPreference(
-            title: S.of(context).autoCheckForUpdates,
-            subtitle: S.of(context).autoCheckForUpdatesDesc,
-            icon: const Icon(Icons.system_update),
-            value: controller.autoUpdate,
-            onChanged: (value) {
-              controller.autoUpdate = value;
-            },
+                  if (path == null) {
+                    Get.showSnackbar(GetSnackBar(
+                        message: S.current.setDefaultDirectory,
+                        duration: const Duration(seconds: 3),
+                        mainButton: TextButton(
+                          onPressed: () {
+                            controller.setDataDir("");
+                            Get.back();
+                          },
+                          child: Text(S.current.confirm),
+                        )));
+                  } else {
+                    controller.setDataDir(path);
+                  }
+                },
+              ),
+              DividerPreference(title: S.of(context).uiSettings),
+              SwitchPreference(
+                  icon: const Icon(Icons.pan_tool_alt_outlined),
+                  title: S.of(context).silentJumpApp,
+                  subtitle: S.of(context).silentJumpAppDesc,
+                  value: controller._silentJumpApp.value,
+                  onChanged: (value) {
+                    controller.silentJumpApp = value;
+                  })
+            ],
           ),
-          SwitchPreference(
-            title: S.of(context).wakeLock,
-            subtitle: S.of(context).wakeLockDesc,
-            icon: const Icon(Icons.screen_lock_portrait),
-            value: controller.wakeLock,
-            onChanged: (value) {
-              controller.wakeLock = value;
-            },
-          ),
-          SwitchPreference(
-            title: S.of(context).bootAutoStartService,
-            subtitle: S.of(context).bootAutoStartServiceDesc,
-            icon: const Icon(Icons.power_settings_new),
-            value: controller.startAtBoot,
-            onChanged: (value) {
-              controller.startAtBoot = value;
-            },
-          ),
-          // AutoStartWebPage
-          SwitchPreference(
-            title: S.of(context).autoStartWebPage,
-            subtitle: S.of(context).autoStartWebPageDesc,
-            icon: const Icon(Icons.open_in_browser),
-            value: controller._autoStartWebPage.value,
-            onChanged: (value) {
-              controller.autoStartWebPage = value;
-            },
-          ),
-
-          BasicPreference(
-            title: S.of(context).dataDirectory,
-            subtitle: controller._dataDir.value,
-            leading: const Icon(Icons.folder),
-            onTap: () async {
-              final path = await FilePicker.platform.getDirectoryPath();
-
-              if (path == null) {
-                Get.showSnackbar(GetSnackBar(
-                    message: S.current.setDefaultDirectory,
-                    duration: const Duration(seconds: 3),
-                    mainButton: TextButton(
-                      onPressed: () {
-                        controller.setDataDir("");
-                        Get.back();
-                      },
-                      child: Text(S.current.confirm),
-                    )));
-              } else {
-                controller.setDataDir(path);
-              }
-            },
-          ),
-          DividerPreference(title: S.of(context).uiSettings),
-          SwitchPreference(
-              icon: const Icon(Icons.pan_tool_alt_outlined),
-              title: S.of(context).silentJumpApp,
-              subtitle: S.of(context).silentJumpAppDesc,
-              value: controller._silentJumpApp.value,
-              onChanged: (value) {
-                controller.silentJumpApp = value;
-              })
-        ],
-      ),
-    ));
+        ));
   }
 }
 
