@@ -53,7 +53,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: Upload AAR
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "AList"
           path: "${{ github.workspace }}/android/app/libs/*.aar"
@@ -76,7 +76,7 @@ jobs:
 
       - name: Upload missing_rules.txt
         if: failure() && steps.gradle.outcome != 'success'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "missing_rules"
           path: "${{ github.workspace }}/build/app/outputs/mapping/release/missing_rules.txt"

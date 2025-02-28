@@ -57,7 +57,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: Upload AAR
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "AList"
           path: "${{ github.workspace }}/android/app/libs/*.aar"
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload missing_rules.txt
         if: failure() && steps.gradle.outcome != 'success'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "missing_rules"
           path: "${{ github.workspace }}/build/app/outputs/mapping/release/missing_rules.txt"
@@ -91,21 +91,21 @@ jobs:
 
       - name: Upload App To Artifact arm64-v8a
         if: success () || failure ()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "AListFlutter-v${{ env.ver_name }}_arm64-v8a"
           path: "${{ env.output }}/*-v8a.apk"
 
       - name: Upload App To Artifact arm-v7a
         if: success () || failure ()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "AListFlutter-v${{ env.ver_name }}_arm-v7a"
           path: "${{ env.output }}/*-v7a.apk"
 
       - name: Upload App To Artifact x86
         if: success () || failure ()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "AListFlutter-v${{ env.ver_name }}_x86_64"
           path: "${{ env.output }}/*64.apk"
