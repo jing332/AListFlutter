@@ -1,7 +1,9 @@
 #!/bin/bash
+# 1. 进入scripts目录 执行 ./init_alist.sh
 
 GIT_REPO="https://github.com/alist-org/alist.git"
-TAG_NAME=$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags $GIT_REPO | tail --lines=1 | cut --delimiter='/' --fields=3)
+#TAG_NAME=$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags $GIT_REPO | tail --lines=1 | cut --delimiter='/' --fields=3)
+TAG_NAME=v3.40.0
 
 echo "AList - ${TAG_NAME}"
 rm -rf ./src
