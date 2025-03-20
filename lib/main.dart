@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:alist_flutter/generated/l10n.dart';
 import 'package:alist_flutter/generated_api.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'contant/native_bridge.dart';
 
@@ -25,7 +27,46 @@ void main() async {
     await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
   }
 
+  if (defaultTargetPlatform == TargetPlatform.iOS) {
+    await ensureConfigDirectory();
+  }
+
   runApp(const MyApp());
+}
+
+/*
+    背景：
+    1. ios覆盖安装应用时，会创建一个新的Document目录，同时会把旧文件拷贝过去
+    2. config文件中存储的日志文件、临时目录等路径都是绝对路径
+
+    问题：由于Document目录已更新，但是config文件中存储的文件路径没有更新，服务启动后仍向旧的Document目录读写文件，会导致读写无权限
+
+    解法：这里对config文件中存储的文件路径进行处理，替换为新的Document目录
+     */
+Future<void> ensureConfigDirectory() async {
+  var documentDirectory = await getApplicationDocumentsDirectory();
+  String dir = '${documentDirectory.path}/config.json';
+  var configFile = File(dir);
+  if (!await configFile.exists()) {
+    return;
+  }
+
+  var configContent = await configFile.readAsString();
+  if (configContent.contains(documentDirectory.path)) {
+    return;
+  }
+
+  // Define the pattern for UUID.
+  String patternString =
+      r'\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/';
+  RegExp regexPattern = RegExp(patternString);
+
+  // Replace the pattern with the document directory path.
+  String newConfigData = configContent.replaceAll(regexPattern,
+      regexPattern.firstMatch(documentDirectory.path)?.group(0) ?? '');
+
+  // Write the updated data back to the file.
+  await configFile.writeAsString(newConfigData);
 }
 
 class MyApp extends StatelessWidget {
@@ -36,6 +77,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'AListFlutter',
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
@@ -44,7 +86,7 @@ class MyApp extends StatelessWidget {
           border: OutlineInputBorder(),
         ),
       ),
-      darkTheme:ThemeData(
+      darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
         colorSchemeSeed: Colors.blueGrey,
