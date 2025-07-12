@@ -1,3 +1,9 @@
+# 本项目已停止更新，请您使用其他开源软件代替。
+- https://github.com/LeoHaoVIP/AListLiteAndroid
+- https://github.com/OpenListApp/OpenListApp
+
+---
+
 [![Release](https://github.com/jing332/AListFlutter/actions/workflows/release.yaml/badge.svg)](https://github.com/jing332/AListFlutter/actions/workflows/release.yaml)
 [![Test](https://github.com/jing332/AListFlutter/actions/workflows/build.yaml/badge.svg)](https://github.com/jing332/AListFlutter/actions/workflows/build.yaml)
 [![CheckAList](https://github.com/jing332/AListFlutter/actions/workflows/sync_alist.yaml/badge.svg)](https://github.com/jing332/AListFlutter/actions/workflows/sync_alist.yaml)
