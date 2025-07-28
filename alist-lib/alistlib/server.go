@@ -36,7 +36,6 @@ var logFormatter *internal.MyFormatter
 
 func Init(e Event, cb LogCallback) error {
 	event = e
-	cmd.Init()
 	logFormatter = &internal.MyFormatter{
 		OnLog: func(entry *log.Entry) {
 			cb.OnLog(int16(entry.Level), entry.Time.UnixMilli(), entry.Message)
@@ -46,8 +45,11 @@ func Init(e Event, cb LogCallback) error {
 		return errors.New("utils.log is nil")
 	} else {
 		utils.Log.SetFormatter(logFormatter)
+		log.StandardLogger().SetFormatter(logFormatter)
 		utils.Log.ExitFunc = event.OnProcessExit
+		log.StandardLogger().ExitFunc = event.OnProcessExit
 	}
+	cmd.Init()
 	return nil
 }
 

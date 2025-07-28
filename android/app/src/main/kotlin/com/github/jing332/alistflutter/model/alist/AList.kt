@@ -72,7 +72,7 @@ object AList : Event, LogCallback {
     }
 
     fun isRunning(): Boolean {
-        return Alistlib.isRunning("")
+        return Alistlib.isRunning("http")
     }
 
     fun setAdminPassword(pwd: String) {

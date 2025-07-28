@@ -69,129 +69,132 @@ class WebScreenState extends State<WebScreen> {
           _webViewController?.goBack();
         },
         child: Scaffold(
-          body: Column(children: <Widget>[
-            SizedBox(height: MediaQuery.of(context).padding.top),
-            LinearProgressIndicator(
-              value: _progress,
-              backgroundColor: Colors.grey[200],
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-            ),
-            Expanded(
-              child: InAppWebView(
-                initialSettings: settings,
-                initialUrlRequest: URLRequest(url: WebUri(_url)),
-                onWebViewCreated: (InAppWebViewController controller) {
-                  _webViewController = controller;
-                },
-                onLoadStart: (InAppWebViewController controller, Uri? url) {
-                  log("onLoadStart $url");
-                  setState(() {
-                    _progress = 0;
-                  });
-                },
-                shouldOverrideUrlLoading: (controller, navigationAction) async {
-                  log("shouldOverrideUrlLoading ${navigationAction.request.url}");
+          // appBar: AppBar(
+          //   backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          //   title: const Text("AList"),
+          // ),
+          body: Stack(children: <Widget>[
+            Positioned(
+                top: 10,
+                child: LinearProgressIndicator(
+                  value: _progress,
+                  backgroundColor: Colors.grey[200],
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+                )),
+            InAppWebView(
+              initialSettings: settings,
+              initialUrlRequest: URLRequest(url: WebUri(_url)),
+              onWebViewCreated: (InAppWebViewController controller) {
+                _webViewController = controller;
+              },
+              onLoadStart: (InAppWebViewController controller, Uri? url) {
+                log("onLoadStart $url");
+                setState(() {
+                  _progress = 0;
+                });
+              },
+              shouldOverrideUrlLoading: (controller, navigationAction) async {
+                log("shouldOverrideUrlLoading ${navigationAction.request.url}");
 
-                  var uri = navigationAction.request.url!;
-                  if (![
-                    "http",
-                    "https",
-                    "file",
-                    "chrome",
-                    "data",
-                    "javascript",
-                    "about"
-                  ].contains(uri.scheme)) {
-                    log("shouldOverrideUrlLoading ${uri.toString()}");
-                    final silentMode =
-                        await NativeBridge.appConfig.isSilentJumpAppEnabled();
-                    if (silentMode) {
-                      NativeCommon().startActivityFromUri(uri.toString());
-                    } else {
-                      Get.showSnackbar(GetSnackBar(
-                          message: S.current.jumpToOtherApp,
-                          duration: const Duration(seconds: 5),
-                          mainButton: TextButton(
-                            onPressed: () {
-                              NativeCommon()
-                                  .startActivityFromUri(uri.toString());
-                            },
-                            child: Text(S.current.goTo),
-                          )));
-                    }
-
-                    return NavigationActionPolicy.CANCEL;
+                var uri = navigationAction.request.url!;
+                if (![
+                  "http",
+                  "https",
+                  "file",
+                  "chrome",
+                  "data",
+                  "javascript",
+                  "about"
+                ].contains(uri.scheme)) {
+                  log("shouldOverrideUrlLoading ${uri.toString()}");
+                  final silentMode =
+                      await NativeBridge.appConfig.isSilentJumpAppEnabled();
+                  if (silentMode) {
+                    NativeCommon().startActivityFromUri(uri.toString());
+                  } else {
+                    Get.showSnackbar(GetSnackBar(
+                        message: S.current.jumpToOtherApp,
+                        duration: const Duration(seconds: 5),
+                        mainButton: TextButton(
+                          onPressed: () {
+                            NativeCommon().startActivityFromUri(uri.toString());
+                          },
+                          child: Text(S.current.goTo),
+                        )));
                   }
 
-                  return NavigationActionPolicy.ALLOW;
-                },
-                onReceivedError: (controller, request, error) async {
-                  if (!await Android().isRunning()) {
-                    await Android().startService();
+                  return NavigationActionPolicy.CANCEL;
+                }
 
-                    for (int i = 0; i < 3; i++) {
-                      await Future.delayed(const Duration(milliseconds: 500));
-                      if (await Android().isRunning()) {
-                        _webViewController?.reload();
-                        break;
-                      }
+                return NavigationActionPolicy.ALLOW;
+              },
+              onReceivedError: (controller, request, error) async {
+                log("onReceivedError", error: error);
+                if (!await Android().isRunning()) {
+                  await Android().startService();
+
+                  for (int i = 0; i < 3; i++) {
+                    await Future.delayed(const Duration(milliseconds: 500));
+                    if (await Android().isRunning()) {
+                      // _webViewController?.reload();
+                      _webViewController?.loadUrl(
+                          urlRequest: URLRequest(url: WebUri(_url)));
+                      break;
                     }
                   }
-                },
-                onDownloadStartRequest: (controller, url) async {
-                  Get.showSnackbar(GetSnackBar(
-                    title: S.of(context).downloadThisFile,
-                    message: url.suggestedFilename ??
-                        url.contentDisposition ??
-                        url.toString(),
-                    duration: const Duration(seconds: 3),
-                    mainButton: Column(children: [
-                      TextButton(
-                        onPressed: () {
-                          IntentUtils.getUrlIntent(url.url.toString())
-                              .launchChooser(S.of(context).selectAppToOpen);
-                        },
-                        child: Text(S.of(context).selectAppToOpen),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          IntentUtils.getUrlIntent(url.url.toString()).launch();
-                        },
-                        child: Text(S.of(context).download),
-                      ),
-                    ]),
-                    onTap: (_) {
-                      Clipboard.setData(
-                          ClipboardData(text: url.url.toString()));
-                      Get.closeCurrentSnackbar();
-                      Get.showSnackbar(GetSnackBar(
-                        message: S.of(context).copiedToClipboard,
-                        duration: const Duration(seconds: 1),
-                      ));
-                    },
-                  ));
-                },
-                onLoadStop:
-                    (InAppWebViewController controller, Uri? url) async {
-                  setState(() {
-                    _progress = 0;
-                  });
-                },
-                onProgressChanged:
-                    (InAppWebViewController controller, int progress) {
-                  setState(() {
-                    _progress = progress / 100;
-                    if (_progress == 1) _progress = 0;
-                  });
-                  controller.canGoBack().then((value) => setState(() {
-                        _canGoBack = value;
-                      }));
-                },
-                onUpdateVisitedHistory: (InAppWebViewController controller,
-                    WebUri? url, bool? isReload) {
-                  _url = url.toString();
-                },
-              ),
+                }
+              },
+              onDownloadStartRequest: (controller, url) async {
+                Get.showSnackbar(GetSnackBar(
+                  title: S.of(context).downloadThisFile,
+                  message: url.suggestedFilename ??
+                      url.contentDisposition ??
+                      url.toString(),
+                  duration: const Duration(seconds: 3),
+                  mainButton: Column(children: [
+                    TextButton(
+                      onPressed: () {
+                        IntentUtils.getUrlIntent(url.url.toString())
+                            .launchChooser(S.of(context).selectAppToOpen);
+                      },
+                      child: Text(S.of(context).selectAppToOpen),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        IntentUtils.getUrlIntent(url.url.toString()).launch();
+                      },
+                      child: Text(S.of(context).download),
+                    ),
+                  ]),
+                  onTap: (_) {
+                    Clipboard.setData(ClipboardData(text: url.url.toString()));
+                    Get.closeCurrentSnackbar();
+                    Get.showSnackbar(GetSnackBar(
+                      message: S.of(context).copiedToClipboard,
+                      duration: const Duration(seconds: 1),
+                    ));
+                  },
+                ));
+              },
+              onLoadStop: (InAppWebViewController controller, Uri? url) async {
+                setState(() {
+                  _progress = 0;
+                });
+              },
+              onProgressChanged:
+                  (InAppWebViewController controller, int progress) {
+                setState(() {
+                  _progress = progress / 100;
+                  if (_progress == 1) _progress = 0;
+                });
+                controller.canGoBack().then((value) => setState(() {
+                      _canGoBack = value;
+                    }));
+              },
+              onUpdateVisitedHistory: (InAppWebViewController controller,
+                  WebUri? url, bool? isReload) {
+                _url = url.toString();
+              },
             ),
           ]),
         ));
